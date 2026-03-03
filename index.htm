@@ -4,28 +4,1083 @@
 <head>
    <meta charset="UTF-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>New Reality Interactive — Small Business Web Development & Tech Consulting</title>
    <meta name="description"
-      content="New Reality Interactive — a creative and technical studio exploring new forms of storytelling, design, and software." />
-   <title>New Reality Interactive</title>
-   <link rel="stylesheet" href="style.css" />
-   <!--script data-goatcounter="https://nri.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script-->
+      content="New Reality Interactive helps small businesses build and enhance their online presence. 26 years of full-stack engineering experience." />
+   <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+      rel="stylesheet" />
    <style>
+      *,
+      *::before,
+      *::after {
+         box-sizing: border-box;
+         margin: 0;
+         padding: 0;
+      }
 
+      :root {
+         --black: #1c1a18;
+         --white: #faf7f2;
+         --accent: #f07050;
+         --accent-dark: #c94f34;
+         --gray: #252220;
+         --mid: #3a3632;
+         --text-muted: #b8ada4;
+         --body-text: #c8c0b8;
+      }
+
+      html {
+         scroll-behavior: smooth;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+
+         *,
+         *::before,
+         *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+         }
+
+         html {
+            scroll-behavior: auto;
+         }
+
+         .marquee-track {
+            animation: none !important;
+         }
+      }
+
+      body {
+         background: var(--black);
+         color: var(--white);
+         font-family: 'DM Sans', sans-serif;
+         font-weight: 400;
+         overflow-x: hidden;
+         font-size: 1rem;
+         line-height: 1.6;
+      }
+
+      /* SKIP LINK */
+      .skip-link {
+         position: fixed !important;
+         top: -9999px !important;
+         left: -9999px !important;
+         width: 1px;
+         height: 1px;
+         overflow: hidden;
+         clip: rect(0, 0, 0, 0);
+         white-space: nowrap;
+         background: var(--accent);
+         color: var(--black);
+         padding: 0.75rem 1.5rem;
+         font-family: 'Syne', sans-serif;
+         font-weight: 700;
+         font-size: 0.9rem;
+         text-decoration: none;
+         z-index: 9999;
+      }
+
+      .skip-link:focus {
+         top: 1rem !important;
+         left: 1rem !important;
+         width: auto;
+         height: auto;
+         clip: auto;
+         overflow: visible;
+      }
+
+      /* FOCUS */
+      :focus-visible {
+         outline: 3px solid var(--accent);
+         outline-offset: 3px;
+      }
+
+      /* NOISE OVERLAY */
+      body::before {
+         content: '';
+         position: fixed;
+         inset: 0;
+         background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+         pointer-events: none;
+         z-index: 999;
+         opacity: 0.4;
+      }
+
+      /* MAIN NAV — scoped to #main-nav only */
+      #main-nav {
+         position: fixed;
+         top: 0;
+         left: 0;
+         right: 0;
+         z-index: 100;
+         padding: 1.5rem 3rem;
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+         background: rgba(28, 26, 24, 0.95);
+         backdrop-filter: blur(12px);
+      }
+
+      #main-nav .nav-logo {
+         font-family: 'Syne', sans-serif;
+         font-weight: 800;
+         font-size: 1.1rem;
+         letter-spacing: 0.02em;
+         color: var(--white);
+         text-decoration: none;
+      }
+
+      #main-nav .nav-logo span {
+         color: var(--accent);
+      }
+
+      #main-nav .nav-links {
+         display: flex;
+         gap: 2.5rem;
+         list-style: none;
+      }
+
+      #main-nav .nav-links a {
+         color: var(--text-muted);
+         text-decoration: none;
+         font-size: 0.9rem;
+         letter-spacing: 0.06em;
+         text-transform: uppercase;
+         transition: color 0.2s;
+         padding: 0.25rem 0;
+      }
+
+      #main-nav .nav-links a:hover,
+      #main-nav .nav-links a:focus-visible {
+         color: var(--accent);
+      }
+
+      /* HERO */
+      .hero {
+         min-height: 100vh;
+         display: grid;
+         grid-template-columns: 1fr 1fr;
+         align-items: center;
+         padding: 8rem 3rem 4rem;
+         position: relative;
+         overflow: hidden;
+      }
+
+      .hero::after {
+         content: '';
+         position: absolute;
+         top: -20%;
+         right: -10%;
+         width: 600px;
+         height: 600px;
+         background: radial-gradient(circle, rgba(240, 112, 80, 0.08) 0%, transparent 70%);
+         pointer-events: none;
+      }
+
+      .hero-left {
+         max-width: 640px;
+      }
+
+      .hero-eyebrow {
+         font-size: 0.8rem;
+         letter-spacing: 0.2em;
+         text-transform: uppercase;
+         color: var(--accent);
+         margin-bottom: 1.5rem;
+         opacity: 0;
+         animation: fadeUp 0.8s ease forwards 0.2s;
+      }
+
+      .hero-title {
+         font-family: 'Syne', sans-serif;
+         font-weight: 800;
+         font-size: clamp(2.8rem, 6vw, 5.5rem);
+         line-height: 1.05;
+         letter-spacing: -0.02em;
+         margin-bottom: 1.5rem;
+         opacity: 0;
+         animation: fadeUp 0.8s ease forwards 0.4s;
+      }
+
+      .hero-title em {
+         font-style: normal;
+         color: var(--accent);
+         position: relative;
+         display: inline-block;
+      }
+
+      .hero-title em::after {
+         content: '';
+         position: absolute;
+         bottom: 4px;
+         left: 0;
+         right: 0;
+         height: 3px;
+         background: var(--accent-dark);
+         transform: scaleX(0);
+         transform-origin: left;
+         animation: lineExpand 0.6s ease forwards 1.2s;
+      }
+
+      .hero-sub {
+         font-size: 1.1rem;
+         line-height: 1.8;
+         color: var(--body-text);
+         margin-bottom: 2.5rem;
+         max-width: 480px;
+         opacity: 0;
+         animation: fadeUp 0.8s ease forwards 0.6s;
+      }
+
+      .hero-cta {
+         display: flex;
+         gap: 1rem;
+         flex-wrap: wrap;
+         opacity: 0;
+         animation: fadeUp 0.8s ease forwards 0.8s;
+      }
+
+      .btn-primary {
+         background: var(--accent);
+         color: var(--black);
+         padding: 0.9rem 2rem;
+         font-family: 'Syne', sans-serif;
+         font-weight: 700;
+         font-size: 0.95rem;
+         letter-spacing: 0.05em;
+         text-decoration: none;
+         display: inline-flex;
+         align-items: center;
+         justify-content: center;
+         min-height: 44px;
+         transition: transform 0.15s, background 0.15s;
+      }
+
+      .btn-primary:hover {
+         background: #d4563a;
+         transform: translateY(-2px);
+      }
+
+      .btn-ghost {
+         border: 2px solid rgba(255, 255, 255, 0.4);
+         color: var(--white);
+         padding: 0.9rem 2rem;
+         font-family: 'Syne', sans-serif;
+         font-weight: 600;
+         font-size: 0.95rem;
+         letter-spacing: 0.05em;
+         text-decoration: none;
+         display: inline-flex;
+         align-items: center;
+         justify-content: center;
+         min-height: 44px;
+         transition: border-color 0.15s, color 0.15s, transform 0.15s;
+      }
+
+      .btn-ghost:hover,
+      .btn-ghost:focus-visible {
+         border-color: var(--accent);
+         color: var(--accent);
+         transform: translateY(-2px);
+      }
+
+      .hero-right {
+         display: flex;
+         justify-content: flex-end;
+         align-items: center;
+         opacity: 0;
+         animation: fadeIn 1s ease forwards 0.9s;
+      }
+
+      .cred-panel {
+         width: 340px;
+         display: flex;
+         flex-direction: column;
+         gap: 1px;
+         background: var(--mid);
+         border: 1px solid var(--mid);
+      }
+
+      .cred-card {
+         background: var(--gray);
+         padding: 1.75rem 2rem;
+         display: flex;
+         align-items: center;
+         gap: 1.25rem;
+         transition: background 0.2s;
+      }
+
+      .cred-card:hover {
+         background: #2e2b28;
+      }
+
+      .cred-icon {
+         width: 44px;
+         height: 44px;
+         flex-shrink: 0;
+         background: rgba(240, 112, 80, 0.12);
+         border: 1px solid rgba(240, 112, 80, 0.25);
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         color: var(--accent);
+      }
+
+      .cred-icon svg {
+         width: 20px;
+         height: 20px;
+      }
+
+      .cred-text {}
+
+      .cred-value {
+         font-family: 'Syne', sans-serif;
+         font-weight: 800;
+         font-size: 1.4rem;
+         color: var(--white);
+         line-height: 1.1;
+         margin-bottom: 0.2rem;
+      }
+
+      .cred-label {
+         font-size: 0.8rem;
+         color: var(--text-muted);
+         letter-spacing: 0.06em;
+         text-transform: uppercase;
+      }
+
+      .cred-divider {
+         height: 1px;
+         background: var(--mid);
+      }
+
+      .cred-footer {
+         background: var(--accent);
+         padding: 1.25rem 2rem;
+         display: flex;
+         align-items: center;
+         gap: 0.75rem;
+      }
+
+      .cred-footer-text {
+         font-family: 'Syne', sans-serif;
+         font-weight: 700;
+         font-size: 0.85rem;
+         color: var(--black);
+         letter-spacing: 0.04em;
+      }
+
+      .cred-dot {
+         width: 8px;
+         height: 8px;
+         border-radius: 50%;
+         background: var(--black);
+         opacity: 0.4;
+         flex-shrink: 0;
+      }
+
+      /* MARQUEE */
+      .marquee-wrap {
+         border-top: 1px solid var(--mid);
+         border-bottom: 1px solid var(--mid);
+         overflow: hidden;
+         padding: 1rem 0;
+         background: var(--gray);
+      }
+
+      .marquee-track {
+         display: flex;
+         gap: 3rem;
+         animation: marquee 20s linear infinite;
+         white-space: nowrap;
+      }
+
+      .marquee-item {
+         font-family: 'Syne', sans-serif;
+         font-weight: 600;
+         font-size: 0.85rem;
+         letter-spacing: 0.15em;
+         text-transform: uppercase;
+         color: var(--text-muted);
+         flex-shrink: 0;
+      }
+
+      .marquee-item span {
+         color: var(--accent);
+         margin-right: 3rem;
+      }
+
+      /* SECTIONS */
+      section {
+         padding: 6rem 3rem;
+      }
+
+      .section-label {
+         font-size: 0.75rem;
+         letter-spacing: 0.2em;
+         text-transform: uppercase;
+         color: var(--accent);
+         margin-bottom: 1rem;
+      }
+
+      .section-title {
+         font-family: 'Syne', sans-serif;
+         font-weight: 800;
+         font-size: clamp(2rem, 4vw, 3.2rem);
+         line-height: 1.1;
+         letter-spacing: -0.02em;
+         margin-bottom: 1.5rem;
+      }
+
+      .section-body {
+         color: var(--body-text);
+         font-size: 1.05rem;
+         line-height: 1.8;
+         max-width: 560px;
+      }
+
+      /* SERVICES */
+      .services-grid {
+         display: grid;
+         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+         gap: 1px;
+         background: var(--mid);
+         border: 1px solid var(--mid);
+         margin-top: 4rem;
+      }
+
+      .service-card {
+         background: var(--black);
+         padding: 2.5rem;
+         position: relative;
+         overflow: hidden;
+         transition: background 0.3s;
+      }
+
+      .service-card::before {
+         content: '';
+         position: absolute;
+         top: 0;
+         left: 0;
+         right: 0;
+         height: 3px;
+         background: var(--accent);
+         transform: scaleX(0);
+         transform-origin: left;
+         transition: transform 0.3s ease;
+      }
+
+      .service-card:hover {
+         background: var(--gray);
+      }
+
+      .service-card:hover::before {
+         transform: scaleX(1);
+      }
+
+      .service-num {
+         font-family: 'Syne', sans-serif;
+         font-weight: 800;
+         font-size: 3rem;
+         color: rgba(240, 112, 80, 0.1);
+         line-height: 1;
+         margin-bottom: 1rem;
+         transition: color 0.3s;
+      }
+
+      .service-card:hover .service-num {
+         color: rgba(240, 112, 80, 0.2);
+      }
+
+      .service-title {
+         font-family: 'Syne', sans-serif;
+         font-weight: 700;
+         font-size: 1.2rem;
+         margin-bottom: 0.75rem;
+         color: var(--white);
+      }
+
+      .service-desc {
+         font-size: 0.95rem;
+         color: var(--body-text);
+         line-height: 1.75;
+      }
+
+      /* ABOUT */
+      .about-inner {
+         display: grid;
+         grid-template-columns: 1fr 1fr;
+         gap: 6rem;
+         align-items: center;
+      }
+
+      .about-accent-block {
+         background: var(--gray);
+         border: 1px solid var(--mid);
+         padding: 3rem;
+         position: relative;
+      }
+
+      .about-accent-block::before {
+         content: '\201C';
+         position: absolute;
+         top: -1rem;
+         left: 2rem;
+         font-family: 'Syne', sans-serif;
+         font-size: 6rem;
+         color: var(--accent);
+         line-height: 1;
+      }
+
+      .about-quote {
+         font-family: 'Syne', sans-serif;
+         font-weight: 600;
+         font-size: 1.25rem;
+         line-height: 1.6;
+         color: var(--white);
+         margin-bottom: 1.5rem;
+         padding-top: 2rem;
+      }
+
+      .about-attribution {
+         font-size: 0.85rem;
+         color: var(--text-muted);
+         letter-spacing: 0.05em;
+      }
+
+      .about-stats {
+         display: grid;
+         grid-template-columns: 1fr 1fr;
+         gap: 1.5rem;
+         margin-top: 2rem;
+      }
+
+      .about-stat-block {
+         border-left: 3px solid var(--accent);
+         padding-left: 1rem;
+      }
+
+      .about-stat-num {
+         font-family: 'Syne', sans-serif;
+         font-weight: 800;
+         font-size: 2rem;
+         color: var(--white);
+      }
+
+      .about-stat-label {
+         font-size: 0.85rem;
+         color: var(--body-text);
+         line-height: 1.4;
+      }
+
+      /* PROCESS */
+      .how-grid {
+         display: grid;
+         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+         gap: 2rem;
+         margin-top: 4rem;
+         list-style: none;
+         padding: 0;
+      }
+
+      .how-step {
+         position: relative;
+         padding-top: 1rem;
+      }
+
+      .how-step::before {
+         content: '';
+         display: block;
+         width: 100%;
+         height: 2px;
+         background: var(--mid);
+         margin-bottom: 2rem;
+      }
+
+      .step-num {
+         font-family: 'Syne', sans-serif;
+         font-weight: 800;
+         font-size: 0.75rem;
+         color: var(--accent);
+         letter-spacing: 0.15em;
+         margin-bottom: 0.75rem;
+      }
+
+      .step-title {
+         font-family: 'Syne', sans-serif;
+         font-weight: 700;
+         font-size: 1.1rem;
+         margin-bottom: 0.75rem;
+         color: var(--white);
+      }
+
+      .step-desc {
+         font-size: 0.95rem;
+         color: var(--body-text);
+         line-height: 1.75;
+      }
+
+      /* CTA BAND */
+      .cta-band {
+         background: var(--accent);
+         color: var(--black);
+         padding: 5rem 3rem;
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         gap: 2rem;
+         flex-wrap: wrap;
+      }
+
+      .cta-band-title {
+         font-family: 'Syne', sans-serif;
+         font-weight: 800;
+         font-size: clamp(1.8rem, 4vw, 3rem);
+         line-height: 1.1;
+         max-width: 560px;
+         color: var(--black);
+      }
+
+      .cta-band-title em {
+         font-style: normal;
+         text-decoration: underline;
+         text-decoration-color: rgba(28, 26, 24, 0.35);
+      }
+
+      .btn-dark {
+         background: var(--black);
+         color: var(--white);
+         padding: 1rem 2.5rem;
+         font-family: 'Syne', sans-serif;
+         font-weight: 700;
+         font-size: 0.95rem;
+         letter-spacing: 0.05em;
+         text-decoration: none;
+         display: inline-flex;
+         align-items: center;
+         justify-content: center;
+         min-height: 44px;
+         transition: transform 0.15s, background 0.15s;
+         white-space: nowrap;
+      }
+
+      .btn-dark:hover,
+      .btn-dark:focus-visible {
+         background: #2e2b28;
+         transform: translateY(-2px);
+      }
+
+      /* FOOTER */
+      .site-footer {
+         padding: 3rem;
+         border-top: 1px solid var(--mid);
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         flex-wrap: wrap;
+         gap: 1rem;
+      }
+
+      .footer-logo {
+         font-family: 'Syne', sans-serif;
+         font-weight: 800;
+         font-size: 1rem;
+         color: var(--white);
+      }
+
+      .footer-logo span {
+         color: var(--accent);
+      }
+
+      .footer-copy {
+         font-size: 0.85rem;
+         color: var(--text-muted);
+      }
+
+      .footer-links {
+         display: flex;
+         gap: 1.5rem;
+      }
+
+      .footer-links a {
+         color: var(--text-muted);
+         text-decoration: underline;
+         font-size: 0.85rem;
+         transition: color 0.2s;
+         min-height: 44px;
+         display: inline-flex;
+         align-items: center;
+      }
+
+      .footer-links a:hover,
+      .footer-links a:focus-visible {
+         color: var(--accent);
+      }
+
+      /* ANIMATIONS */
+      @keyframes fadeUp {
+         from {
+            opacity: 0;
+            transform: translateY(24px);
+         }
+
+         to {
+            opacity: 1;
+            transform: translateY(0);
+         }
+      }
+
+      @keyframes fadeIn {
+         from {
+            opacity: 0;
+         }
+
+         to {
+            opacity: 1;
+         }
+      }
+
+      @keyframes marquee {
+         from {
+            transform: translateX(0);
+         }
+
+         to {
+            transform: translateX(-50%);
+         }
+      }
+
+      @keyframes lineExpand {
+         to {
+            transform: scaleX(1);
+         }
+      }
+
+      /* SCROLL REVEAL */
+      .reveal {
+         opacity: 0;
+         transform: translateY(30px);
+         transition: opacity 0.7s ease, transform 0.7s ease;
+      }
+
+      .reveal.visible {
+         opacity: 1;
+         transform: translateY(0);
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 900px) {
+         #main-nav {
+            padding: 1.25rem 1.5rem;
+         }
+
+         #main-nav .nav-links {
+            display: none;
+         }
+
+         .hero {
+            grid-template-columns: 1fr;
+            padding: 7rem 1.5rem 3rem;
+         }
+
+         .hero-right {
+            display: none;
+         }
+
+         section {
+            padding: 4rem 1.5rem;
+         }
+
+         .about-inner {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+         }
+
+         .cta-band {
+            padding: 3.5rem 1.5rem;
+         }
+
+         .site-footer {
+            padding: 2rem 1.5rem;
+            flex-direction: column;
+            align-items: flex-start;
+         }
+      }
    </style>
 </head>
 
 <body>
-   <div class="page-wrapper">
-      <div class="container">
-         <img src="images/logo_white_text_transparent_bg.png" alt="New Reality Interactive Logo" class="logo" />
-         <p>Building immersive experiences at the edge of story and technology.</p>
-         <p class="tagline">A new creative studio — launching soon.</p>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav id="main-nav" aria-label="Main navigation">
+   <a href="#" class="nav-logo" aria-label="New Reality Interactive — Home">NR<span aria-hidden="true">I</span></a>
+   <ul class="nav-links" role="list">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#contact">Contact</a></li>
+   </ul>
+   <a href="#contact" class="btn-primary" style="font-size:0.85rem; padding:0.6rem 1.4rem;">Let's Talk</a>
+</nav>
+
+<main id="main-content">
+
+   <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-left">
+         <p class="hero-eyebrow" aria-hidden="true">New Reality Interactive</p>
+         <h1 class="hero-title" id="hero-heading">
+            Your business.<br>
+            <em>Brought to life</em><br>
+            online.
+         </h1>
+         <p class="hero-sub">26 years of engineering experience, focused on one goal: helping small businesses build
+            a powerful, authentic online presence without the confusion.</p>
+         <div class="hero-cta">
+            <a href="#services" class="btn-primary">See What I Do</a>
+            <a href="#contact" class="btn-ghost">Start a Conversation</a>
+         </div>
       </div>
-      
-      <footer class="site-footer">
-         &copy; 2025 <span class="footer-name">New Reality Interactive, LLC</span>™. All rights reserved.
-      </footer>
+      <div class="hero-right" aria-hidden="true">
+         <div class="cred-panel" role="presentation">
+
+            <div class="cred-card">
+               <div class="cred-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                     stroke-linejoin="round">
+                     <circle cx="12" cy="8" r="4" />
+                     <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+                  </svg>
+               </div>
+               <div class="cred-text">
+                  <div class="cred-value">26 Years</div>
+                  <div class="cred-label">Engineering Experience</div>
+               </div>
+            </div>
+
+            <div class="cred-card">
+               <div class="cred-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                     stroke-linejoin="round">
+                     <rect x="2" y="3" width="20" height="14" rx="2" />
+                     <polyline points="8 21 12 17 16 21" />
+                  </svg>
+               </div>
+               <div class="cred-text">
+                  <div class="cred-value">Full Stack</div>
+                  <div class="cred-label">Front End &amp; Back End</div>
+               </div>
+            </div>
+
+            <div class="cred-card">
+               <div class="cred-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                     stroke-linejoin="round">
+                     <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                     <path d="M2 17l10 5 10-5" />
+                     <path d="M2 12l10 5 10-5" />
+                  </svg>
+               </div>
+               <div class="cred-text">
+                  <div class="cred-value">End-to-End</div>
+                  <div class="cred-label">Custom Solutions</div>
+               </div>
+            </div>
+
+            <div class="cred-card">
+               <div class="cred-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                     stroke-linejoin="round">
+                     <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                     <circle cx="9" cy="7" r="4" />
+                     <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                     <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+               </div>
+               <div class="cred-text">
+                  <div class="cred-value">1-on-1</div>
+                  <div class="cred-label">Direct Client Relationship</div>
+               </div>
+            </div>
+
+            <div class="cred-footer">
+               <div class="cred-dot"></div>
+               <div class="cred-footer-text">Available for New Projects</div>
+            </div>
+
+         </div>
+      </div>
+   </section>
+
+   <div class="marquee-wrap" aria-hidden="true" role="presentation">
+      <div class="marquee-track">
+         <span class="marquee-item">Web Development <span>&#10022;</span></span>
+         <span class="marquee-item">Custom Solutions <span>&#10022;</span></span>
+         <span class="marquee-item">Front-End Engineering <span>&#10022;</span></span>
+         <span class="marquee-item">Back-End Engineering <span>&#10022;</span></span>
+         <span class="marquee-item">Tech Strategy <span>&#10022;</span></span>
+         <span class="marquee-item">Small Business Consulting <span>&#10022;</span></span>
+         <span class="marquee-item">Platform Integrations <span>&#10022;</span></span>
+         <span class="marquee-item">Online Presence <span>&#10022;</span></span>
+         <span class="marquee-item">Web Development <span>&#10022;</span></span>
+         <span class="marquee-item">Custom Solutions <span>&#10022;</span></span>
+         <span class="marquee-item">Front-End Engineering <span>&#10022;</span></span>
+         <span class="marquee-item">Back-End Engineering <span>&#10022;</span></span>
+         <span class="marquee-item">Tech Strategy <span>&#10022;</span></span>
+         <span class="marquee-item">Small Business Consulting <span>&#10022;</span></span>
+         <span class="marquee-item">Platform Integrations <span>&#10022;</span></span>
+         <span class="marquee-item">Online Presence <span>&#10022;</span></span>
+      </div>
    </div>
+
+   <section id="services" aria-labelledby="services-heading">
+      <div class="reveal">
+         <p class="section-label" aria-hidden="true">What I Do</p>
+         <h2 class="section-title" id="services-heading">Technology that works<br>as hard as you do.</h2>
+         <p class="section-body">Whether you need something built from scratch or just need someone to help you
+            navigate the options, I bring deep technical experience with a clear focus on your business goals.</p>
+      </div>
+      <div class="services-grid reveal">
+         <article class="service-card">
+            <div class="service-num" aria-hidden="true">01</div>
+            <h3 class="service-title">Custom Web Development</h3>
+            <p class="service-desc">Hand-crafted websites and web applications built specifically for your business.
+               No generic templates — solutions designed around what you actually need.</p>
+         </article>
+         <article class="service-card">
+            <div class="service-num" aria-hidden="true">02</div>
+            <h3 class="service-title">Modernize Your Presence</h3>
+            <p class="service-desc">Already have a site but it's feeling dated or underperforming? I'll assess what's
+               holding you back and bring it up to speed — visually and technically.</p>
+         </article>
+         <article class="service-card">
+            <div class="service-num" aria-hidden="true">03</div>
+            <h3 class="service-title">Platform &amp; Tool Integration</h3>
+            <p class="service-desc">Connect your website to the tools your business runs on — payment systems, CRMs,
+               booking platforms, email marketing, and more.</p>
+         </article>
+         <article class="service-card">
+            <div class="service-num" aria-hidden="true">04</div>
+            <h3 class="service-title">Tech Strategy &amp; Advisory</h3>
+            <p class="service-desc">Not sure which platform, tool, or approach is right for you? I'll cut through the
+               noise and give you clear, honest guidance — no jargon, no upsell.</p>
+         </article>
+      </div>
+   </section>
+
+   <section id="about" aria-labelledby="about-heading" style="background: var(--gray);">
+      <div class="about-inner">
+         <div class="reveal">
+            <p class="section-label" aria-hidden="true">About</p>
+            <h2 class="section-title" id="about-heading">Story meets<br>technology.</h2>
+            <p class="section-body" style="margin-bottom: 1.5rem;">New Reality Interactive was built on a belief that
+               technology should tell your story — not just host it. With 26 years of software engineering
+               experience, I bring enterprise-level expertise to small businesses that deserve the same quality
+               without the complexity or cost.</p>
+            <p class="section-body">I work with a limited number of clients at a time, which means you get focused
+               attention, direct communication, and solutions that are genuinely built for you. Flexible
+               project-based and retainer pricing available to fit a variety of budgets and needs.</p>
+            <dl class="about-stats">
+               <div class="about-stat-block">
+                  <dt class="about-stat-label">Years of software engineering experience</dt>
+                  <dd class="about-stat-num">26</dd>
+               </div>
+               <div class="about-stat-block">
+                  <dt class="about-stat-label">Full stack — front end and back end</dt>
+                  <dd class="about-stat-num">F+B</dd>
+               </div>
+               <div class="about-stat-block">
+                  <dt class="about-stat-label">Direct relationship — you work with me, not a team</dt>
+                  <dd class="about-stat-num">1:1</dd>
+               </div>
+               <div class="about-stat-block">
+                  <dt class="about-stat-label">Ongoing commitment to your long-term success</dt>
+                  <dd class="about-stat-num" aria-label="Ongoing">&#8734;</dd>
+               </div>
+            </dl>
+         </div>
+         <blockquote class="about-accent-block reveal">
+            <p class="about-quote">Technology can feel intimidating when you're focused on running your business. My
+               goal is to make it simple, collaborative, and results-driven.</p>
+            <footer class="about-attribution">&#8212; Founder, New Reality Interactive</footer>
+         </blockquote>
+      </div>
+   </section>
+
+   <section id="process" aria-labelledby="process-heading">
+      <div class="reveal">
+         <p class="section-label" aria-hidden="true">How It Works</p>
+         <h2 class="section-title" id="process-heading">Simple by design.</h2>
+         <p class="section-body">No confusing processes, no disappearing acts. Here's what working together looks
+            like.</p>
+      </div>
+         <ol class="how-grid reveal" aria-label="Process steps">
+            <li class="how-step">
+               <div class="step-num" aria-hidden="true">STEP 01</div>
+               <h3 class="step-title">We Talk</h3>
+               <p class="step-desc">We start with a free conversation about your business, your goals, and where
+                  technology might help. No pressure, no pitch.</p>
+            </li>
+            <li class="how-step">
+               <div class="step-num" aria-hidden="true">STEP 02</div>
+               <h3 class="step-title">I Listen</h3>
+               <p class="step-desc">I take the time to understand your business before recommending anything. The right
+                  solution for you may be different from what worked for someone else.</p>
+            </li>
+            <li class="how-step">
+               <div class="step-num" aria-hidden="true">STEP 03</div>
+               <h3 class="step-title">We Build</h3>
+               <p class="step-desc">Once we agree on an approach, I get to work — keeping you informed and involved
+                  throughout, without overwhelming you with technical detail.</p>
+            </li>
+            <li class="how-step">
+               <div class="step-num" aria-hidden="true">STEP 04</div>
+               <h3 class="step-title">You Grow</h3>
+               <p class="step-desc">Delivery is just the beginning. I'm available for ongoing support, maintenance, or
+                  your next project as your business evolves.</p>
+            </li>
+         </ol>
+         </section>
+         
+         <section class="cta-band" id="contact" aria-labelledby="contact-heading">
+            <h2 class="cta-band-title" id="contact-heading">Ready to build your <em>new reality</em>?</h2>
+            <a href="/cdn-cgi/l/email-protection#aac2cfc6c6c5eac4cfddd8cfcbc6c3ded3c3c4decfd8cbc9dec3dccf84c9c5c7"
+               class="btn-dark">Get In Touch</a>
+         </section>
+         
+         </main>
+
+   <footer class="site-footer" role="contentinfo">
+      <div class="footer-logo">New Reality <span>Interactive</span></div>
+      <p class="footer-copy">&#169; 2026 New Reality Interactive, LLC. All rights reserved.</p>
+      <nav aria-label="Footer links" class="footer-links">
+         <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
+            aria-label="Visit New Reality Interactive on LinkedIn (opens in new tab)">LinkedIn</a>
+         <a href="/cdn-cgi/l/email-protection#f69e939a9a99b69893818493979a9f828f9f988293849795829f8093d895999b"
+            aria-label="Send an email to New Reality Interactive">Email</a>
+      </nav>
+   </footer>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script>
+   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+   if (prefersReducedMotion) {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+   } else {
+      const observer = new IntersectionObserver((entries) => {
+         entries.forEach(e => {
+            if (e.isIntersecting) {
+               e.target.classList.add('visible');
+               observer.unobserve(e.target);
+            }
+         });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+   }
+</script>
+
 </body>
 
 </html>
