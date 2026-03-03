@@ -396,6 +396,9 @@
       function closeContactModal() {
          modal.classList.remove('open');
          document.body.style.overflow = '';
+         document.getElementById('formContent').style.display = '';
+         formSuccess.style.display = '';
+         form.reset();
       }
 
       openBtn.addEventListener('click', openContactModal);
