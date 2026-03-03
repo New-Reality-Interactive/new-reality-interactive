@@ -964,6 +964,167 @@
             align-items: flex-start;
          }
       }
+
+      /* MODAL */
+      .modal-overlay {
+         position: fixed;
+         inset: 0;
+         background: rgba(10, 9, 8, 0.85);
+         backdrop-filter: blur(6px);
+         z-index: 1000;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         padding: 1.5rem;
+         opacity: 0;
+         pointer-events: none;
+         transition: opacity 0.3s ease;
+      }
+
+      .modal-overlay.open {
+         opacity: 1;
+         pointer-events: all;
+      }
+
+      .modal {
+         background: var(--gray);
+         border: 1px solid var(--mid);
+         width: 100%;
+         max-width: 520px;
+         padding: 3rem;
+         position: relative;
+         transform: translateY(20px);
+         transition: transform 0.3s ease;
+      }
+
+      .modal-overlay.open .modal {
+         transform: translateY(0);
+      }
+
+      .modal-close {
+         position: absolute;
+         top: 1.25rem;
+         right: 1.25rem;
+         background: none;
+         border: none;
+         color: var(--text-muted);
+         cursor: pointer;
+         font-size: 1.5rem;
+         line-height: 1;
+         padding: 0.25rem 0.5rem;
+         transition: color 0.2s;
+      }
+
+      .modal-close:hover {
+         color: var(--white);
+      }
+
+      .modal-title {
+         font-family: var(--font-display);
+         font-weight: 700;
+         font-size: 2rem;
+         color: var(--white);
+         margin-bottom: 0.4rem;
+      }
+
+      .modal-sub {
+         font-size: 0.9rem;
+         color: var(--text-muted);
+         margin-bottom: 2rem;
+      }
+
+      .modal form {
+         display: flex;
+         flex-direction: column;
+         gap: 1.25rem;
+      }
+
+      .form-group {
+         display: flex;
+         flex-direction: column;
+         gap: 0.4rem;
+      }
+
+      .form-group label {
+         font-size: 0.8rem;
+         letter-spacing: 0.08em;
+         text-transform: uppercase;
+         color: var(--text-muted);
+      }
+
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+         background: var(--black);
+         border: 1px solid var(--mid);
+         color: var(--white);
+         font-family: var(--font-body);
+         font-size: 0.95rem;
+         padding: 0.75rem 1rem;
+         width: 100%;
+         transition: border-color 0.2s;
+         outline: none;
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus,
+      .form-group select:focus {
+         border-color: var(--accent);
+      }
+
+      .form-group textarea {
+         resize: vertical;
+         min-height: 120px;
+      }
+
+      .form-group select option {
+         background: var(--black);
+      }
+
+      .form-submit {
+         background: var(--accent);
+         color: var(--black);
+         border: none;
+         padding: 0.9rem 2rem;
+         font-family: var(--font-display);
+         font-weight: 700;
+         font-size: 1rem;
+         letter-spacing: 0.05em;
+         cursor: pointer;
+         transition: background 0.15s, transform 0.15s;
+         align-self: flex-start;
+         min-height: 44px;
+         min-width: 44px;
+      }
+
+      .form-submit:hover {
+         background: #d4563a;
+         transform: translateY(-2px);
+      }
+
+      .form-success {
+         display: none;
+         text-align: center;
+         padding: 2rem 0;
+      }
+
+      .form-success-icon {
+         font-size: 3rem;
+         margin-bottom: 1rem;
+      }
+
+      .form-success-title {
+         font-family: var(--font-display);
+         font-weight: 700;
+         font-size: 1.6rem;
+         color: var(--white);
+         margin-bottom: 0.5rem;
+      }
+
+      .form-success-msg {
+         font-size: 0.95rem;
+         color: var(--text-muted);
+      }
    </style>
 </head>
 
@@ -980,7 +1141,8 @@
          <li><a href="#pricing">Pricing</a></li>
          <li><a href="#contact">Contact</a></li>
       </ul>
-      <a href="#contact" class="btn-primary" style="font-size:0.85rem; padding:0.6rem 1.4rem;">Let's Talk</a>
+      <button class="btn-primary" style="font-size:0.85rem; padding:0.6rem 1.4rem;" onclick="openContactModal()">Let's
+         Talk</button>
    </nav>
 
    <main id="main-content">
@@ -997,7 +1159,7 @@
                a powerful, authentic online presence without the confusion.</p>
             <div class="hero-cta">
                <a href="#services" class="btn-primary">See What I Do</a>
-               <a href="#contact" class="btn-ghost">Start a Conversation</a>
+               <button class="btn-ghost" onclick="openContactModal()">Start a Conversation</button>
             </div>
          </div>
          <div class="hero-right" aria-hidden="true">
@@ -1242,15 +1404,66 @@
                <p class="pricing-message-body">If budget is a concern, let's talk. There is often more than one way to
                   get where you need to go, and I would rather find a solution that works for you than lose the
                   opportunity to help.</p>
-               <a href="#contact" class="pricing-message-cta">Start the conversation &#8594;</a>
+               <button class="pricing-message-cta"
+                  style="background:none;border:none;cursor:pointer;font-family:var(--font-display);font-weight:600;font-size:1rem;letter-spacing:0.03em;"
+                  onclick="openContactModal()">Start the conversation &#8594;</button>
             </div>
          </div>
       </section>
 
       <section class="cta-band" id="contact" aria-labelledby="contact-heading">
          <h2 class="cta-band-title" id="contact-heading">Ready to build your<br><em>new reality?</em></h2>
-         <a href="mailto:hello@newrealityinteractive.com" class="btn-dark">Get In Touch</a>
+         <button class="btn-dark" id="openModal" aria-haspopup="dialog">Get In Touch</button>
       </section>
+
+
+      <!-- CONTACT MODAL -->
+      <div class="modal-overlay" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+         <div class="modal">
+            <button class="modal-close" id="modalClose" aria-label="Close contact form">&#x2715;</button>
+            <div id="formContent">
+               <div class="modal-title" id="modal-title">Let's talk.</div>
+               <div class="modal-sub">Tell me a bit about your business and what you need. I'll get back to you within
+                  one business day.</div>
+               <form action="https://formspree.io/f/mzdaljja" method="POST" id="contactForm">
+                  <div class="form-group">
+                     <label for="name">Your name</label>
+                     <input type="text" id="name" name="name" placeholder="Jane Smith" required />
+                  </div>
+                  <div class="form-group">
+                     <label for="email">Your email</label>
+                     <input type="email" id="email" name="email" placeholder="jane@yourbusiness.com" required />
+                  </div>
+                  <div class="form-group">
+                     <label for="business">Your business</label>
+                     <input type="text" id="business" name="business" placeholder="What does your business do?" />
+                  </div>
+                  <div class="form-group">
+                     <label for="interest">What are you looking for?</label>
+                     <select id="interest" name="interest">
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="new-website">A new website</option>
+                        <option value="modernize">Modernize my existing site</option>
+                        <option value="integrations">Tool or platform integrations</option>
+                        <option value="advisory">Tech advice and guidance</option>
+                        <option value="not-sure">Not sure yet</option>
+                        <option value="explain-below">I'll explain below</option>
+                     </select>
+                  </div>
+                  <div class="form-group">
+                     <label for="message">Anything else you'd like me to know</label>
+                     <textarea id="message" name="message" placeholder="Budget, timeline, questions..."></textarea>
+                  </div>
+                  <button type="submit" class="form-submit">Send Message</button>
+               </form>
+            </div>
+            <div class="form-success" id="formSuccess">
+               <div class="form-success-icon">&#10003;</div>
+               <div class="form-success-title">Message sent.</div>
+               <div class="form-success-msg">Thanks for reaching out. I'll be in touch within one business day.</div>
+            </div>
+         </div>
+      </div>
 
    </main>
 
@@ -1260,7 +1473,7 @@
       <nav aria-label="Footer links" class="footer-links">
          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
             aria-label="Visit New Reality Interactive on LinkedIn (opens in new tab)">LinkedIn</a>
-         <a href="/cdn-cgi/l/email-protection#f69e939a9a99b69893818493979a9f828f9f988293849795829f8093d895999b"
+         <a href="mailto:contact@newrealityinteractive.com"
             aria-label="Send an email to New Reality Interactive">Email</a>
       </nav>
    </footer>
@@ -1281,6 +1494,55 @@
          }, { threshold: 0.1 });
          document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
       }
+
+      // Modal
+      const modal = document.getElementById('contactModal');
+      const openBtn = document.getElementById('openModal');
+      const closeBtn = document.getElementById('modalClose');
+      const form = document.getElementById('contactForm');
+      const formSuccess = document.getElementById('formSuccess');
+
+      function openContactModal() {
+         modal.classList.add('open');
+         document.body.style.overflow = 'hidden';
+         closeBtn.focus();
+      }
+
+      function closeContactModal() {
+         modal.classList.remove('open');
+         document.body.style.overflow = '';
+      }
+
+      openBtn.addEventListener('click', openContactModal);
+      closeBtn.addEventListener('click', closeContactModal);
+
+      modal.addEventListener('click', (e) => {
+         if (e.target === modal) closeContactModal();
+      });
+
+      document.addEventListener('keydown', (e) => {
+         if (e.key === 'Escape' && modal.classList.contains('open')) closeContactModal();
+      });
+
+      form.addEventListener('submit', async (e) => {
+         e.preventDefault();
+         const data = new FormData(form);
+         try {
+            const res = await fetch(form.action, {
+               method: 'POST',
+               body: data,
+               headers: { 'Accept': 'application/json' }
+            });
+            if (res.ok) {
+               document.getElementById('formContent').style.display = 'none';
+               formSuccess.style.display = 'block';
+            } else {
+               alert('Something went wrong. Please try again or email contact@newrealityinteractive.com directly.');
+            }
+         } catch {
+            alert('Something went wrong. Please try again or email contact@newrealityinteractive.com directly.');
+         }
+      });
    </script>
 
 </body>
