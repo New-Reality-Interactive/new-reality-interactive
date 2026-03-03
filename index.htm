@@ -583,24 +583,41 @@
       .how-grid {
          display: grid;
          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-         gap: 2rem;
+         gap: 1px;
          margin-top: 4rem;
          list-style: none;
          padding: 0;
+         background: var(--mid);
+         border: 1px solid var(--mid);
       }
 
       .how-step {
          position: relative;
-         padding-top: 1rem;
+         padding: 2.5rem;
+         background: var(--black);
+         overflow: hidden;
+         transition: background 0.3s;
       }
 
       .how-step::before {
          content: '';
-         display: block;
-         width: 100%;
-         height: 2px;
-         background: var(--mid);
-         margin-bottom: 2rem;
+         position: absolute;
+         top: 0;
+         left: 0;
+         right: 0;
+         height: 3px;
+         background: var(--accent);
+         transform: scaleX(0);
+         transform-origin: left;
+         transition: transform 0.3s ease;
+      }
+
+      .how-step:hover {
+         background: var(--gray);
+      }
+
+      .how-step:hover::before {
+         transform: scaleX(1);
       }
 
       .step-num {
@@ -610,6 +627,7 @@
          color: var(--accent);
          letter-spacing: 0.15em;
          margin-bottom: 0.75rem;
+         opacity: 0.7;
       }
 
       .step-title {
@@ -915,8 +933,8 @@
                </div>
 
             </div>
-            </div>
-            </section>
+         </div>
+         </section>
 
       <div class="marquee-wrap" aria-hidden="true" role="presentation">
          <div class="marquee-track">
@@ -1047,14 +1065,14 @@
             </li>
          </ol>
       </section>
-      
+
       <section class="cta-band" id="contact" aria-labelledby="contact-heading">
          <h2 class="cta-band-title" id="contact-heading">Ready to build your<br><em>new reality?</em></h2>
          <a href="/cdn-cgi/l/email-protection#aac2cfc6c6c5eac4cfddd8cfcbc6c3ded3c3c4decfd8cbc9dec3dccf84c9c5c7"
             class="btn-dark">Get In Touch</a>
-         </section>
-         
-         </main>
+      </section>
+      
+      </main>
 
    <footer class="site-footer" role="contentinfo">
       <div class="footer-logo">New Reality <span>Interactive</span></div>
