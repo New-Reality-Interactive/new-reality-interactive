@@ -19,6 +19,79 @@ const openBtn = document.getElementById('openModal');
 const closeBtn = document.getElementById('modalClose');
 const form = document.getElementById('contactForm');
 const formSuccess = document.getElementById('formSuccess');
+const submitBtn = document.getElementById('formSubmit');
+
+const nameInput = document.getElementById('name');
+const emailInput = document.getElementById('email');
+const businessInput = document.getElementById('business');
+const interestInput = document.getElementById('interest');
+const messageInput = document.getElementById('message');
+
+function isValidEmail(val) {
+   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val.trim());
+}
+
+function getFieldValidity() {
+   const messageRequired = interestInput.value === 'explain-below';
+   return {
+      name: nameInput.value.trim() !== '',
+      email: isValidEmail(emailInput.value),
+      business: businessInput.value.trim() !== '',
+      interest: interestInput.value !== '',
+      message: !messageRequired || messageInput.value.trim() !== ''
+   };
+}
+
+function setWarning(fieldId, show) {
+   const input = document.getElementById(fieldId);
+   const group = input.closest('.form-group');
+   group.classList.toggle('has-warning', show);
+}
+
+function validateAll() {
+   const validity = getFieldValidity();
+   submitBtn.disabled = !Object.values(validity).every(Boolean);
+}
+
+function attachFieldListeners() {
+   [nameInput, businessInput].forEach(input => {
+      input.addEventListener('input', () => {
+         setWarning(input.id, input.value.trim() === '');
+         validateAll();
+      });
+      input.addEventListener('blur', () => {
+         if (input.value.trim() === '') setWarning(input.id, true);
+      });
+   });
+
+   emailInput.addEventListener('input', () => {
+      setWarning('email', !isValidEmail(emailInput.value));
+      validateAll();
+   });
+   emailInput.addEventListener('blur', () => {
+      if (!isValidEmail(emailInput.value)) setWarning('email', true);
+   });
+
+   interestInput.addEventListener('change', () => {
+      setWarning('interest', interestInput.value === '');
+      if (interestInput.value !== 'explain-below') setWarning('message', false);
+      validateAll();
+   });
+
+   messageInput.addEventListener('input', () => {
+      if (interestInput.value === 'explain-below') {
+         setWarning('message', messageInput.value.trim() === '');
+      }
+      validateAll();
+   });
+   messageInput.addEventListener('blur', () => {
+      if (interestInput.value === 'explain-below' && messageInput.value.trim() === '') {
+         setWarning('message', true);
+      }
+   });
+}
+
+attachFieldListeners();
 
 function openContactModal() {
    modal.classList.add('open');
@@ -33,6 +106,11 @@ function closeContactModal() {
 
 openBtn.addEventListener('click', openContactModal);
 closeBtn.addEventListener('click', closeContactModal);
+
+document.querySelectorAll('[onclick="openContactModal()"]').forEach(btn => {
+   btn.removeAttribute('onclick');
+   btn.addEventListener('click', openContactModal);
+});
 
 modal.addEventListener('click', (e) => {
    if (e.target === modal) closeContactModal();
@@ -53,12 +131,14 @@ form.addEventListener('submit', async (e) => {
       });
       if (res.ok) {
          form.reset();
+         document.querySelectorAll('.form-group.has-warning').forEach(g => g.classList.remove('has-warning'));
+         submitBtn.disabled = true;
          document.getElementById('formContent').style.display = 'none';
          formSuccess.style.display = 'block';
       } else {
-         alert('Something went wrong. Please try again or email contact@newrealityinteractive.com directly.');
+         alert('Something went wrong. Please try again or email hello@newrealityinteractive.com directly.');
       }
    } catch {
-      alert('Something went wrong. Please try again or email contact@newrealityinteractive.com directly.');
+      alert('Something went wrong. Please try again or email hello@newrealityinteractive.com directly.');
    }
 });

@@ -50,7 +50,6 @@ body {
    overflow-x: hidden;
    font-size: 1rem;
    line-height: 1.6;
-   scrollbar-gutter: stable;
 }
 
 /* SKIP LINK */
@@ -1090,6 +1089,30 @@ section {
 .form-submit:hover {
    background: #d4563a;
    transform: translateY(-2px);
+}
+
+.form-submit:disabled {
+   background: var(--mid);
+   color: var(--text-muted);
+   cursor: not-allowed;
+   transform: none;
+}
+
+.form-warning {
+   display: none;
+   font-size: 0.78rem;
+   color: var(--accent);
+   letter-spacing: 0.03em;
+}
+
+.form-group.has-warning .form-warning {
+   display: block;
+}
+
+.form-group.has-warning input,
+.form-group.has-warning textarea,
+.form-group.has-warning select {
+   border-color: var(--accent);
 }
 
 .form-success {
