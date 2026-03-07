@@ -1091,13 +1091,6 @@ section {
    transform: translateY(-2px);
 }
 
-.form-submit:disabled {
-   background: var(--mid);
-   color: var(--text-muted);
-   cursor: not-allowed;
-   transform: none;
-}
-
 .form-warning {
    display: none;
    font-size: 0.78rem;

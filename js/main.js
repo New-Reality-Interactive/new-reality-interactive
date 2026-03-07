@@ -31,67 +31,53 @@ function isValidEmail(val) {
    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val.trim());
 }
 
-function getFieldValidity() {
-   const messageRequired = interestInput.value === 'explain-below';
-   return {
-      name: nameInput.value.trim() !== '',
-      email: isValidEmail(emailInput.value),
-      business: businessInput.value.trim() !== '',
-      interest: interestInput.value !== '',
-      message: !messageRequired || messageInput.value.trim() !== ''
-   };
-}
-
 function setWarning(fieldId, show) {
    const input = document.getElementById(fieldId);
    const group = input.closest('.form-group');
    group.classList.toggle('has-warning', show);
 }
 
-function validateAll() {
-   const validity = getFieldValidity();
-   submitBtn.disabled = !Object.values(validity).every(Boolean);
+function validateForm() {
+   const messageRequired = interestInput.value === 'explain-below';
+
+   const checks = {
+      name: nameInput.value.trim() !== '',
+      email: isValidEmail(emailInput.value),
+      business: businessInput.value.trim() !== '',
+      interest: interestInput.value !== '',
+      message: !messageRequired || messageInput.value.trim() !== ''
+   };
+
+   Object.entries(checks).forEach(([id, valid]) => setWarning(id, !valid));
+
+   return Object.values(checks).every(Boolean);
 }
 
-function attachFieldListeners() {
+// Clear warning on a field as soon as the user corrects it
+function attachClearListeners() {
    [nameInput, businessInput].forEach(input => {
       input.addEventListener('input', () => {
-         setWarning(input.id, input.value.trim() === '');
-         validateAll();
-      });
-      input.addEventListener('blur', () => {
-         if (input.value.trim() === '') setWarning(input.id, true);
+         if (input.value.trim() !== '') setWarning(input.id, false);
       });
    });
 
    emailInput.addEventListener('input', () => {
-      setWarning('email', !isValidEmail(emailInput.value));
-      validateAll();
-   });
-   emailInput.addEventListener('blur', () => {
-      if (!isValidEmail(emailInput.value)) setWarning('email', true);
+      if (isValidEmail(emailInput.value)) setWarning('email', false);
    });
 
    interestInput.addEventListener('change', () => {
-      setWarning('interest', interestInput.value === '');
+      if (interestInput.value !== '') setWarning('interest', false);
       if (interestInput.value !== 'explain-below') setWarning('message', false);
-      validateAll();
    });
 
    messageInput.addEventListener('input', () => {
-      if (interestInput.value === 'explain-below') {
-         setWarning('message', messageInput.value.trim() === '');
-      }
-      validateAll();
-   });
-   messageInput.addEventListener('blur', () => {
-      if (interestInput.value === 'explain-below' && messageInput.value.trim() === '') {
-         setWarning('message', true);
+      if (interestInput.value === 'explain-below' && messageInput.value.trim() !== '') {
+         setWarning('message', false);
       }
    });
 }
 
-attachFieldListeners();
+attachClearListeners();
 
 function openContactModal() {
    modal.classList.add('open');
@@ -122,6 +108,9 @@ document.addEventListener('keydown', (e) => {
 
 form.addEventListener('submit', async (e) => {
    e.preventDefault();
+
+   if (!validateForm()) return;
+
    const data = new FormData(form);
    try {
       const res = await fetch(form.action, {
@@ -132,7 +121,6 @@ form.addEventListener('submit', async (e) => {
       if (res.ok) {
          form.reset();
          document.querySelectorAll('.form-group.has-warning').forEach(g => g.classList.remove('has-warning'));
-         submitBtn.disabled = true;
          document.getElementById('formContent').style.display = 'none';
          formSuccess.style.display = 'block';
       } else {
