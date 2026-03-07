@@ -124,9 +124,9 @@ form.addEventListener('submit', async (e) => {
          document.getElementById('formContent').style.display = 'none';
          formSuccess.style.display = 'block';
       } else {
-         alert('Something went wrong. Please try again or email hello@newrealityinteractive.com directly.');
+         alert('Something went wrong. Please try again or email contact@newrealityinteractive.com directly.');
       }
    } catch {
-      alert('Something went wrong. Please try again or email hello@newrealityinteractive.com directly.');
+      alert('Something went wrong. Please try again or email contact@newrealityinteractive.com directly.');
    }
 });
