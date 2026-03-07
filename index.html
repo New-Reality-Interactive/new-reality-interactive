@@ -11,6 +11,8 @@
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600;700&display=swap"
       rel="stylesheet" />
    <link rel="stylesheet" href="css/styles.css" />
+   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+   <script src="js/main.js" defer></script>
 </head>
 
 <body>
@@ -310,18 +312,21 @@
                <div class="modal-title" id="modal-title">Let's talk.</div>
                <div class="modal-sub">Tell me a bit about your business and what you need. I'll get back to you within
                   one business day.</div>
-               <form action="https://formspree.io/f/mzdaljja" method="POST" id="contactForm">
+               <form action="https://formspree.io/f/mzdaljja" method="POST" id="contactForm" novalidate>
                   <div class="form-group">
                      <label for="name">Your name</label>
-                     <input type="text" id="name" name="name" placeholder="Jane Smith" required />
+                     <input type="text" id="name" name="name" placeholder="Jane Smith" />
+                     <span class="form-warning" id="warn-name">&#9888; Please enter your name.</span>
                   </div>
                   <div class="form-group">
                      <label for="email">Your email</label>
-                     <input type="email" id="email" name="email" placeholder="jane@yourbusiness.com" required />
+                     <input type="email" id="email" name="email" placeholder="jane@yourbusiness.com" />
+                     <span class="form-warning" id="warn-email">&#9888; Please enter a valid email address.</span>
                   </div>
                   <div class="form-group">
                      <label for="business">Your business</label>
                      <input type="text" id="business" name="business" placeholder="What does your business do?" />
+                     <span class="form-warning" id="warn-business">&#9888; Please tell me about your business.</span>
                   </div>
                   <div class="form-group">
                      <label for="interest">What are you looking for?</label>
@@ -334,12 +339,16 @@
                         <option value="not-sure">Not sure yet</option>
                         <option value="explain-below">I'll explain below</option>
                      </select>
+                     <span class="form-warning" id="warn-interest">&#9888; Please select what you are looking
+                        for.</span>
                   </div>
                   <div class="form-group">
                      <label for="message">Anything else you'd like me to know</label>
                      <textarea id="message" name="message" placeholder="Budget, timeline, questions..."></textarea>
+                     <span class="form-warning" id="warn-message">&#9888; Please provide some details about what you
+                        need.</span>
                   </div>
-                  <button type="submit" class="form-submit">Send Message</button>
+                  <button type="submit" class="form-submit" id="formSubmit">Send Message</button>
                </form>
             </div>
             <div class="form-success" id="formSuccess">
@@ -362,76 +371,6 @@
             aria-label="Send an email to New Reality Interactive">Email</a>
       </nav>
    </footer>
-
-   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-   <script>
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (prefersReducedMotion) {
-         document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
-      } else {
-         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => {
-               if (e.isIntersecting) {
-                  e.target.classList.add('visible');
-                  observer.unobserve(e.target);
-               }
-            });
-         }, { threshold: 0.1 });
-         document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
-      }
-
-      // Modal
-      const modal = document.getElementById('contactModal');
-      const openBtn = document.getElementById('openModal');
-      const closeBtn = document.getElementById('modalClose');
-      const form = document.getElementById('contactForm');
-      const formSuccess = document.getElementById('formSuccess');
-
-      function openContactModal() {
-         modal.classList.add('open');
-         document.body.style.overflow = 'hidden';
-         closeBtn.focus();
-      }
-
-      function closeContactModal() {
-         modal.classList.remove('open');
-         document.body.style.overflow = '';
-         document.getElementById('formContent').style.display = '';
-         formSuccess.style.display = '';
-         form.reset();
-      }
-
-      openBtn.addEventListener('click', openContactModal);
-      closeBtn.addEventListener('click', closeContactModal);
-
-      modal.addEventListener('click', (e) => {
-         if (e.target === modal) closeContactModal();
-      });
-
-      document.addEventListener('keydown', (e) => {
-         if (e.key === 'Escape' && modal.classList.contains('open')) closeContactModal();
-      });
-
-      form.addEventListener('submit', async (e) => {
-         e.preventDefault();
-         const data = new FormData(form);
-         try {
-            const res = await fetch(form.action, {
-               method: 'POST',
-               body: data,
-               headers: { 'Accept': 'application/json' }
-            });
-            if (res.ok) {
-               document.getElementById('formContent').style.display = 'none';
-               formSuccess.style.display = 'block';
-            } else {
-               alert('Something went wrong. Please try again or email contact@newrealityinteractive.com directly.');
-            }
-         } catch {
-            alert('Something went wrong. Please try again or email contact@newrealityinteractive.com directly.');
-         }
-      });
-   </script>
 
 </body>
 

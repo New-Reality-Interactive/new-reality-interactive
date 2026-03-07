@@ -255,6 +255,8 @@ body::before {
 }
 
 .btn-ghost {
+   background: none;
+   cursor: pointer;
    border: 2px solid rgba(255, 255, 255, 0.4);
    color: var(--white);
    padding: 0.9rem 2rem;
@@ -1087,6 +1089,23 @@ section {
 .form-submit:hover {
    background: #d4563a;
    transform: translateY(-2px);
+}
+
+.form-warning {
+   display: none;
+   font-size: 0.78rem;
+   color: var(--accent);
+   letter-spacing: 0.03em;
+}
+
+.form-group.has-warning .form-warning {
+   display: block;
+}
+
+.form-group.has-warning input,
+.form-group.has-warning textarea,
+.form-group.has-warning select {
+   border-color: var(--accent);
 }
 
 .form-success {
