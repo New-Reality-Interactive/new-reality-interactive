@@ -160,10 +160,16 @@ body::before {
    min-height: 100vh;
    display: grid;
    grid-template-columns: 1fr 1fr;
+   grid-template-rows: 1fr auto;
    align-items: center;
-   padding: 8rem 3rem 4rem;
+   padding: 8rem 3rem 0;
    position: relative;
    overflow: hidden;
+}
+
+.hero .marquee-wrap {
+   grid-column: 1 / -1;
+   margin: 0 -3rem;
 }
 
 .hero::after {
