@@ -19,7 +19,7 @@
    <a href="#main-content" class="skip-link">Skip to main content</a>
 
    <nav id="main-nav" aria-label="Main navigation">
-      <a href="#" class="nav-logo" aria-label="New Reality Interactive — Home">NR<span aria-hidden="true">I</span></a>
+      <a href="#" class="nav-logo" aria-label="New Reality Interactive — Home">New Reality <span>Interactive</span></a>
       <ul class="nav-links" role="list">
          <li><a href="#services">Services</a></li>
          <li><a href="#about">About</a></li>
@@ -27,7 +27,7 @@
          <li><a href="#pricing">Pricing</a></li>
          <li><a href="#contact">Contact</a></li>
       </ul>
-      <button class="btn-primary" style="font-size:0.85rem; padding:0.6rem 1.4rem;" onclick="openContactModal()">Let's
+      <button class="btn-primary" onclick="openContactModal()">Let's
          Talk</button>
    </nav>
 
@@ -35,7 +35,6 @@
 
       <section class="hero" aria-labelledby="hero-heading">
          <div class="hero-left">
-            <p class="hero-eyebrow" aria-hidden="true">New Reality Interactive</p>
             <h1 class="hero-title" id="hero-heading">
                Your business.<br>
                <em>Brought to life</em><br>
@@ -110,38 +109,41 @@
                </div>
 
                <div class="cred-footer">
-                  <div class="cred-dot"></div>
-                  <div class="cred-footer-text">Available for New Projects</div>
+                  <div class="cred-footer-label">Availability</div>
+                  <div class="cred-footer-status">
+                     <div class="cred-dot"></div>
+                     <div class="cred-footer-text">Available for New Projects</div>
+                  </div>
                </div>
 
             </div>
          </div>
-      </section>
 
-      <div class="marquee-wrap" aria-hidden="true" role="presentation">
-         <div class="marquee-track">
-            <span class="marquee-item">Web Development <span>&#10022;</span></span>
-            <span class="marquee-item">Custom Solutions <span>&#10022;</span></span>
-            <span class="marquee-item">Front-End Engineering <span>&#10022;</span></span>
-            <span class="marquee-item">Back-End Engineering <span>&#10022;</span></span>
-            <span class="marquee-item">Tech Strategy <span>&#10022;</span></span>
-            <span class="marquee-item">Small Business Consulting <span>&#10022;</span></span>
-            <span class="marquee-item">Platform Integrations <span>&#10022;</span></span>
-            <span class="marquee-item">Online Presence <span>&#10022;</span></span>
-            <span class="marquee-item">Web Development <span>&#10022;</span></span>
-            <span class="marquee-item">Custom Solutions <span>&#10022;</span></span>
-            <span class="marquee-item">Front-End Engineering <span>&#10022;</span></span>
-            <span class="marquee-item">Back-End Engineering <span>&#10022;</span></span>
-            <span class="marquee-item">Tech Strategy <span>&#10022;</span></span>
-            <span class="marquee-item">Small Business Consulting <span>&#10022;</span></span>
-            <span class="marquee-item">Platform Integrations <span>&#10022;</span></span>
-            <span class="marquee-item">Online Presence <span>&#10022;</span></span>
+         <div class="marquee-wrap" aria-hidden="true" role="presentation">
+            <div class="marquee-track">
+               <span class="marquee-item">Web Development <span>&#10022;</span></span>
+               <span class="marquee-item">Custom Solutions <span>&#10022;</span></span>
+               <span class="marquee-item">Front-End Engineering <span>&#10022;</span></span>
+               <span class="marquee-item">Back-End Engineering <span>&#10022;</span></span>
+               <span class="marquee-item">Tech Strategy <span>&#10022;</span></span>
+               <span class="marquee-item">Small Business Consulting <span>&#10022;</span></span>
+               <span class="marquee-item">Platform Integrations <span>&#10022;</span></span>
+               <span class="marquee-item">Online Presence <span>&#10022;</span></span>
+               <span class="marquee-item">Web Development <span>&#10022;</span></span>
+               <span class="marquee-item">Custom Solutions <span>&#10022;</span></span>
+               <span class="marquee-item">Front-End Engineering <span>&#10022;</span></span>
+               <span class="marquee-item">Back-End Engineering <span>&#10022;</span></span>
+               <span class="marquee-item">Tech Strategy <span>&#10022;</span></span>
+               <span class="marquee-item">Small Business Consulting <span>&#10022;</span></span>
+               <span class="marquee-item">Platform Integrations <span>&#10022;</span></span>
+               <span class="marquee-item">Online Presence <span>&#10022;</span></span>
+            </div>
          </div>
-      </div>
+      </section>
 
       <section id="services" aria-labelledby="services-heading">
          <div class="reveal">
-            <p class="section-label" aria-hidden="true">What I Do</p>
+            <p class="section-label" aria-hidden="true">Services</p>
             <h2 class="section-title" id="services-heading">Technology that works<br>as hard as you do.</h2>
             <p class="section-body">Whether you need something built from scratch or just need someone to help you
                navigate the options, I bring deep technical experience with a clear focus on your business goals.</p>
@@ -174,12 +176,12 @@
          </div>
       </section>
 
-      <section id="about" aria-labelledby="about-heading" style="background: var(--gray);">
+      <section id="about" aria-labelledby="about-heading">
          <div class="about-inner">
             <div class="reveal">
                <p class="section-label" aria-hidden="true">About</p>
                <h2 class="section-title" id="about-heading">Story meets<br>technology.</h2>
-               <p class="section-body" style="margin-bottom: 1.5rem;">New Reality Interactive started with a simple
+               <p class="section-body about-body-intro">New Reality Interactive started with a simple
                   idea: technology should tell your story, not just host it. With 26 years of software engineering
                   experience, I bring the same caliber of work you would expect from a large agency, without the
                   overhead or the runaround.</p>
@@ -193,7 +195,12 @@
                   </div>
                   <div class="about-stat-block">
                      <dt class="about-stat-label">I build the whole thing, no extra vendors needed</dt>
-                     <dd class="about-stat-num">A to Z</dd>
+                     <dd class="about-stat-num">A <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                           fill="none" stroke="var(--accent-dark)" stroke-width="2.5" stroke-linecap="round"
+                           stroke-linejoin="round" aria-hidden="true" class="stat-icon-arrow">
+                           <line x1="5" y1="12" x2="19" y2="12" />
+                           <polyline points="13 6 19 12 13 18" />
+                        </svg> Z</dd>
                   </div>
                   <div class="about-stat-block">
                      <dt class="about-stat-label">You work directly with me, not handed off to a team</dt>
@@ -201,7 +208,12 @@
                   </div>
                   <div class="about-stat-block">
                      <dt class="about-stat-label">Ongoing commitment to your long-term success</dt>
-                     <dd class="about-stat-num" aria-label="Ongoing">&#8734;</dd>
+                     <dd class="about-stat-num" aria-label="Ongoing"><svg xmlns="http://www.w3.org/2000/svg"
+                           viewBox="0 0 50 24" fill="none" stroke="currentColor" stroke-width="4.5"
+                           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="stat-icon-infinity">
+                           <path d="M25 12c-3-5-7-8-11-8a8 8 0 0 0 0 16c4 0 8-3 11-8z" />
+                           <path d="M25 12c3 5 7 8 11 8a8 8 0 0 0 0-16c-4 0-8 3-11 8z" />
+                        </svg></dd>
                   </div>
                </dl>
             </div>
@@ -215,7 +227,7 @@
 
       <section id="process" aria-labelledby="process-heading">
          <div class="reveal">
-            <p class="section-label" aria-hidden="true">How It Works</p>
+            <p class="section-label" aria-hidden="true">Process</p>
             <h2 class="section-title" id="process-heading">Simple by design.</h2>
             <p class="section-body">Working together is straightforward. Here's what to expect.</p>
          </div>
@@ -255,7 +267,7 @@
                answer when it comes to cost, and I would not pretend otherwise.</p>
          </div>
          <div class="pricing-inner reveal">
-            <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+            <div class="pricing-cards-stack">
                <div class="pricing-card">
                   <div class="pricing-card-title">Project Work</div>
                   <div class="pricing-card-sub">One-time engagements</div>
@@ -290,9 +302,7 @@
                <p class="pricing-message-body">If budget is a concern, let's talk. There is often more than one way to
                   get where you need to go, and I would rather find a solution that works for you than lose the
                   opportunity to help.</p>
-               <button class="pricing-message-cta"
-                  style="background:none;border:none;cursor:pointer;font-family:var(--font-display);font-weight:600;font-size:1rem;letter-spacing:0.03em;"
-                  onclick="openContactModal()">Start the conversation &#8594;</button>
+               <button class="pricing-message-cta" onclick="openContactModal()">Start the conversation &#8594;</button>
             </div>
          </div>
       </section>
@@ -362,11 +372,12 @@
 
    <footer class="site-footer" role="contentinfo">
       <div class="footer-logo">New Reality <span>Interactive</span></div>
-      <p class="footer-copy">&#169; 2026 New Reality Interactive, LLC. All rights reserved.</p>
+      <p class="footer-copy">&#169; 2026 New Reality <span class="brand-accent">Interactive</span>, LLC. All rights
+         reserved.</p>
       <nav aria-label="Footer links" class="footer-links">
          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
             aria-label="Visit New Reality Interactive on LinkedIn (opens in new tab)">LinkedIn</a>
-         <a href="mailto:contact@newrealityinteractive.com"
+         <a href="/cdn-cgi/l/email-protection#60030f0e14010314200e05171205010c091419090e1405120103140916054e030f0d"
             aria-label="Send an email to New Reality Interactive">Email</a>
       </nav>
    </footer>
