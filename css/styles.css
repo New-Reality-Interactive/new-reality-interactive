@@ -169,7 +169,7 @@ body::before {
 
 .hero .marquee-wrap {
    grid-column: 1 / -1;
-   margin: 0 -3rem;
+   margin: 0 -3rem 2rem;
 }
 
 .hero::after {
