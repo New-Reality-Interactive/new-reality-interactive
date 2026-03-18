@@ -124,7 +124,7 @@ body::before {
 #main-nav .nav-logo {
    font-family: var(--font-display);
    font-weight: 800;
-   font-size: 1.1rem;
+   font-size: 1.43rem;
    letter-spacing: 0.02em;
    color: var(--black);
    text-decoration: none;
