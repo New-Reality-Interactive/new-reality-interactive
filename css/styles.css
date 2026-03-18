@@ -181,20 +181,6 @@ body::before {
    max-width: 640px;
 }
 
-.hero-eyebrow {
-   font-size: 0.8rem;
-   letter-spacing: 0.2em;
-   text-transform: uppercase;
-   color: var(--black);
-   margin-bottom: 1.5rem;
-   opacity: 0;
-   animation: fadeUp 0.8s ease forwards 0.2s;
-}
-
-.hero-eyebrow .eyebrow-accent {
-   color: var(--accent);
-}
-
 .hero-title {
    font-family: var(--font-display);
    font-weight: 800;
@@ -351,11 +337,6 @@ body::before {
    color: var(--text-muted);
    letter-spacing: 0.06em;
    text-transform: uppercase;
-}
-
-.cred-divider {
-   height: 1px;
-   background: var(--mid);
 }
 
 .cred-footer {
