@@ -892,6 +892,20 @@ section {
    transform: translateY(-2px);
 }
 
+.cta-band .btn-dark {
+   border: 2px solid rgba(242, 245, 248, 0.5);
+   cursor: pointer;
+   transition: border-color 0.15s, transform 0.15s;
+}
+
+.cta-band .btn-dark:hover,
+.cta-band .btn-dark:focus-visible {
+   background: var(--white);
+   color: var(--black);
+   border-color: var(--white);
+   transform: translateY(-2px);
+}
+
 /* FOOTER */
 .site-footer {
    padding: 3rem;
