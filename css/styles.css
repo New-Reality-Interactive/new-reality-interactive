@@ -38,7 +38,7 @@ html {
    }
 
    .marquee-track,
-   .cred-dot {
+   .cred-dot--available {
       animation: none !important;
    }
 }
@@ -358,6 +358,20 @@ body::before {
    background: var(--accent);
    padding: 1.25rem 2rem;
    display: flex;
+   flex-direction: column;
+   gap: 0.4rem;
+}
+
+.cred-footer-label {
+   font-size: 0.7rem;
+   letter-spacing: 0.12em;
+   text-transform: uppercase;
+   color: var(--white);
+   opacity: 0.75;
+}
+
+.cred-footer-status {
+   display: flex;
    align-items: center;
    gap: 0.75rem;
 }
@@ -374,9 +388,16 @@ body::before {
    width: 10px;
    height: 10px;
    border-radius: 50%;
-   background: #4ade80;
    flex-shrink: 0;
+}
+
+.cred-dot--available {
+   background: #4ade80;
    animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.cred-dot--unavailable {
+   background: #94a3b8;
 }
 
 @keyframes pulse-dot {

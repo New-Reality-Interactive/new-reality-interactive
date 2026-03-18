@@ -1,3 +1,12 @@
+const AVAILABLE = true; // set to false when not available for new projects
+
+const credDot = document.querySelector('.cred-dot');
+const credFooterText = document.querySelector('.cred-footer-text');
+if (credDot && credFooterText) {
+   credDot.classList.add(AVAILABLE ? 'cred-dot--available' : 'cred-dot--unavailable');
+   credFooterText.textContent = AVAILABLE ? 'Available for New Projects' : 'Fully Booked Right Now';
+}
+
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 if (prefersReducedMotion) {
    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
