@@ -37,7 +37,8 @@ html {
       scroll-behavior: auto;
    }
 
-   .marquee-track {
+   .marquee-track,
+   .cred-dot {
       animation: none !important;
    }
 }
@@ -370,12 +371,26 @@ body::before {
 }
 
 .cred-dot {
-   width: 8px;
-   height: 8px;
+   width: 10px;
+   height: 10px;
    border-radius: 50%;
-   background: var(--white);
-   opacity: 0.4;
+   background: #4ade80;
    flex-shrink: 0;
+   animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+
+   0%,
+   100% {
+      opacity: 1;
+      transform: scale(1);
+   }
+
+   50% {
+      opacity: 0.6;
+      transform: scale(0.85);
+   }
 }
 
 /* MARQUEE */
