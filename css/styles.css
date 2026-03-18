@@ -10,7 +10,7 @@
    --font-display: 'Cormorant Garamond', serif;
    --font-body: 'Jost', sans-serif;
    --black: #1b2733;
-      --white: #f2f5f8;
+   --white: #f2f5f8;
       --accent: #2563a8;
       --accent-dark: #1a4d8a;
       --gray: #e5e9ee;
@@ -44,7 +44,7 @@ html {
 
 body {
    background: var(--white);
-      color: var(--black);
+   color: var(--black);
    font-family: var(--font-body);
    font-weight: 400;
    overflow-x: hidden;
@@ -110,7 +110,7 @@ body::before {
    justify-content: space-between;
    align-items: center;
    border-bottom: 1px solid rgba(27, 39, 51, 0.15);
-      background: rgba(242, 245, 248, 0.95);
+   background: rgba(242, 245, 248, 0.95);
    backdrop-filter: blur(12px);
 }
 
@@ -258,7 +258,7 @@ body::before {
    background: none;
    cursor: pointer;
    border: 2px solid rgba(27, 39, 51, 0.35);
-      color: var(--black);
+   color: var(--black);
    padding: 0.9rem 2rem;
    font-family: var(--font-display);
    font-weight: 600;
@@ -314,7 +314,7 @@ body::before {
    height: 44px;
    flex-shrink: 0;
    background: rgba(37, 99, 168, 0.12);
-      border: 1px solid rgba(37, 99, 168, 0.25);
+   border: 1px solid rgba(37, 99, 168, 0.25);
    display: flex;
    align-items: center;
    justify-content: center;
@@ -553,11 +553,10 @@ section {
 }
 
 .about-stat-num {
-   font-family: var(--font-display);
+   font-family: var(--font-body);
    font-weight: 800;
-   font-size: 2rem;
-   color: transparent;
-      -webkit-text-stroke: 2px var(--accent-dark);
+   font-size: 1.5rem;
+      color: var(--accent-dark);
 }
 
 .about-stat-label {
@@ -796,7 +795,7 @@ section {
 
 .btn-dark {
    background: var(--white);
-      color: var(--black);
+   color: var(--black);
    padding: 1rem 2.5rem;
    font-family: var(--font-display);
    font-weight: 700;
