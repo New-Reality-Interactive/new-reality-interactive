@@ -11,12 +11,12 @@
    --font-body: 'Jost', sans-serif;
    --black: #1b2733;
    --white: #f2f5f8;
-      --accent: #2563a8;
-      --accent-dark: #1a4d8a;
-      --gray: #e5e9ee;
-      --mid: #b8c2cc;
-      --text-muted: #4f5f6e;
-      --body-text: #364452;
+   --accent: #2563a8;
+   --accent-dark: #1a4d8a;
+   --gray: #e5e9ee;
+   --mid: #b8c2cc;
+   --text-muted: #4f5f6e;
+   --body-text: #364452;
 }
 
 html {
@@ -556,7 +556,7 @@ section {
    font-family: var(--font-body);
    font-weight: 800;
    font-size: 1.5rem;
-      color: var(--accent-dark);
+   color: var(--accent-dark);
 }
 
 .about-stat-label {
