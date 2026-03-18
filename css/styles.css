@@ -160,16 +160,10 @@ body::before {
    min-height: 100vh;
    display: grid;
    grid-template-columns: 1fr 1fr;
-   grid-template-rows: 1fr auto;
    align-items: center;
-   padding: 8rem 3rem 0;
+   padding: 10rem 3rem 0;
    position: relative;
    overflow: hidden;
-}
-
-.hero .marquee-wrap {
-   grid-column: 1 / -1;
-   margin: 0 -3rem 2rem;
 }
 
 .hero::after {
@@ -408,6 +402,11 @@ body::before {
 
 /* MARQUEE */
 .marquee-wrap {
+   position: fixed;
+   top: 93px;
+   left: 0;
+   right: 0;
+   z-index: 99;
    border-top: 1px solid var(--mid);
    border-bottom: 1px solid var(--mid);
    overflow: hidden;
@@ -440,6 +439,7 @@ body::before {
 /* SECTIONS */
 section {
    padding: 6rem 3rem;
+   scroll-margin-top: 75px;
 }
 
 .section-label {
