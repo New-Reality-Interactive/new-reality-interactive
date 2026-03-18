@@ -157,9 +157,9 @@ body::before {
 
 /* HERO */
 .hero {
+   min-height: 100vh;
    display: grid;
    grid-template-columns: 1fr 1fr;
-   grid-template-rows: 1fr auto;
    align-items: center;
    padding: 10rem 3rem 0;
    position: relative;
@@ -402,6 +402,11 @@ body::before {
 
 /* MARQUEE */
 .marquee-wrap {
+   position: fixed;
+   top: 93px;
+   left: 0;
+   right: 0;
+   z-index: 99;
    border-top: 1px solid var(--mid);
    border-bottom: 1px solid var(--mid);
    overflow: hidden;
@@ -434,6 +439,7 @@ body::before {
 /* SECTIONS */
 section {
    padding: 6rem 3rem;
+   scroll-margin-top: 75px;
 }
 
 .section-label {
