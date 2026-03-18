@@ -185,10 +185,14 @@ body::before {
    font-size: 0.8rem;
    letter-spacing: 0.2em;
    text-transform: uppercase;
-   color: var(--accent);
+   color: var(--black);
    margin-bottom: 1.5rem;
    opacity: 0;
    animation: fadeUp 0.8s ease forwards 0.2s;
+}
+
+.hero-eyebrow .eyebrow-accent {
+   color: var(--accent);
 }
 
 .hero-title {
@@ -906,7 +910,8 @@ section {
    color: var(--black);
 }
 
-.footer-logo span {
+.footer-logo span,
+.brand-accent {
    color: var(--accent);
 }
 
