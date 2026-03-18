@@ -98,6 +98,12 @@ body::before {
    opacity: 0.4;
 }
 
+/* NAV BUTTON SIZE */
+#main-nav .btn-primary {
+   font-size: 0.85rem;
+   padding: 0.6rem 1.4rem;
+}
+
 /* MAIN NAV — scoped to #main-nav only */
 #main-nav {
    position: fixed;
@@ -500,6 +506,26 @@ section {
 }
 
 /* ABOUT */
+#about {
+   background: var(--gray);
+}
+
+.about-body-intro {
+   margin-bottom: 1.5rem;
+}
+
+.about-stat-num .stat-icon-arrow {
+   width: 1em;
+   height: 1em;
+   vertical-align: middle;
+}
+
+.about-stat-num .stat-icon-infinity {
+   width: 1.6em;
+   height: 0.8em;
+   vertical-align: middle;
+}
+
 .about-inner {
    display: grid;
    grid-template-columns: 1fr 1fr;
@@ -636,6 +662,12 @@ section {
    background: var(--gray);
 }
 
+.pricing-cards-stack {
+   display: flex;
+   flex-direction: column;
+   gap: 1.5rem;
+}
+
 .pricing-inner {
    display: grid;
    grid-template-columns: 1fr 1fr;
@@ -746,6 +778,9 @@ section {
 }
 
 .pricing-message-cta {
+   background: none;
+   border: none;
+   cursor: pointer;
    font-family: var(--font-display);
    font-weight: 600;
    font-size: 1rem;
