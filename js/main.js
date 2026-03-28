@@ -22,6 +22,39 @@ if (prefersReducedMotion) {
    document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
 }
 
+// Mobile nav
+const navToggle = document.getElementById('navToggle');
+const mobileNav = document.getElementById('mobileNav');
+
+function openMobileNav() {
+   mobileNav.classList.add('open');
+   navToggle.classList.add('open');
+   navToggle.setAttribute('aria-expanded', 'true');
+   mobileNav.setAttribute('aria-hidden', 'false');
+}
+
+function closeMobileNav() {
+   mobileNav.classList.remove('open');
+   navToggle.classList.remove('open');
+   navToggle.setAttribute('aria-expanded', 'false');
+   mobileNav.setAttribute('aria-hidden', 'true');
+}
+
+navToggle.addEventListener('click', () => {
+   mobileNav.classList.contains('open') ? closeMobileNav() : openMobileNav();
+});
+
+// Close mobile nav when any link or the CTA inside it is clicked
+mobileNav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMobileNav));
+
+const mobileNavCta = mobileNav.querySelector('.mobile-nav-cta');
+if (mobileNavCta) {
+   mobileNavCta.addEventListener('click', () => {
+      closeMobileNav();
+      openContactModal();
+   });
+}
+
 // Modal
 const modal = document.getElementById('contactModal');
 const openBtn = document.getElementById('openModal');
@@ -112,7 +145,13 @@ modal.addEventListener('click', (e) => {
 });
 
 document.addEventListener('keydown', (e) => {
-   if (e.key === 'Escape' && modal.classList.contains('open')) closeContactModal();
+   if (e.key === 'Escape') {
+      if (modal.classList.contains('open')) closeContactModal();
+      if (mobileNav.classList.contains('open')) {
+         closeMobileNav();
+         navToggle.focus();
+      }
+   }
 });
 
 form.addEventListener('submit', async (e) => {
