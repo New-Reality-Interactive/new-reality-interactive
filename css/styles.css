@@ -664,11 +664,11 @@ section {
 .step-num {
    font-family: var(--font-display);
    font-weight: 800;
-   font-size: 0.75rem;
+   font-size: 1.1rem;
    color: var(--accent);
    letter-spacing: 0.15em;
    margin-bottom: 0.75rem;
-   opacity: 0.7;
+   opacity: 1;
 }
 
 .step-title {
@@ -896,9 +896,7 @@ section {
 
 /* CONTACT SECTION */
 .contact-section {
-   background: #3d5570;
-   color: var(--white);
-   padding: 7rem 3rem;
+   background: var(--white);
 }
 
 .contact-inner {
@@ -912,33 +910,23 @@ section {
    font-size: 0.75rem;
    letter-spacing: 0.2em;
    text-transform: uppercase;
-   color: rgba(242, 245, 248, 0.45);
+   color: var(--accent);
    margin-bottom: 1rem;
 }
 
 .contact-title {
    font-family: var(--font-display);
    font-weight: 800;
-   font-size: clamp(2.4rem, 4.5vw, 4rem);
-   line-height: 1.08;
+   font-size: clamp(2.2rem, 4vw, 3.6rem);
+   line-height: 1.1;
    letter-spacing: -0.02em;
-   color: var(--white);
-   margin-bottom: 1.5rem;
+   color: var(--black);
+   margin-bottom: 2rem;
 }
 
 .contact-title em {
    font-style: normal;
-   text-decoration: underline;
-   text-decoration-color: rgba(37, 99, 168, 0.7);
-   text-underline-offset: 4px;
-}
-
-.contact-sub {
-   font-size: 1.05rem;
-   line-height: 1.8;
-   color: rgba(242, 245, 248, 0.65);
-   margin-bottom: 2.5rem;
-   max-width: 400px;
+   color: var(--accent);
 }
 
 .btn-contact {
@@ -968,67 +956,78 @@ section {
    font-size: 0.75rem;
    letter-spacing: 0.2em;
    text-transform: uppercase;
-   color: rgba(242, 245, 248, 0.45);
-   margin-bottom: 2rem;
+   color: var(--accent);
+   margin-bottom: 1.5rem;
 }
 
 .contact-steps {
+   display: grid;
+   grid-template-columns: 1fr;
+   gap: 1px;
    list-style: none;
    padding: 0;
-   display: flex;
-   flex-direction: column;
+   background: var(--mid);
+   border: 1px solid var(--mid);
 }
 
 .contact-step {
-   display: flex;
-   gap: 1.5rem;
-   align-items: flex-start;
-   padding: 1.75rem 0;
-   border-top: 1px solid rgba(242, 245, 248, 0.1);
+   position: relative;
+   padding: 0.5rem 2.5rem;
+   background: var(--white);
+   overflow: hidden;
+   transition: background 0.3s;
 }
 
-.contact-step:last-child {
-   border-bottom: 1px solid rgba(242, 245, 248, 0.1);
+.contact-step::before {
+   content: '';
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   height: 3px;
+   background: var(--accent);
+   transform: scaleX(0);
+   transform-origin: left;
+   transition: transform 0.3s ease;
+}
+
+.contact-step:hover {
+   background: var(--gray);
+}
+
+.contact-step:hover::before {
+   transform: scaleX(1);
 }
 
 .contact-step-num {
    font-family: var(--font-display);
    font-weight: 800;
-   font-size: 0.75rem;
-   letter-spacing: 0.12em;
+   font-size: 1.1rem;
    color: var(--accent);
-   flex-shrink: 0;
-   padding-top: 0.15rem;
-   min-width: 2rem;
+   letter-spacing: 0.15em;
+   margin-bottom: 0.75rem;
+   opacity: 1;
 }
 
 .contact-step-title {
    display: block;
    font-family: var(--font-display);
    font-weight: 700;
-   font-size: 1.05rem;
-   color: var(--white);
-   margin-bottom: 0.4rem;
+   font-size: 1.1rem;
+   color: var(--black);
+   margin-bottom: 0.75rem;
 }
 
 .contact-step-desc {
-   font-size: 0.9rem;
-   color: rgba(242, 245, 248, 0.55);
+   font-size: 0.95rem;
+   color: var(--body-text);
    line-height: 1.75;
 }
 
 @media (max-width: 900px) {
-   .contact-section {
-      padding: 5rem 1.5rem;
-   }
-
    .contact-inner {
       grid-template-columns: 1fr;
-      gap: 3.5rem;
-   }
-
-   .contact-sub {
-      max-width: 100%;
+      gap: 3rem;
    }
 }
 
