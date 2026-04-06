@@ -413,6 +413,8 @@ body::before {
    overflow: hidden;
    padding: 1rem 0;
    background: var(--gray);
+   -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+   mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
 }
 
 .marquee-track {
