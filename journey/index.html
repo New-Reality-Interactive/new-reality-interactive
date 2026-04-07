@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Tommy's Voyage · Live Tracker</title>
+
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap"
+      rel="stylesheet">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+
+   <style>
+      *,
+      *::before,
+      *::after {
+         box-sizing: border-box;
+         margin: 0;
+         padding: 0;
+      }
+
+      body {
+         font-family: 'DM Sans', sans-serif;
+         background: #f2f0eb;
+         color: #1a1a17;
+      }
+
+      /* ── HEADER ───────────────────────────────────────────── */
+      .site-header {
+         background: #04211A;
+         height: 56px;
+         padding: 0 28px;
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         position: sticky;
+         top: 0;
+         z-index: 1001;
+         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .logo {
+         display: flex;
+         align-items: center;
+         gap: 11px;
+      }
+
+      .logo-icon {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         width: 28px;
+         height: 28px;
+         border: 1px solid rgba(93, 202, 165, 0.35);
+         border-radius: 6px;
+      }
+
+      .logo-name {
+         font-family: 'Playfair Display', serif;
+         font-size: 17px;
+         color: #e8f2ef;
+         letter-spacing: 0.02em;
+      }
+
+      .live-pill {
+         display: flex;
+         align-items: center;
+         gap: 5px;
+         background: rgba(29, 158, 117, 0.12);
+         border: 1px solid rgba(93, 202, 165, 0.25);
+         border-radius: 20px;
+         padding: 3px 9px 3px 7px;
+         font-size: 10px;
+         color: #5DCAA5;
+         font-family: 'DM Mono', monospace;
+         letter-spacing: 0.05em;
+      }
+
+      .live-dot {
+         width: 6px;
+         height: 6px;
+         border-radius: 50%;
+         background: #1D9E75;
+         animation: blink 2.2s ease-in-out infinite;
+      }
+
+      @keyframes blink {
+
+         0%,
+         100% {
+            opacity: 1
+         }
+
+         55% {
+            opacity: 0.2
+         }
+      }
+
+      .nav-links {
+         display: flex;
+         gap: 26px;
+      }
+
+      .nav-links a {
+         font-size: 13px;
+         color: rgba(255, 255, 255, 0.38);
+         text-decoration: none;
+         transition: color 0.15s;
+      }
+
+      .nav-links a:hover {
+         color: rgba(255, 255, 255, 0.82);
+      }
+
+      .nav-right {
+         font-size: 11px;
+         color: rgba(255, 255, 255, 0.22);
+         font-family: 'DM Mono', monospace;
+         letter-spacing: 0.03em;
+      }
+
+      /* ── MAP ──────────────────────────────────────────────── */
+      #map {
+         width: 100%;
+         height: 62vh;
+         min-height: 440px;
+      }
+
+      /* Custom popup styles */
+      .leaflet-popup-content-wrapper {
+         border-radius: 10px !important;
+         box-shadow: 0 6px 28px rgba(0, 0, 0, 0.14) !important;
+         padding: 0 !important;
+         overflow: hidden;
+         border: 1px solid rgba(0, 0, 0, 0.06);
+      }
+
+      .leaflet-popup-content {
+         margin: 0 !important;
+         width: auto !important;
+      }
+
+      .leaflet-popup-tip {
+         background: #fff !important;
+      }
+
+      .pop {
+         font-family: 'DM Sans', sans-serif;
+         padding: 14px 16px;
+         min-width: 210px;
+      }
+
+      .pop-top {
+         display: flex;
+         align-items: flex-start;
+         justify-content: space-between;
+         gap: 8px;
+         margin-bottom: 8px;
+      }
+
+      .pop-name {
+         font-size: 14px;
+         font-weight: 500;
+         color: #1a1a17;
+      }
+
+      .pop-tag {
+         font-size: 10px;
+         padding: 2px 8px;
+         border-radius: 20px;
+         white-space: nowrap;
+         flex-shrink: 0;
+      }
+
+      .pop-coords {
+         font-size: 11px;
+         color: #888;
+         font-family: 'DM Mono', monospace;
+         margin-bottom: 4px;
+      }
+
+      .pop-row {
+         font-size: 11px;
+         color: #bbb;
+      }
+
+      .pop-divider {
+         height: 1px;
+         background: #f0ede8;
+         margin: 8px 0;
+      }
+
+      /* ── TELEMETRY STRIP ──────────────────────────────────── */
+      .telemetry {
+         background: #04211A;
+         padding: 0 28px;
+         display: flex;
+         align-items: stretch;
+         overflow-x: auto;
+         scrollbar-width: none;
+         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .telemetry::-webkit-scrollbar {
+         display: none;
+      }
+
+      .t-item {
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         padding: 11px 22px 11px 0;
+         margin-right: 20px;
+         border-right: 1px solid rgba(255, 255, 255, 0.06);
+         gap: 3px;
+         min-width: max-content;
+      }
+
+      .t-item:last-child {
+         border-right: none;
+         margin-right: 0;
+      }
+
+      .t-label {
+         font-size: 9px;
+         color: rgba(255, 255, 255, 0.3);
+         text-transform: uppercase;
+         letter-spacing: 0.1em;
+         font-family: 'DM Mono', monospace;
+      }
+
+      .t-val {
+         font-size: 13px;
+         font-weight: 500;
+         color: #9FE1CB;
+         font-family: 'DM Mono', monospace;
+      }
+
+      .t-val.accent {
+         color: #5DCAA5;
+      }
+
+      /* ── STATS ROW ────────────────────────────────────────── */
+      .stats-row {
+         display: grid;
+         grid-template-columns: repeat(4, 1fr);
+         background: #fff;
+         border-bottom: 1px solid #e8e5df;
+      }
+
+      .stat {
+         padding: 18px 20px;
+         text-align: center;
+         border-right: 1px solid #e8e5df;
+      }
+
+      .stat:last-child {
+         border-right: none;
+      }
+
+      .stat-val {
+         font-family: 'Playfair Display', serif;
+         font-size: 24px;
+         color: #04211A;
+         line-height: 1;
+      }
+
+      .stat-unit {
+         font-size: 14px;
+         color: #aaa;
+         margin-left: 2px;
+      }
+
+      .stat-lbl {
+         font-size: 10px;
+         color: #aaa;
+         margin-top: 4px;
+         text-transform: uppercase;
+         letter-spacing: 0.07em;
+      }
+
+      /* ── BODY ─────────────────────────────────────────────── */
+      .columns {
+         display: grid;
+         grid-template-columns: 1fr 1fr;
+      }
+
+      .panel {
+         background: #fff;
+         border-top: 3px solid #f2f0eb;
+      }
+
+      .panel+.panel {
+         border-left: 3px solid #f2f0eb;
+      }
+
+      .panel-hdr {
+         padding: 14px 22px;
+         border-bottom: 1px solid #ede9e2;
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+      }
+
+      .panel-hdr-title {
+         font-size: 10px;
+         font-weight: 500;
+         text-transform: uppercase;
+         letter-spacing: 0.09em;
+         color: #aaa;
+      }
+
+      .panel-hdr-count {
+         font-size: 11px;
+         color: #bbb;
+         background: #f5f3ee;
+         padding: 2px 9px;
+         border-radius: 20px;
+      }
+
+      /* ── LOG ──────────────────────────────────────────────── */
+      .log-entry {
+         display: flex;
+         align-items: flex-start;
+         gap: 13px;
+         padding: 13px 22px;
+         border-bottom: 1px solid #f0ede8;
+         transition: background 0.12s;
+         cursor: default;
+      }
+
+      .log-entry:last-child {
+         border-bottom: none;
+      }
+
+      .log-entry:hover {
+         background: #faf9f6;
+      }
+
+      .log-entry.is-current {
+         background: #f0faf6;
+      }
+
+      .log-entry.is-current:hover {
+         background: #ebf8f3;
+      }
+
+      .stop-n {
+         width: 26px;
+         height: 26px;
+         border-radius: 50%;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         font-size: 10px;
+         font-weight: 500;
+         flex-shrink: 0;
+         margin-top: 1px;
+         font-family: 'DM Mono', monospace;
+      }
+
+      .sn-past {
+         background: #9FE1CB;
+         color: #063D2F;
+      }
+
+      .sn-current {
+         background: #1D9E75;
+         color: #fff;
+      }
+
+      .sn-future {
+         background: #f0ede8;
+         color: #ccc;
+         border: 1.5px solid #e5e2dc;
+      }
+
+      .log-place {
+         font-size: 14px;
+         font-weight: 500;
+         color: #1a1a17;
+         display: flex;
+         align-items: center;
+         gap: 6px;
+         flex-wrap: wrap;
+      }
+
+      .tag-now {
+         font-size: 10px;
+         padding: 2px 7px;
+         border-radius: 20px;
+         background: #d7f5ea;
+         color: #0F6E56;
+      }
+
+      .tag-next {
+         font-size: 10px;
+         padding: 2px 7px;
+         border-radius: 20px;
+         background: #f0ede8;
+         color: #bbb;
+      }
+
+      .log-coords {
+         font-size: 11px;
+         color: #bbb;
+         font-family: 'DM Mono', monospace;
+         margin-top: 3px;
+      }
+
+      .log-meta {
+         font-size: 11px;
+         color: #ccc;
+         margin-top: 2px;
+      }
+
+      /* ── MESSAGES ─────────────────────────────────────────── */
+      .msg-entry {
+         padding: 14px 22px;
+         border-bottom: 1px solid #f0ede8;
+      }
+
+      .msg-entry:last-child {
+         border-bottom: none;
+      }
+
+      .msg-hdr {
+         display: flex;
+         align-items: center;
+         gap: 9px;
+         margin-bottom: 7px;
+      }
+
+      .msg-avatar {
+         width: 28px;
+         height: 28px;
+         border-radius: 50%;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         font-size: 11px;
+         font-weight: 500;
+         flex-shrink: 0;
+         font-family: 'DM Mono', monospace;
+      }
+
+      .msg-from {
+         font-size: 13px;
+         font-weight: 500;
+         color: #1a1a17;
+      }
+
+      .msg-time {
+         font-size: 10px;
+         color: #bbb;
+         font-family: 'DM Mono', monospace;
+         margin-left: auto;
+      }
+
+      .msg-body {
+         font-size: 13px;
+         color: #555;
+         line-height: 1.58;
+         padding-left: 37px;
+      }
+
+      .msg-gps {
+         font-size: 10px;
+         color: #bbb;
+         font-family: 'DM Mono', monospace;
+         padding-left: 37px;
+         margin-top: 5px;
+      }
+
+      /* ── FOOTER ───────────────────────────────────────────── */
+      .site-footer {
+         background: #04211A;
+         padding: 16px 28px;
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         border-top: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .footer-left {
+         font-size: 12px;
+         color: rgba(255, 255, 255, 0.25);
+         font-family: 'DM Mono', monospace;
+      }
+
+      .footer-right {
+         font-size: 12px;
+         color: rgba(255, 255, 255, 0.18);
+      }
+
+      /* ── RESPONSIVE ───────────────────────────────────────── */
+      @media (max-width: 780px) {
+         .columns {
+            grid-template-columns: 1fr;
+         }
+
+         .stats-row {
+            grid-template-columns: repeat(2, 1fr);
+         }
+
+         .nav-right {
+            display: none;
+         }
+
+         .nav-links {
+            gap: 18px;
+         }
+      }
+
+      @media (max-width: 480px) {
+         .nav-links {
+            display: none;
+         }
+
+         .site-header {
+            padding: 0 16px;
+         }
+
+         .telemetry {
+            padding: 0 16px;
+         }
+
+         .stats-row {
+            grid-template-columns: repeat(2, 1fr);
+         }
+      }
+   </style>
+</head>
+
+<body>
+
+   <!-- ── HEADER ─────────────────────────────────────────────── -->
+   <header class="site-header">
+      <div class="logo">
+         <div class="logo-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M8 1.5 L8 14.5" stroke="#5DCAA5" stroke-width="1.2" stroke-linecap="round" />
+               <path d="M8 2 L3 11 L8 9.5 L13 11 Z" fill="none" stroke="#5DCAA5" stroke-width="1.2"
+                  stroke-linejoin="round" />
+               <path d="M2 14 L14 14" stroke="#5DCAA5" stroke-width="1.2" stroke-linecap="round" opacity="0.5" />
+            </svg>
+         </div>
+         <span class="logo-name">Tommy's Voyage</span>
+         <div class="live-pill">
+            <div class="live-dot"></div>LIVE
+         </div>
+      </div>
+
+      <nav class="nav-links">
+         <a href="#">Map</a>
+         <a href="#">Log</a>
+         <a href="#">Messages</a>
+         <a href="#">Stats</a>
+      </nav>
+
+      <div class="nav-right">Garmin InReach Explorer+</div>
+   </header>
+
+   <!-- ── MAP ────────────────────────────────────────────────── -->
+   <div id="map"></div>
+
+   <!-- ── TELEMETRY ──────────────────────────────────────────── -->
+   <div class="telemetry">
+      <div class="t-item">
+         <div class="t-label">Location</div>
+         <div class="t-val accent" id="t-loc">Negril, Jamaica</div>
+      </div>
+      <div class="t-item">
+         <div class="t-label">Latitude</div>
+         <div class="t-val" id="t-lat">18.2679° N</div>
+      </div>
+      <div class="t-item">
+         <div class="t-label">Longitude</div>
+         <div class="t-val" id="t-lng">78.3516° W</div>
+      </div>
+      <div class="t-item">
+         <div class="t-label">Elevation</div>
+         <div class="t-val" id="t-ele">4 m</div>
+      </div>
+      <div class="t-item">
+         <div class="t-label">Speed</div>
+         <div class="t-val" id="t-spd">0.0 kt</div>
+      </div>
+      <div class="t-item">
+         <div class="t-label">Heading</div>
+         <div class="t-val" id="t-hdg">289°</div>
+      </div>
+      <div class="t-item">
+         <div class="t-label">UTC</div>
+         <div class="t-val" id="t-utc">2024-11-14 14:22</div>
+      </div>
+      <div class="t-item">
+         <div class="t-label">Interval</div>
+         <div class="t-val">2 min</div>
+      </div>
+      <div class="t-item">
+         <div class="t-label">Battery</div>
+         <div class="t-val" id="t-batt">74%</div>
+      </div>
+   </div>
+
+   <!-- ── STATS ──────────────────────────────────────────────── -->
+   <div class="stats-row">
+      <div class="stat">
+         <div class="stat-val" id="s-countries">4</div>
+         <div class="stat-lbl">Countries visited</div>
+      </div>
+      <div class="stat">
+         <div class="stat-val"><span id="s-dist">—</span><span class="stat-unit">km</span></div>
+         <div class="stat-lbl">Distance covered</div>
+      </div>
+      <div class="stat">
+         <div class="stat-val" id="s-stops">11 / 12</div>
+         <div class="stat-lbl">Stops reached</div>
+      </div>
+      <div class="stat">
+         <div class="stat-val">8<span class="stat-unit"> days</span></div>
+         <div class="stat-lbl">On the water</div>
+      </div>
+   </div>
+
+   <!-- ── COLUMNS ────────────────────────────────────────────── -->
+   <div class="columns">
+      <div class="panel">
+         <div class="panel-hdr">
+            <div class="panel-hdr-title">Location log</div>
+            <div class="panel-hdr-count">12 stops</div>
+         </div>
+         <div id="log-list"></div>
+      </div>
+
+      <div class="panel">
+         <div class="panel-hdr">
+            <div class="panel-hdr-title">InReach messages</div>
+            <div class="panel-hdr-count" id="msg-count">8 messages</div>
+         </div>
+         <div id="msg-list"></div>
+      </div>
+   </div>
+
+   <!-- ── FOOTER ─────────────────────────────────────────────── -->
+   <footer class="site-footer">
+      <div class="footer-left">Miami, FL → George Town, Grand Cayman · 2024</div>
+      <div class="footer-right">Powered by Garmin InReach Explorer+</div>
+   </footer>
+
+   <!-- ── SCRIPTS ────────────────────────────────────────────── -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+   <script>
+      // ─── WAYPOINTS ───────────────────────────────────────────────────────────────
+      const WAYPOINTS = [
+         { n: 1, name: 'Miami, FL', country: 'United States', flag: '🇺🇸', lat: 25.7617, lng: -80.1918, ele: 2, utc: '2024-11-06 08:00', spd: 0.0, hdg: 195, status: 'past' },
+         { n: 2, name: 'Key Largo, FL', country: 'United States', flag: '🇺🇸', lat: 25.0865, lng: -80.4473, ele: 1, utc: '2024-11-06 15:10', spd: 12.4, hdg: 212, status: 'past' },
+         { n: 3, name: 'Key West, FL', country: 'United States', flag: '🇺🇸', lat: 24.5551, lng: -81.7800, ele: 2, utc: '2024-11-07 09:25', spd: 8.1, hdg: 248, status: 'past' },
+         { n: 4, name: 'Dry Tortugas, FL', country: 'United States', flag: '🇺🇸', lat: 24.6285, lng: -82.8732, ele: 1, utc: '2024-11-07 16:40', spd: 10.2, hdg: 196, status: 'past' },
+         { n: 5, name: 'Havana, Cuba', country: 'Cuba', flag: '🇨🇺', lat: 23.1136, lng: -82.3666, ele: 24, utc: '2024-11-08 11:15', spd: 0.0, hdg: 164, status: 'past' },
+         { n: 6, name: 'Varadero, Cuba', country: 'Cuba', flag: '🇨🇺', lat: 23.1565, lng: -81.2502, ele: 5, utc: '2024-11-09 09:50', spd: 9.7, hdg: 98, status: 'past' },
+         { n: 7, name: 'Cienfuegos, Cuba', country: 'Cuba', flag: '🇨🇺', lat: 22.1497, lng: -80.4400, ele: 18, utc: '2024-11-09 19:30', spd: 11.3, hdg: 185, status: 'past' },
+         { n: 8, name: 'Trinidad, Cuba', country: 'Cuba', flag: '🇨🇺', lat: 21.8036, lng: -79.9836, ele: 65, utc: '2024-11-10 12:05', spd: 7.6, hdg: 155, status: 'past' },
+         { n: 9, name: 'Manzanillo, Cuba', country: 'Cuba', flag: '🇨🇺', lat: 20.3406, lng: -77.1158, ele: 12, utc: '2024-11-11 14:45', spd: 13.1, hdg: 165, status: 'past' },
+         { n: 10, name: 'Montego Bay, Jamaica', country: 'Jamaica', flag: '🇯🇲', lat: 18.4762, lng: -77.8939, ele: 8, utc: '2024-11-12 10:20', spd: 0.0, hdg: 210, status: 'past' },
+         { n: 11, name: 'Negril, Jamaica', country: 'Jamaica', flag: '🇯🇲', lat: 18.2679, lng: -78.3516, ele: 4, utc: '2024-11-14 14:22', spd: 0.0, hdg: 289, status: 'current' },
+         { n: 12, name: 'George Town, Cayman Is.', country: 'Cayman Islands', flag: '🇰🇾', lat: 19.2869, lng: -81.3674, ele: 3, utc: null, spd: null, hdg: null, status: 'future' },
+      ];
+
+      // ─── MESSAGES ────────────────────────────────────────────────────────────────
+      const MESSAGES = [
+         {
+            from: 'Tommy', init: 'M', ac: '#d7f5ea', tc: '#0B5C40',
+            text: 'Departed Miami under clear skies. Winds SSE at 12kts, seas around 0.8m. Everything aboard is looking good — this is going to be a great voyage.',
+            utc: '2024-11-06 08:12', coords: '25.7617° N, 80.1918° W',
+         },
+         {
+            from: 'Sarah', init: 'S', ac: '#dbeeff', tc: '#185FA5',
+            text: "Stay safe out there! Tracking you on the map — you're very tiny! Message when you reach Key West.",
+            utc: '2024-11-06 09:48', coords: null,
+         },
+         {
+            from: 'Tommy', init: 'M', ac: '#d7f5ea', tc: '#0B5C40',
+            text: 'Anchored overnight in Key West. Beautiful passage down the Keys with 15kt ESE and 1.5m swell on the nose the whole way. Heading for Dry Tortugas at first light.',
+            utc: '2024-11-07 09:38', coords: '24.5551° N, 81.7800° W',
+         },
+         {
+            from: 'Tommy', init: 'M', ac: '#d7f5ea', tc: '#0B5C40',
+            text: 'Dry Tortugas. Fort Jefferson rising up out of nothing — absolutely stunning. Heading for Cuba in the morning. Big crossing.',
+            utc: '2024-11-07 17:05', coords: '24.6285° N, 82.8732° W',
+         },
+         {
+            from: 'Dad', init: 'D', ac: '#fff3dc', tc: '#8A4F0B',
+            text: "Watching you cross to Cuba on the tracker — you're a tiny dot in a lot of blue. Your mother is very nervous. Call when you can.",
+            utc: '2024-11-08 06:20', coords: null,
+         },
+         {
+            from: 'Tommy', init: 'M', ac: '#d7f5ea', tc: '#0B5C40',
+            text: 'Made Havana. Customs took 3 hours but the Malecón at sunset was worth every minute. Cuba is extraordinary — totally worth the paperwork.',
+            utc: '2024-11-08 11:30', coords: '23.1136° N, 82.3666° W',
+         },
+         {
+            from: 'Tommy', init: 'M', ac: '#d7f5ea', tc: '#0B5C40',
+            text: "Overnight in Trinidad — the colonial city is unlike anything I've seen. Heading SE to Manzanillo tomorrow, then on to Jamaica.",
+            utc: '2024-11-10 19:50', coords: '21.8036° N, 79.9836° W',
+         },
+         {
+            from: 'Tommy', init: 'M', ac: '#d7f5ea', tc: '#0B5C40',
+            text: 'Anchored in Negril. Weather front keeping me here a day or two. Forecast clears Sunday. Grand Cayman is close — almost there.',
+            utc: '2024-11-14 14:35', coords: '18.2679° N, 78.3516° W',
+         },
+      ];
+
+      // ─── HELPERS ─────────────────────────────────────────────────────────────────
+      function toRad(d) { return d * Math.PI / 180; }
+
+      function haversineKm(la1, ln1, la2, ln2) {
+         const dLa = toRad(la2 - la1), dLn = toRad(ln2 - ln1);
+         const a = Math.sin(dLa / 2) ** 2 + Math.cos(toRad(la1)) * Math.cos(toRad(la2)) * Math.sin(dLn / 2) ** 2;
+         return 6371 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      }
+
+      function bearing(la1, ln1, la2, ln2) {
+         const dLn = toRad(ln2 - ln1);
+         const x = Math.sin(dLn) * Math.cos(toRad(la2));
+         const y = Math.cos(toRad(la1)) * Math.sin(toRad(la2)) - Math.sin(toRad(la1)) * Math.cos(toRad(la2)) * Math.cos(dLn);
+         return Math.round(((Math.atan2(x, y) * 180 / Math.PI) + 360) % 360);
+      }
+
+      // Seed-based pseudo-random for stable jitter
+      function seededRand(seed) {
+         const x = Math.sin(seed) * 10000;
+         return x - Math.floor(x);
+      }
+
+      // ─── BUILD TRACK ─────────────────────────────────────────────────────────────
+      function buildTrack() {
+         const visited = WAYPOINTS.filter(w => w.status !== 'future');
+         const pts = [];
+         let seed = 0;
+         for (let i = 0; i < visited.length - 1; i++) {
+            const A = visited[i], B = visited[i + 1];
+            const steps = 50;
+            for (let s = 0; s < steps; s++) {
+               const t = s / steps;
+               // Cubic ease for more natural spacing
+               const et = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+               pts.push([
+                  A.lat + (B.lat - A.lat) * et + (seededRand(seed++) - 0.5) * 0.022,
+                  A.lng + (B.lng - A.lng) * et + (seededRand(seed++) - 0.5) * 0.022,
+               ]);
+            }
+         }
+         const cur = WAYPOINTS.find(w => w.status === 'current');
+         pts.push([cur.lat, cur.lng]);
+         return pts;
+      }
+
+      // ─── COMPUTE DISTANCE ────────────────────────────────────────────────────────
+      const visited = WAYPOINTS.filter(w => w.status !== 'future');
+      let totalKm = 0;
+      for (let i = 0; i < visited.length - 1; i++) {
+         totalKm += haversineKm(visited[i].lat, visited[i].lng, visited[i + 1].lat, visited[i + 1].lng);
+      }
+      document.getElementById('s-dist').textContent = Math.round(totalKm).toLocaleString();
+
+      const remainKm = haversineKm(
+         WAYPOINTS[10].lat, WAYPOINTS[10].lng,
+         WAYPOINTS[11].lat, WAYPOINTS[11].lng
+      );
+
+      // ─── MAP ─────────────────────────────────────────────────────────────────────
+      const map = L.map('map', { zoomControl: false }).setView([21.4, -80.0], 6);
+      L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+         attribution: '© <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
+         maxZoom: 18,
+      }).addTo(map);
+
+      // Completed track
+      const track = buildTrack();
+      L.polyline(track, {
+         color: '#0F6E56',
+         weight: 2.5,
+         dashArray: '8 5',
+         opacity: 0.88,
+      }).addTo(map);
+
+      // Remaining leg
+      const cur = WAYPOINTS.find(w => w.status === 'current');
+      const fut = WAYPOINTS.find(w => w.status === 'future');
+      L.polyline([[cur.lat, cur.lng], [fut.lat, fut.lng]], {
+         color: '#aaa',
+         weight: 1.5,
+         dashArray: '4 7',
+         opacity: 0.55,
+      }).addTo(map);
+
+      // Waypoint markers
+      WAYPOINTS.forEach(wp => {
+         const cfg = {
+            past: { bg: '#9FE1CB', tx: '#063D2F', border: '2.5px solid #fff' },
+            current: { bg: '#1D9E75', tx: '#fff', border: '2.5px solid #fff' },
+            future: { bg: '#f0ede8', tx: '#ccc', border: '1.5px solid #e0ddd8' },
+         }[wp.status];
+
+         const icon = L.divIcon({
+            html: `<div style="width:26px;height:26px;border-radius:50%;background:${cfg.bg};
+      border:${cfg.border};box-shadow:0 2px 10px rgba(0,0,0,0.16);
+      display:flex;align-items:center;justify-content:center;
+      font-size:10px;font-weight:500;color:${cfg.tx};
+      font-family:'DM Mono',monospace;">${wp.n}</div>`,
+            className: '',
+            iconSize: [26, 26],
+            iconAnchor: [13, 13],
+         });
+
+         const tagCfg = {
+            past: { txt: 'Visited', bg: '#f0faf6', cl: '#1D9E75' },
+            current: { txt: '● Current', bg: '#d7f5ea', cl: '#0F6E56' },
+            future: { txt: 'Upcoming', bg: '#f5f3ee', cl: '#bbb' },
+         }[wp.status];
+
+         const latStr = `${Math.abs(wp.lat).toFixed(4)}° ${wp.lat >= 0 ? 'N' : 'S'}`;
+         const lngStr = `${Math.abs(wp.lng).toFixed(4)}° ${wp.lng < 0 ? 'W' : 'E'}`;
+         const metaLine = wp.utc
+            ? `${wp.utc} UTC &nbsp;·&nbsp; Elev: ${wp.ele}m`
+            : 'Not yet reached';
+         const spdLine = wp.spd !== null
+            ? `Speed: ${wp.spd} kt &nbsp;·&nbsp; Hdg: ${wp.hdg}°`
+            : '';
+
+         L.marker([wp.lat, wp.lng], { icon })
+            .bindPopup(`
+      <div class="pop">
+        <div class="pop-top">
+          <div class="pop-name">${wp.flag} ${wp.name}</div>
+          <span class="pop-tag" style="background:${tagCfg.bg};color:${tagCfg.cl};">${tagCfg.txt}</span>
+        </div>
+        <div class="pop-coords">${latStr} &nbsp; ${lngStr}</div>
+        <div class="pop-divider"></div>
+        <div class="pop-row">${metaLine}</div>
+        ${spdLine ? `<div class="pop-row" style="margin-top:3px;">${spdLine}</div>` : ''}
+        <div class="pop-row" style="margin-top:3px;">${wp.country}</div>
+      </div>`, { maxWidth: 260 })
+            .addTo(map);
+      });
+
+      // Pulsing live marker
+      const pulse = L.divIcon({
+         html: `
+    <div style="position:relative;width:48px;height:48px;">
+      <div style="position:absolute;inset:0;border-radius:50%;border:2px solid #1D9E75;
+        animation:ripple 2.6s ease-out infinite;opacity:0;"></div>
+      <div style="position:absolute;inset:4px;border-radius:50%;border:2px solid #1D9E75;
+        animation:ripple 2.6s ease-out 0.9s infinite;opacity:0;"></div>
+      <div style="position:absolute;inset:13px;border-radius:50%;background:#1D9E75;
+        border:2.5px solid #fff;box-shadow:0 2px 16px rgba(0,0,0,0.22);"></div>
+    </div>
+    <style>
+      @keyframes ripple {
+        0%   { transform: scale(0.6); opacity: 0.7; }
+        100% { transform: scale(2.2); opacity: 0; }
+      }
+    </style>`,
+         className: '',
+         iconSize: [48, 48],
+         iconAnchor: [24, 24],
+      });
+      L.marker([cur.lat, cur.lng], { icon: pulse, zIndexOffset: 1000 }).addTo(map);
+
+      // ─── RENDER LOG ──────────────────────────────────────────────────────────────
+      const logList = document.getElementById('log-list');
+      WAYPOINTS.forEach(wp => {
+         const el = document.createElement('div');
+         el.className = `log-entry${wp.status === 'current' ? ' is-current' : ''}`;
+
+         const numCls = { past: 'sn-past', current: 'sn-current', future: 'sn-future' }[wp.status];
+         const tag = wp.status === 'current'
+            ? '<span class="tag-now">● Now</span>'
+            : wp.status === 'future'
+               ? '<span class="tag-next">Next stop</span>'
+               : '';
+
+         const latStr = `${Math.abs(wp.lat).toFixed(4)}° ${wp.lat >= 0 ? 'N' : 'S'}`;
+         const lngStr = `${Math.abs(wp.lng).toFixed(4)}° ${wp.lng < 0 ? 'W' : 'E'}`;
+         const timeStr = wp.utc ? `${wp.utc} UTC` : 'Not yet reached';
+
+         el.innerHTML = `
+    <div class="stop-n ${numCls}">${wp.n}</div>
+    <div style="min-width:0;">
+      <div class="log-place">${wp.flag} ${wp.name}${tag}</div>
+      <div class="log-coords">${latStr} &nbsp;/&nbsp; ${lngStr} &nbsp;·&nbsp; ${wp.ele} m</div>
+      <div class="log-meta">${wp.country} · ${timeStr}${wp.spd !== null ? ` · ${wp.spd} kt` : ''}</div>
+    </div>`;
+         logList.appendChild(el);
+      });
+
+      // ─── RENDER MESSAGES ─────────────────────────────────────────────────────────
+      const msgList = document.getElementById('msg-list');
+      [...MESSAGES].reverse().forEach(m => {
+         const el = document.createElement('div');
+         el.className = 'msg-entry';
+         el.innerHTML = `
+    <div class="msg-hdr">
+      <div class="msg-avatar" style="background:${m.ac};color:${m.tc};">${m.init}</div>
+      <div class="msg-from">${m.from}</div>
+      <div class="msg-time">${m.utc} UTC</div>
+    </div>
+    <div class="msg-body">${m.text}</div>
+    ${m.coords ? `<div class="msg-gps">📍 ${m.coords}</div>` : ''}`;
+         msgList.appendChild(el);
+      });
+   </script>
+</body>
+
+</html>
