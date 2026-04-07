@@ -571,19 +571,19 @@
    <div class="telemetry">
       <div class="t-item">
          <div class="t-label">Location</div>
-         <div class="t-val accent" id="t-loc">Negril, Jamaica</div>
+         <div class="t-val accent" id="t-loc">Montego Bay, Jamaica</div>
       </div>
       <div class="t-item">
          <div class="t-label">Latitude</div>
-         <div class="t-val" id="t-lat">18.2679° N</div>
+         <div class="t-val" id="t-lat">18.4762° N</div>
       </div>
       <div class="t-item">
          <div class="t-label">Longitude</div>
-         <div class="t-val" id="t-lng">78.3516° W</div>
+         <div class="t-val" id="t-lng">77.9139° W</div>
       </div>
       <div class="t-item">
          <div class="t-label">Elevation</div>
-         <div class="t-val" id="t-ele">4 m</div>
+         <div class="t-val" id="t-ele">3 m</div>
       </div>
       <div class="t-item">
          <div class="t-label">Speed</div>
@@ -591,11 +591,11 @@
       </div>
       <div class="t-item">
          <div class="t-label">Heading</div>
-         <div class="t-val" id="t-hdg">289°</div>
+         <div class="t-val" id="t-hdg">288°</div>
       </div>
       <div class="t-item">
          <div class="t-label">UTC</div>
-         <div class="t-val" id="t-utc">2024-11-14 14:22</div>
+         <div class="t-val" id="t-utc">2024-11-14 11:45</div>
       </div>
       <div class="t-item">
          <div class="t-label">Interval</div>
@@ -603,7 +603,7 @@
       </div>
       <div class="t-item">
          <div class="t-label">Battery</div>
-         <div class="t-val" id="t-batt">74%</div>
+         <div class="t-val" id="t-batt">76%</div>
       </div>
    </div>
 
@@ -648,133 +648,155 @@
 
    <!-- ── FOOTER ─────────────────────────────────────────────── -->
    <footer class="site-footer">
-      <div class="footer-left">Miami, FL → George Town, Grand Cayman · 2024</div>
+      <div class="footer-left">Port of Miami, FL → George Town, Grand Cayman · 2024</div>
       <div class="footer-right">Powered by Garmin InReach Explorer+</div>
    </footer>
 
    <!-- ── SCRIPTS ────────────────────────────────────────────── -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
    <script>
-      // ─── WAYPOINTS ───────────────────────────────────────────────────────────────
-      const WAYPOINTS = [
-         { n: 1, name: 'Miami, FL', country: 'United States', flag: '🇺🇸', lat: 25.7617, lng: -80.1918, ele: 2, utc: '2024-11-06 08:00', spd: 0.0, hdg: 195, status: 'past' },
-         { n: 2, name: 'Key Largo, FL', country: 'United States', flag: '🇺🇸', lat: 25.0865, lng: -80.4473, ele: 1, utc: '2024-11-06 15:10', spd: 12.4, hdg: 212, status: 'past' },
-         { n: 3, name: 'Key West, FL', country: 'United States', flag: '🇺🇸', lat: 24.5551, lng: -81.7800, ele: 2, utc: '2024-11-07 09:25', spd: 8.1, hdg: 248, status: 'past' },
-         { n: 4, name: 'Dry Tortugas, FL', country: 'United States', flag: '🇺🇸', lat: 24.6285, lng: -82.8732, ele: 1, utc: '2024-11-07 16:40', spd: 10.2, hdg: 196, status: 'past' },
-         { n: 5, name: 'Havana, Cuba', country: 'Cuba', flag: '🇨🇺', lat: 23.1136, lng: -82.3666, ele: 24, utc: '2024-11-08 11:15', spd: 0.0, hdg: 164, status: 'past' },
-         { n: 6, name: 'Varadero, Cuba', country: 'Cuba', flag: '🇨🇺', lat: 23.1565, lng: -81.2502, ele: 5, utc: '2024-11-09 09:50', spd: 9.7, hdg: 98, status: 'past' },
-         { n: 7, name: 'Cienfuegos, Cuba', country: 'Cuba', flag: '🇨🇺', lat: 22.1497, lng: -80.4400, ele: 18, utc: '2024-11-09 19:30', spd: 11.3, hdg: 185, status: 'past' },
-         { n: 8, name: 'Trinidad, Cuba', country: 'Cuba', flag: '🇨🇺', lat: 21.8036, lng: -79.9836, ele: 65, utc: '2024-11-10 12:05', spd: 7.6, hdg: 155, status: 'past' },
-         { n: 9, name: 'Manzanillo, Cuba', country: 'Cuba', flag: '🇨🇺', lat: 20.3406, lng: -77.1158, ele: 12, utc: '2024-11-11 14:45', spd: 13.1, hdg: 165, status: 'past' },
-         { n: 10, name: 'Montego Bay, Jamaica', country: 'Jamaica', flag: '🇯🇲', lat: 18.4762, lng: -77.8939, ele: 8, utc: '2024-11-12 10:20', spd: 0.0, hdg: 210, status: 'past' },
-         { n: 11, name: 'Negril, Jamaica', country: 'Jamaica', flag: '🇯🇲', lat: 18.2679, lng: -78.3516, ele: 4, utc: '2024-11-14 14:22', spd: 0.0, hdg: 289, status: 'current' },
-         { n: 12, name: 'George Town, Cayman Is.', country: 'Cayman Islands', flag: '🇰🇾', lat: 19.2869, lng: -81.3674, ele: 3, utc: null, spd: null, hdg: null, status: 'future' },
+      // ─── PORT STOPS (displayed markers + log) ─────────────────────────────────────
+      // All stops are on navigable water. Cuba stops stay on the NORTH COAST only —
+      // going from the south coast to the north coast (or vice versa) requires sailing
+      // all the way around the island. Route exits Cuba via Cabo Maisi (eastern tip)
+      // through the Windward Passage, then west along Jamaica's north coast.
+      const PORT_STOPS = [
+         { n: 1, name: 'Port of Miami, FL', country: 'United States', flag: '🇺🇸', lat: 25.7749, lng: -80.1772, ele: 2, utc: '2024-11-06 08:00', spd: 0.0, hdg: 180, status: 'past', note: 'Port of Miami' },
+         { n: 2, name: 'Key Largo, FL', country: 'United States', flag: '🇺🇸', lat: 25.0865, lng: -80.4473, ele: 1, utc: '2024-11-06 15:10', spd: 12.4, hdg: 212, status: 'past', note: 'Key Largo Harbour Marina' },
+         { n: 3, name: 'Marathon, FL', country: 'United States', flag: '🇺🇸', lat: 24.7059, lng: -81.1005, ele: 2, utc: '2024-11-07 07:30', spd: 9.8, hdg: 240, status: 'past', note: 'Boot Key Harbor' },
+         { n: 4, name: 'Key West, FL', country: 'United States', flag: '🇺🇸', lat: 24.5568, lng: -81.8005, ele: 2, utc: '2024-11-07 14:55', spd: 8.1, hdg: 248, status: 'past', note: 'Key West Bight Marina' },
+         { n: 5, name: 'Havana, Cuba', country: 'Cuba', flag: '🇨🇺', lat: 23.0860, lng: -82.5070, ele: 10, utc: '2024-11-08 11:15', spd: 0.0, hdg: 164, status: 'past', note: 'Marina Hemingway' },
+         { n: 6, name: 'Varadero, Cuba', country: 'Cuba', flag: '🇨🇺', lat: 23.1378, lng: -81.2200, ele: 5, utc: '2024-11-09 09:50', spd: 9.7, hdg: 98, status: 'past', note: 'Marina Gaviota Varadero' },
+         // Cayo Guillermo: north coast, no land crossing from Varadero
+         { n: 7, name: 'Cayo Guillermo, Cuba', country: 'Cuba', flag: '🇨🇺', lat: 22.5100, lng: -78.6400, ele: 3, utc: '2024-11-10 08:10', spd: 11.3, hdg: 95, status: 'past', note: 'Marina Cayo Guillermo' },
+         // Marina Vita: north coast, eastern Cuba — exit Cuba via Cabo Maisi to the east
+         { n: 8, name: 'Marina Vita, Cuba', country: 'Cuba', flag: '🇨🇺', lat: 21.0700, lng: -75.9300, ele: 8, utc: '2024-11-11 16:40', spd: 13.1, hdg: 142, status: 'past', note: 'Marina Vita, Holguin' },
+         // After Cabo Maisi → Windward Passage → Jamaica east coast
+         { n: 9, name: 'Port Antonio, Jamaica', country: 'Jamaica', flag: '🇯🇲', lat: 18.1784, lng: -76.4467, ele: 4, utc: '2024-11-12 10:05', spd: 0.0, hdg: 275, status: 'past', note: 'Errol Flynn Marina' },
+         { n: 10, name: 'Ocho Rios, Jamaica', country: 'Jamaica', flag: '🇯🇲', lat: 18.4069, lng: -77.1020, ele: 5, utc: '2024-11-13 08:30', spd: 8.4, hdg: 268, status: 'past', note: 'Ocho Rios Harbour' },
+         { n: 11, name: 'Montego Bay, Jamaica', country: 'Jamaica', flag: '🇯🇲', lat: 18.4762, lng: -77.9139, ele: 3, utc: '2024-11-14 11:45', spd: 0.0, hdg: 288, status: 'current', note: 'Montego Bay Yacht Club' },
+         { n: 12, name: 'George Town, Cayman Is.', country: 'Cayman Islands', flag: '🇰🇾', lat: 19.2869, lng: -81.3674, ele: 3, utc: null, spd: null, hdg: null, status: 'future', note: 'George Town Harbour' },
       ];
 
       // ─── MESSAGES ────────────────────────────────────────────────────────────────
       const MESSAGES = [
          {
-            from: 'Tommy', init: 'M', ac: '#d7f5ea', tc: '#0B5C40',
-            text: 'Departed Miami under clear skies. Winds SSE at 12kts, seas around 0.8m. Everything aboard is looking good — this is going to be a great voyage.',
-            utc: '2024-11-06 08:12', coords: '25.7617° N, 80.1918° W',
+            from: 'Tommy', init: 'T', ac: '#d7f5ea', tc: '#0B5C40',
+            text: 'Cleared the Port of Miami. Winds SSE 12kts, seas 0.8m. Running south along the Keys — beautiful morning for it.',
+            utc: '2024-11-06 08:18', coords: '25.7749° N, 80.1772° W'
          },
          {
             from: 'Sarah', init: 'S', ac: '#dbeeff', tc: '#185FA5',
-            text: "Stay safe out there! Tracking you on the map — you're very tiny! Message when you reach Key West.",
-            utc: '2024-11-06 09:48', coords: null,
+            text: 'Be safe Tommy! Tracking you on the map. Message when you reach Key West.',
+            utc: '2024-11-06 09:50', coords: null
          },
          {
-            from: 'Tommy', init: 'M', ac: '#d7f5ea', tc: '#0B5C40',
-            text: 'Anchored overnight in Key West. Beautiful passage down the Keys with 15kt ESE and 1.5m swell on the nose the whole way. Heading for Dry Tortugas at first light.',
-            utc: '2024-11-07 09:38', coords: '24.5551° N, 81.7800° W',
+            from: 'Tommy', init: 'T', ac: '#d7f5ea', tc: '#0B5C40',
+            text: 'Boot Key Harbor in Marathon — proper cruiser hub. Liveaboards everywhere. Pushing to Key West at sunrise.',
+            utc: '2024-11-07 07:42', coords: '24.7059° N, 81.1005° W'
          },
          {
-            from: 'Tommy', init: 'M', ac: '#d7f5ea', tc: '#0B5C40',
-            text: 'Dry Tortugas. Fort Jefferson rising up out of nothing — absolutely stunning. Heading for Cuba in the morning. Big crossing.',
-            utc: '2024-11-07 17:05', coords: '24.6285° N, 82.8732° W',
+            from: 'Tommy', init: 'T', ac: '#d7f5ea', tc: '#0B5C40',
+            text: 'Key West Bight Marina. Provisioned up. Crossing to Marina Hemingway tomorrow — first real foreign port.',
+            utc: '2024-11-07 15:10', coords: '24.5568° N, 81.8005° W'
          },
          {
             from: 'Dad', init: 'D', ac: '#fff3dc', tc: '#8A4F0B',
-            text: "Watching you cross to Cuba on the tracker — you're a tiny dot in a lot of blue. Your mother is very nervous. Call when you can.",
-            utc: '2024-11-08 06:20', coords: null,
+            text: "Watching that dot crossing to Cuba. Your mother has the map open on her iPad. Call when you clear customs.",
+            utc: '2024-11-08 07:00', coords: null
          },
          {
-            from: 'Tommy', init: 'M', ac: '#d7f5ea', tc: '#0B5C40',
-            text: 'Made Havana. Customs took 3 hours but the Malecón at sunset was worth every minute. Cuba is extraordinary — totally worth the paperwork.',
-            utc: '2024-11-08 11:30', coords: '23.1136° N, 82.3666° W',
+            from: 'Tommy', init: 'T', ac: '#d7f5ea', tc: '#0B5C40',
+            text: 'Made Marina Hemingway. Customs took 3 hours but the Malecón at sunset was worth every minute. Cuba is everything I hoped.',
+            utc: '2024-11-08 11:30', coords: '23.0860° N, 82.5070° W'
          },
          {
-            from: 'Tommy', init: 'M', ac: '#d7f5ea', tc: '#0B5C40',
-            text: "Overnight in Trinidad — the colonial city is unlike anything I've seen. Heading SE to Manzanillo tomorrow, then on to Jamaica.",
-            utc: '2024-11-10 19:50', coords: '21.8036° N, 79.9836° W',
+            from: 'Tommy', init: 'T', ac: '#d7f5ea', tc: '#0B5C40',
+            text: 'Marina Vita, Holguin — tiny but welcoming. Big crossing tomorrow: around Cabo Maisi then the Windward Passage to Jamaica.',
+            utc: '2024-11-11 17:10', coords: '21.0700° N, 75.9300° W'
          },
          {
-            from: 'Tommy', init: 'M', ac: '#d7f5ea', tc: '#0B5C40',
-            text: 'Anchored in Negril. Weather front keeping me here a day or two. Forecast clears Sunday. Grand Cayman is close — almost there.',
-            utc: '2024-11-14 14:35', coords: '18.2679° N, 78.3516° W',
+            from: 'Tommy', init: 'T', ac: '#d7f5ea', tc: '#0B5C40',
+            text: 'Montego Bay Yacht Club. Sitting out a front before the Grand Cayman crossing. Forecast clears Sunday. So close.',
+            utc: '2024-11-14 11:58', coords: '18.4762° N, 77.9139° W'
          },
       ];
 
+      // ─── EXPLICIT ROUTE PATH ──────────────────────────────────────────────────────
+      // Coordinates hand-placed to stay 2–5 miles offshore at all times.
+      // Cuba section stays entirely on the NORTH COAST, exits via Cabo Maisi
+      // (Cuba's eastern tip, ~20.25°N 74.14°W), threads the Windward Passage
+      // between Cuba and Haiti, then arrives at Jamaica's north coast from the east.
+      // Index 32 = Montego Bay = current position (split point for track vs future).
+      const ROUTE_PATH = [
+         // ── Florida Keys (south along the Atlantic side) ──────────────────────────
+         [25.7749, -80.1772],  // 1 Port of Miami
+         [25.42, -80.32],   //   offshore, heading south
+         [25.0865, -80.4473],  // 2 Key Largo
+         [24.88, -80.67],   //   down the keys
+         [24.7059, -81.1005],  // 3 Marathon
+         [24.62, -81.42],
+         [24.5568, -81.8005],  // 4 Key West
+         // ── Florida Straits (open water crossing to Cuba) ─────────────────────────
+         [24.12, -82.02],
+         [23.60, -82.35],
+         [23.0860, -82.5070],  // 5 Havana — Marina Hemingway
+         // ── Cuba north coast, heading east (Havana → Varadero) ───────────────────
+         [23.22, -82.08],   //   ~3mi offshore
+         [23.28, -81.70],
+         [23.1378, -81.2200],  // 6 Varadero
+         // ── Cuba north coast, heading east (Varadero → Cayo Guillermo) ───────────
+         [23.02, -80.52],   //   ~3mi offshore, north of the cays
+         [22.85, -79.82],
+         [22.66, -79.18],
+         [22.5100, -78.6400],  // 7 Cayo Guillermo
+         // ── Cuba north coast, heading east (Cayo Guillermo → Marina Vita) ─────────
+         [22.40, -77.88],   //   ~3mi offshore, eastern Cuba provinces
+         [21.98, -77.10],
+         [21.55, -76.40],
+         [21.0700, -75.9300],  // 8 Marina Vita, Holguin
+         // ── Around Cabo Maisi (Cuba's eastern tip) → Windward Passage ────────────
+         // Stay north of Cuba's coastline, rounding the tip, then south through the
+         // strait between Cuba (~20°N south coast) and Haiti (~20°N north coast).
+         [21.38, -75.35],   //   north coast, approaching tip
+         [21.10, -74.85],
+         [20.82, -74.45],   //   nearing Cabo Maisi
+         [20.55, -74.05],   //   just east of the tip — open Atlantic
+         [20.18, -73.88],   //   Windward Passage (Cuba/Haiti strait)
+         [19.15, -74.52],   //   Caribbean Sea, clear of Haiti's north cape
+         [18.85, -75.52],   //   open Caribbean, heading west toward Jamaica
+         [18.1784, -76.4467],  // 9 Port Antonio — Errol Flynn Marina
+         // ── Jamaica north coast, heading west ────────────────────────────────────
+         [18.33, -76.82],
+         [18.4069, -77.1020],  // 10 Ocho Rios
+         [18.46, -77.52],
+         [18.4762, -77.9139],  // 11 Montego Bay ← CURRENT (index 32)
+         // ── Future leg: NW across Caribbean to Grand Cayman ──────────────────────
+         [18.68, -78.52],
+         [18.92, -79.65],
+         [19.14, -80.58],
+         [19.2869, -81.3674],  // 12 George Town, Grand Cayman
+      ];
+
+      const CURRENT_IDX = 32; // index of Montego Bay in ROUTE_PATH
+
       // ─── HELPERS ─────────────────────────────────────────────────────────────────
       function toRad(d) { return d * Math.PI / 180; }
-
       function haversineKm(la1, ln1, la2, ln2) {
          const dLa = toRad(la2 - la1), dLn = toRad(ln2 - ln1);
          const a = Math.sin(dLa / 2) ** 2 + Math.cos(toRad(la1)) * Math.cos(toRad(la2)) * Math.sin(dLn / 2) ** 2;
          return 6371 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
       }
 
-      function bearing(la1, ln1, la2, ln2) {
-         const dLn = toRad(ln2 - ln1);
-         const x = Math.sin(dLn) * Math.cos(toRad(la2));
-         const y = Math.cos(toRad(la1)) * Math.sin(toRad(la2)) - Math.sin(toRad(la1)) * Math.cos(toRad(la2)) * Math.cos(dLn);
-         return Math.round(((Math.atan2(x, y) * 180 / Math.PI) + 360) % 360);
-      }
-
-      // Seed-based pseudo-random for stable jitter
-      function seededRand(seed) {
-         const x = Math.sin(seed) * 10000;
-         return x - Math.floor(x);
-      }
-
-      // ─── BUILD TRACK ─────────────────────────────────────────────────────────────
-      function buildTrack() {
-         const visited = WAYPOINTS.filter(w => w.status !== 'future');
-         const pts = [];
-         let seed = 0;
-         for (let i = 0; i < visited.length - 1; i++) {
-            const A = visited[i], B = visited[i + 1];
-            const steps = 50;
-            for (let s = 0; s < steps; s++) {
-               const t = s / steps;
-               // Cubic ease for more natural spacing
-               const et = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-               pts.push([
-                  A.lat + (B.lat - A.lat) * et + (seededRand(seed++) - 0.5) * 0.022,
-                  A.lng + (B.lng - A.lng) * et + (seededRand(seed++) - 0.5) * 0.022,
-               ]);
-            }
-         }
-         const cur = WAYPOINTS.find(w => w.status === 'current');
-         pts.push([cur.lat, cur.lng]);
-         return pts;
-      }
-
-      // ─── COMPUTE DISTANCE ────────────────────────────────────────────────────────
-      const visited = WAYPOINTS.filter(w => w.status !== 'future');
+      // ─── DISTANCE (along route path, not straight-line) ───────────────────────────
       let totalKm = 0;
-      for (let i = 0; i < visited.length - 1; i++) {
-         totalKm += haversineKm(visited[i].lat, visited[i].lng, visited[i + 1].lat, visited[i + 1].lng);
+      for (let i = 0; i < CURRENT_IDX; i++) {
+         totalKm += haversineKm(ROUTE_PATH[i][0], ROUTE_PATH[i][1], ROUTE_PATH[i + 1][0], ROUTE_PATH[i + 1][1]);
       }
       document.getElementById('s-dist').textContent = Math.round(totalKm).toLocaleString();
 
-      const remainKm = haversineKm(
-         WAYPOINTS[10].lat, WAYPOINTS[10].lng,
-         WAYPOINTS[11].lat, WAYPOINTS[11].lng
-      );
-
       // ─── MAP ─────────────────────────────────────────────────────────────────────
-      const map = L.map('map', { zoomControl: false }).setView([21.4, -80.0], 6);
+      const map = L.map('map', { zoomControl: false });
       L.control.zoom({ position: 'bottomright' }).addTo(map);
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -782,27 +804,23 @@
          maxZoom: 18,
       }).addTo(map);
 
-      // Completed track
-      const track = buildTrack();
-      L.polyline(track, {
-         color: '#0F6E56',
-         weight: 2.5,
-         dashArray: '8 5',
-         opacity: 0.88,
+      // Fit the map to the full route extent
+      map.fitBounds(L.latLngBounds(ROUTE_PATH), { padding: [28, 28] });
+
+      // Completed track (solid dashed green)
+      const completedTrack = ROUTE_PATH.slice(0, CURRENT_IDX + 1);
+      L.polyline(completedTrack, {
+         color: '#0F6E56', weight: 2.5, dashArray: '8 5', opacity: 0.9,
       }).addTo(map);
 
-      // Remaining leg
-      const cur = WAYPOINTS.find(w => w.status === 'current');
-      const fut = WAYPOINTS.find(w => w.status === 'future');
-      L.polyline([[cur.lat, cur.lng], [fut.lat, fut.lng]], {
-         color: '#aaa',
-         weight: 1.5,
-         dashArray: '4 7',
-         opacity: 0.55,
+      // Future leg (dotted gray)
+      const futureLeg = ROUTE_PATH.slice(CURRENT_IDX);
+      L.polyline(futureLeg, {
+         color: '#aaa', weight: 1.5, dashArray: '4 7', opacity: 0.55,
       }).addTo(map);
 
-      // Waypoint markers
-      WAYPOINTS.forEach(wp => {
+      // ─── PORT MARKERS ────────────────────────────────────────────────────────────
+      PORT_STOPS.forEach(wp => {
          const cfg = {
             past: { bg: '#9FE1CB', tx: '#063D2F', border: '2.5px solid #fff' },
             current: { bg: '#1D9E75', tx: '#fff', border: '2.5px solid #fff' },
@@ -815,9 +833,7 @@
       display:flex;align-items:center;justify-content:center;
       font-size:10px;font-weight:500;color:${cfg.tx};
       font-family:'DM Mono',monospace;">${wp.n}</div>`,
-            className: '',
-            iconSize: [26, 26],
-            iconAnchor: [13, 13],
+            className: '', iconSize: [26, 26], iconAnchor: [13, 13],
          });
 
          const tagCfg = {
@@ -828,75 +844,58 @@
 
          const latStr = `${Math.abs(wp.lat).toFixed(4)}° ${wp.lat >= 0 ? 'N' : 'S'}`;
          const lngStr = `${Math.abs(wp.lng).toFixed(4)}° ${wp.lng < 0 ? 'W' : 'E'}`;
-         const metaLine = wp.utc
-            ? `${wp.utc} UTC &nbsp;·&nbsp; Elev: ${wp.ele}m`
-            : 'Not yet reached';
-         const spdLine = wp.spd !== null
-            ? `Speed: ${wp.spd} kt &nbsp;·&nbsp; Hdg: ${wp.hdg}°`
-            : '';
+         const metaRow = wp.utc ? `${wp.utc} UTC &nbsp;·&nbsp; Elev: ${wp.ele}m` : 'Not yet reached';
+         const spdRow = wp.spd !== null ? `Speed: ${wp.spd} kt &nbsp;·&nbsp; Hdg: ${wp.hdg}°` : '';
 
          L.marker([wp.lat, wp.lng], { icon })
-            .bindPopup(`
-      <div class="pop">
-        <div class="pop-top">
-          <div class="pop-name">${wp.flag} ${wp.name}</div>
-          <span class="pop-tag" style="background:${tagCfg.bg};color:${tagCfg.cl};">${tagCfg.txt}</span>
-        </div>
-        <div class="pop-coords">${latStr} &nbsp; ${lngStr}</div>
-        <div class="pop-divider"></div>
-        <div class="pop-row">${metaLine}</div>
-        ${spdLine ? `<div class="pop-row" style="margin-top:3px;">${spdLine}</div>` : ''}
-        <div class="pop-row" style="margin-top:3px;">${wp.country}</div>
-      </div>`, { maxWidth: 260 })
+            .bindPopup(`<div class="pop">
+      <div class="pop-top">
+        <div class="pop-name">${wp.flag} ${wp.name}</div>
+        <span class="pop-tag" style="background:${tagCfg.bg};color:${tagCfg.cl};">${tagCfg.txt}</span>
+      </div>
+      <div class="pop-coords">${latStr} &nbsp; ${lngStr}</div>
+      <div class="pop-divider"></div>
+      <div class="pop-row">${metaRow}</div>
+      ${spdRow ? `<div class="pop-row" style="margin-top:3px;">${spdRow}</div>` : ''}
+      <div class="pop-row" style="margin-top:3px;">${wp.country} · <em>${wp.note}</em></div>
+    </div>`, { maxWidth: 260 })
             .addTo(map);
       });
 
-      // Pulsing live marker
+      // Pulsing live marker at current position
+      const curStop = PORT_STOPS.find(w => w.status === 'current');
       const pulse = L.divIcon({
-         html: `
-    <div style="position:relative;width:48px;height:48px;">
-      <div style="position:absolute;inset:0;border-radius:50%;border:2px solid #1D9E75;
-        animation:ripple 2.6s ease-out infinite;opacity:0;"></div>
-      <div style="position:absolute;inset:4px;border-radius:50%;border:2px solid #1D9E75;
-        animation:ripple 2.6s ease-out 0.9s infinite;opacity:0;"></div>
-      <div style="position:absolute;inset:13px;border-radius:50%;background:#1D9E75;
-        border:2.5px solid #fff;box-shadow:0 2px 16px rgba(0,0,0,0.22);"></div>
-    </div>
-    <style>
-      @keyframes ripple {
-        0%   { transform: scale(0.6); opacity: 0.7; }
-        100% { transform: scale(2.2); opacity: 0; }
-      }
-    </style>`,
-         className: '',
-         iconSize: [48, 48],
-         iconAnchor: [24, 24],
+         html: `<div style="position:relative;width:48px;height:48px;">
+    <div style="position:absolute;inset:0;border-radius:50%;border:2px solid #1D9E75;
+      animation:ripple 2.6s ease-out infinite;opacity:0;"></div>
+    <div style="position:absolute;inset:4px;border-radius:50%;border:2px solid #1D9E75;
+      animation:ripple 2.6s ease-out 0.9s infinite;opacity:0;"></div>
+    <div style="position:absolute;inset:13px;border-radius:50%;background:#1D9E75;
+      border:2.5px solid #fff;box-shadow:0 2px 16px rgba(0,0,0,0.22);"></div>
+  </div>
+  <style>@keyframes ripple{0%{transform:scale(0.6);opacity:0.7}100%{transform:scale(2.2);opacity:0}}</style>`,
+         className: '', iconSize: [48, 48], iconAnchor: [24, 24],
       });
-      L.marker([cur.lat, cur.lng], { icon: pulse, zIndexOffset: 1000 }).addTo(map);
+      L.marker([curStop.lat, curStop.lng], { icon: pulse, zIndexOffset: 1000 }).addTo(map);
 
       // ─── RENDER LOG ──────────────────────────────────────────────────────────────
       const logList = document.getElementById('log-list');
-      WAYPOINTS.forEach(wp => {
+      PORT_STOPS.forEach(wp => {
          const el = document.createElement('div');
          el.className = `log-entry${wp.status === 'current' ? ' is-current' : ''}`;
-
          const numCls = { past: 'sn-past', current: 'sn-current', future: 'sn-future' }[wp.status];
-         const tag = wp.status === 'current'
-            ? '<span class="tag-now">● Now</span>'
-            : wp.status === 'future'
-               ? '<span class="tag-next">Next stop</span>'
-               : '';
-
+         const tag = wp.status === 'current' ? '<span class="tag-now">● Now</span>'
+            : wp.status === 'future' ? '<span class="tag-next">Next stop</span>' : '';
          const latStr = `${Math.abs(wp.lat).toFixed(4)}° ${wp.lat >= 0 ? 'N' : 'S'}`;
          const lngStr = `${Math.abs(wp.lng).toFixed(4)}° ${wp.lng < 0 ? 'W' : 'E'}`;
          const timeStr = wp.utc ? `${wp.utc} UTC` : 'Not yet reached';
-
          el.innerHTML = `
     <div class="stop-n ${numCls}">${wp.n}</div>
     <div style="min-width:0;">
       <div class="log-place">${wp.flag} ${wp.name}${tag}</div>
       <div class="log-coords">${latStr} &nbsp;/&nbsp; ${lngStr} &nbsp;·&nbsp; ${wp.ele} m</div>
       <div class="log-meta">${wp.country} · ${timeStr}${wp.spd !== null ? ` · ${wp.spd} kt` : ''}</div>
+      <div class="log-meta" style="color:#bbb;font-style:italic;">${wp.note}</div>
     </div>`;
          logList.appendChild(el);
       });
