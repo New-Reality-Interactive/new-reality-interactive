@@ -1,0 +1,60 @@
+/* App page only. The shared look (font, colors, footer) is in shared.css. */
+:root { --w: clamp(200px, 58vw, 300px); }
+
+main { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 1.25rem; padding-block: 2rem 1.5rem; }
+
+h1 { margin: 0; font-weight: 700; font-size: clamp(2.2rem, 7vw, 3.6rem); letter-spacing: -0.035em; line-height: 1; text-wrap: balance; text-align: center; }
+h1 span { color: var(--accent); }
+
+/* Every caption sits in the same grid cell, so the box is always as tall as the tallest one and
+   the carousel below never moves. Only the current one shows. */
+.captions { display: grid; width: 100%; max-width: 30rem; text-align: center; }
+.caption { grid-area: 1 / 1; display: flex; flex-direction: column; justify-content: flex-start; gap: 0.35rem; transition: opacity 320ms ease, transform 320ms ease; }
+.caption[aria-hidden="true"] { opacity: 0; transform: translateY(6px); }
+.caption h2 { margin: 0; font-weight: 600; font-size: clamp(1.35rem, 4vw, 1.75rem); letter-spacing: -0.02em; text-wrap: balance; }
+.caption p { margin: 0; color: var(--muted); font-size: 1rem; line-height: 1.5; text-wrap: balance; }
+
+.stage {
+  position: relative; width: 100%; max-width: 1100px;
+  height: calc(var(--w) * 2556 / 1178 + 24px);
+  perspective: 1600px; perspective-origin: 50% 45%; touch-action: pan-y; user-select: none; -webkit-user-select: none;
+  cursor: grab; outline: none;
+}
+.stage.dragging { cursor: grabbing; }
+.stage:focus-visible { outline: 2px solid var(--accent); outline-offset: 6px; border-radius: 24px; }
+.slide {
+  position: absolute; top: 12px; left: 50%; width: var(--w); margin-left: calc(var(--w) / -2);
+  transform-style: preserve-3d; transform-origin: 50% 50%;
+  transition: transform 520ms cubic-bezier(.2,.8,.2,1), opacity 520ms ease, filter 520ms ease;
+  will-change: transform;
+}
+.stage.dragging .slide { transition: none; }
+.slide img {
+  display: block; width: 100%; max-width: 100%; height: auto; aspect-ratio: 1178 / 2556;
+  border-radius: calc(var(--w) * 0.15); border: 7px solid var(--frame); background: #F2F2F7;
+  box-shadow: 0 30px 60px -30px rgba(0,0,0,.45);
+  pointer-events: none;
+}
+
+.controls { display: flex; align-items: center; gap: 1rem; }
+.arrow {
+  width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--dot); background: transparent; color: var(--fg);
+  display: grid; place-items: center; cursor: pointer;
+}
+.arrow:hover { border-color: var(--accent); color: var(--accent); }
+.arrow:focus-visible, .dot:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.dots { display: flex; gap: 0.15rem; }
+.dot { width: 28px; height: 44px; border: 0; background: none; padding: 0; cursor: pointer; display: grid; place-items: center; }
+.dot::after { content: ""; width: 8px; height: 8px; border-radius: 4px; background: var(--dot); transition: width 300ms ease, background 300ms ease; }
+.dot[aria-current="true"]::after { width: 22px; background: var(--accent); }
+
+
+@media (prefers-reduced-motion: reduce) {
+  .slide, .caption, .dot::after { transition: none; }
+}
+
+.tagline { margin: -0.25rem 0 0; max-width: 30rem; text-align: center; color: var(--muted); font-size: 1.125rem; line-height: 1.5; text-wrap: balance; }
+.soon { margin: 0; font-weight: 600; color: var(--accent); text-align: center; }
+
+/* Without JavaScript the carousel is just the first screen and its caption; the rest of the page still reads. */
+html:not(.js) .slide:not(:first-child), html:not(.js) .controls { display: none; }

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nudge-inator</title>
+<meta name="description" content="An iPhone app that keeps nudging you about a reminder, the way an iOS Alarm keeps ringing, until you mark it done.">
+<script>document.documentElement.classList.add("js");</script>
+<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<main>
+  <h1>Nudge<span>-</span>inator</h1>
+  <p class="tagline">An iPhone app that keeps nudging you about a reminder, the way an iOS Alarm keeps ringing, until you mark it done.</p>
+  <p class="soon">Coming soon to the App Store.</p>
+
+  <div class="captions" id="captions" aria-live="polite">
+    <div class="caption" aria-hidden="false"><h2>Meet the reminder that won't let it go.</h2><p>No account and no server. Just nudges until you tap Done.</p></div>
+    <div class="caption" aria-hidden="true"><h2>It keeps coming back.</h2><p>Reminders that are nudging sit at the top of Now, each with one big Done.</p></div>
+    <div class="caption" aria-hidden="true"><h2>Always know what's next.</h2><p>Every reminder shows which nudge it's on and when the next one comes.</p></div>
+    <div class="caption" aria-hidden="true"><h2>Choose how hard it pushes.</h2><p>Gentle, Firm or Relentless. With Relentless, every nudge rings as an alarm.</p></div>
+    <div class="caption" aria-hidden="true"><h2>Your day, accounted for.</h2><p>What's done, what's nudging, what you missed and what's left.</p></div>
+    <div class="caption" aria-hidden="true"><h2>Narrow it down.</h2><p>Filter My Day by tag. Match all of them or any one, or show only reminders without tags.</p></div>
+    <div class="caption" aria-hidden="true"><h2>Your pace, your rules.</h2><p>Choose how often new reminders nudge, and check that notifications and alarms are on.</p></div>
+  </div>
+
+  <div class="stage" id="stage" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Nudge-inator screens. Use the left and right arrow keys, or swipe.">
+    <div class="slide" aria-roledescription="slide" aria-label="1 of 7"><img src="shots/onboarding.png" alt="Welcome screen: Nudges until you're done, Urgent nudges ring as alarms, You choose what breaks through, Stays on your iPhone." draggable="false"></div>
+    <div class="slide" aria-roledescription="slide" aria-label="2 of 7"><img src="shots/now-1.png" alt="The Now tab: two reminders nudging, each with its strength, nudge count, next nudge and a Done button." draggable="false"></div>
+    <div class="slide" aria-roledescription="slide" aria-label="3 of 7"><img src="shots/details-nudging-1.png" alt="A nudging reminder's page: nudge 2 of 20, the next nudge, Done, and its repeat and pace." draggable="false"></div>
+    <div class="slide" aria-roledescription="slide" aria-label="4 of 7"><img src="shots/form-new-relentless-1.png" alt="The New Reminder form with Relentless chosen: every nudge rings as an alarm." draggable="false"></div>
+    <div class="slide" aria-roledescription="slide" aria-label="5 of 7"><img src="shots/myday-1.png" alt="My Day: counts of Done, Nudging, Missed and Left, then each reminder with its time and what happened." draggable="false"></div>
+    <div class="slide" aria-roledescription="slide" aria-label="6 of 7"><img src="shots/myday-filter-1.png" alt="Filter My Day: tags with checkmarks, Match set to All Tags or Any Tag, and No Tags for reminders without one." draggable="false"></div>
+    <div class="slide" aria-roledescription="slide" aria-label="7 of 7"><img src="shots/settings-1.png" alt="Settings: notifications and alarms on, Send a Test Nudge, Default Pace and How It Nudges." draggable="false"></div>
+  </div>
+
+  <div class="controls">
+    <button class="arrow" id="prev" type="button" aria-label="Previous screen">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+    </button>
+    <div class="dots" id="dots"></div>
+    <button class="arrow" id="next" type="button" aria-label="Next screen">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <nav aria-label="Nudge-inator">
+    <a href="privacy/">Privacy</a>
+    <a href="support/">Support</a>
+  </nav>
+  <p>© 2026 <a href="../index.html">New Reality Interactive LLC</a></p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
