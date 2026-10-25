@@ -96,7 +96,7 @@ Each story says who does it. **(Agent)** stories change this repository and an a
 48. As a person using the app, I want a link to the privacy policy inside the app, so that I can read it without searching for it. Guideline 5.1.1(i) requires this. It's built in the Nudge-inator repository, not here. It's added in the Nudge-inator repository (open question 13). It blocks nothing in this spec, but the App Store release depends on it. (Not built in this repository)
 49. As a person deleting my data, I want the privacy policy to say how long reminders are kept and how to delete them, so that I know what Delete All Data does before I use it. (Agent drafts, Brian approves)
 50. As a beta tester, I want the privacy policy to say what TestFlight shares with the developer when I send feedback or a crash log, so that I know what I'm sending before I send it. (Agent drafts, Brian approves)
-51. As Brian, I want the three pages built in the site's existing static HTML and CSS, so that the section looks like the rest of the site and I only need to approve and publish. The agent builds the app page as described in "Pages", and builds the privacy policy and support placeholders (stories 52 to 55). The full privacy policy and support text is written outside this project. All three pages follow the mockup's design, including its dark-mode colors. They work without JavaScript and link to each other. It runs the Testing Decisions checks that can run before publishing (iPhone width in light and dark mode, heading order, link text, contrast, no broken links, wording against the fact list) on the pull request's pages and reports the results there. Brian approves the text (stories 6 and 7) and publishes by merging. (Agent builds; Brian approves and publishes)
+51. As Brian, I want the three pages built in the site's existing static HTML and CSS, so that I only need to approve and publish. The agent builds the app page as described in "Pages", and builds the privacy policy and support placeholders (stories 52 to 55). The full privacy policy and support text is written outside this project. All three pages follow the mockup's design, including its dark-mode colors. They work without JavaScript and link to each other. It runs the Testing Decisions checks that can run before publishing (iPhone width in light and dark mode, heading order, link text, contrast, no broken links, wording against the fact list) on the pull request's pages and reports the results there. Brian approves the text (stories 6 and 7) and publishes by merging. (Agent builds; Brian approves and publishes)
 
 ### Placeholder pages
 
@@ -158,7 +158,8 @@ Each story says who does it. **(Agent)** stories change this repository and an a
 - The mockup includes the privacy and support pages as well as the app page. Their layout, header and footer are the design spec. Their body text is generated filler, not approved text: the placeholders follow the "Placeholder pages" rules below, and the full text comes from outside this project.
 - The footer is a soft rounded tray, echoing the phone frames, below the carousel on the app page and below the content on the other two. It holds links to the other Nudge-inator pages, with the app page labelled Home, and below it, on its own line, "© <year> New Reality Interactive LLC" linking to the home page (chosen by Brian on 2026-10-25).
 - The privacy policy and support pages work without JavaScript. The app page's screen carousel uses JavaScript, and the rest of that page doesn't depend on it. The pages use no third-party scripts, no web fonts and no trackers.
-- Each page links back to the home page and to the other two Nudge-inator pages.
+- **"Home" depends on where you are.** On the main site, Home is the site's root page. Inside the Nudge-inator section, Home is the app page at `/nudge-inator/`. The main site doesn't link to the Nudge-inator section, on purpose, for now (Brian, 2026-10-25).
+- Each Nudge-inator page links to the other two Nudge-inator pages, with the app page labelled Home. The company name in the footer links to the main site's root page.
 - Each page has a visible last-updated date.
 - The privacy policy states the following, using the wording from the facts list in the brief dated 2026-10-24:
   - No account and no server. Reminders are stored only on the iPhone, in the app's local database (SwiftData in the app's App Group container, with CloudKit sync turned off).
@@ -187,8 +188,8 @@ Each story says who does it. **(Agent)** stories change this repository and an a
   - Has the page name as its heading, a visible "Coming Soon" status, and no policy or FAQ text.
   - Says the page is being written and will be published on this address.
   - Shows the approved contact address for that page: `privacy@newrealityinteractive.com` on the privacy placeholder, `support@newrealityinteractive.com` on the support placeholder.
-  - Links to the other placeholder and to the home page. The app page isn't built yet, so it isn't linked.
-  - Uses the same design as the app page, works without JavaScript, and has no last-updated date until the full text arrives.
+  - Links to the other placeholder, and to the main site's root page from the company name in the footer. Until the app page is live, the nav bar and the footer show only Privacy and Support, with no Home link, and the wordmark isn't a link (Brian, 2026-10-25). Home and the wordmark link are added in the same change that publishes the app page.
+  - Uses the same design as the app page and works without JavaScript. It shows the last-updated date October 25, 2026, which changes to the full text's date when that replaces the placeholder (Brian, 2026-10-25).
 - The privacy policy and support content bullets below describe the full text, which is written outside this project.
 
 ### Typography
@@ -308,7 +309,6 @@ Guideline 5.1.1(i) requires the privacy policy "within the app in an easily acce
 - A public TestFlight link. Testing is by invitation only.
 - A search engine, a blog or any other page beyond the three listed.
 - The App Store age rating. The app has no age restriction, but the rating questions are answered in App Store Connect, not on this site.
-- Creating tickets, and starting any build work. That comes after Brian approves this spec.
 
 ## Further Notes
 
@@ -320,6 +320,7 @@ The status stays `needs-info` until every item is checked. Then Brian changes it
 - [x] Design questions 15 to 17 answered (2026-10-25).
 - [x] Testing seam approved by Brian (2026-10-25).
 - [x] Spec and mockup committed on the spec branch (2026-10-25).
+- [x] Spec approved by Brian (2026-10-25). Tickets are created from it next.
 
 ### Open Questions for Brian
 
