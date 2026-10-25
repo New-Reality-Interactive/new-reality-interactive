@@ -182,7 +182,7 @@ Each story says who does it. **(Agent)** stories change this repository and an a
   - No "Installing a beta" section (open question 11).
 - The app page is in scope now. It says the app is coming until it is on the App Store, then links to the App Store. It uses the app's one-line description from the glossary: "An iPhone app that keeps nudging you about a reminder, the way an iOS Alarm keeps ringing, until you mark it done."
 - The app page's design, screens and captions come from the mockup, which is the design spec. Its seven screens are real app screens, and its captions are draft copy for Brian to approve (story 32). The mockup doesn't show the "coming soon" line or the App Store link, which the app page adds (stories 33 and 34).
-- Caption 7 (the alarms caption, sixth until the Filter My Day screen was added) reads "Urgent nudges ring as alarms, even on silent and in every Focus, when `Break through Focus` is enabled." The mockup's wording needed that clause, because Break through Focus is a setting on each reminder.
+- Caption 7, on the Settings screen, reads "Your pace, your rules. Choose how often new reminders nudge, and check that notifications and alarms are on." Brian chose it on 2026-10-25 to match the screen. It replaces the earlier alarms caption ("Loud when it matters."); the welcome screen on slide 1 still says urgent nudges ring as alarms.
 - **Placeholder pages.** The privacy policy and support page ship first as placeholders on their final addresses. Each placeholder:
   - Has the page name as its heading, a visible "Coming Soon" status, and no policy or FAQ text.
   - Says the page is being written and will be published on this address.
@@ -338,7 +338,7 @@ Answered on 2026-10-24:
 Answered on 2026-10-25:
 - **Carousel:** it stays. The app page's screen carousel uses JavaScript.
 - **Fonts:** the system font for the whole Nudge-inator section, matching the app's SF Pro, with no web fonts (see "Typography"). This replaces the earlier answer, the mockup's two Google Fonts. The homepage is unchanged.
-- **Caption 7 (alarms):** "Urgent nudges ring as alarms, even on silent and in every Focus, when `Break through Focus` is enabled." The other six captions stay as drafted in the mockup until Brian approves them (story 32).
+- **Caption 7 (Settings):** "Your pace, your rules. Choose how often new reminders nudge, and check that notifications and alarms are on." It replaces the alarms caption approved on 2026-10-25. The other six captions stay as drafted in the mockup until Brian approves them (story 32).
 - **Apple diagnostics wording (6):** decided when the full privacy text is written outside this project. The placeholders don't need it.
 - **Pause and Stop wording (7):** the FAQ answers Done, then Pause and Resume, as drafted.
 - **Clean-reinstall steps (11):** left out. The support page has no "Installing a beta" section.
