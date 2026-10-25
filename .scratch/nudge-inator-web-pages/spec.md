@@ -154,9 +154,9 @@ Each story says who does it. **(Agent)** stories change this repository and an a
 ### Pages
 
 - The Nudge-inator section uses the design in the mockup at `docs/mockups/nudge-inator`: its system font (see "Typography"), its colors and its dark-mode colors. This replaces the earlier rule that the pages use the homepage's type and colors. The homepage itself is unchanged.
-- Each page is a standalone HTML page in that design, with the same header and footer across the three.
+- Each page is a standalone HTML page in that design, with the same footer across the three. The privacy and support pages also have a nav bar under the wordmark: Home (the app page), Privacy and Support, with the current page underlined in the accent color (Brian, 2026-10-25).
 - The mockup includes the privacy and support pages as well as the app page. Their layout, header and footer are the design spec. Their body text is generated filler, not approved text: the placeholders follow the "Placeholder pages" rules below, and the full text comes from outside this project.
-- The footer is a soft rounded tray, echoing the phone frames, below the carousel on the app page and below the content on the other two. It holds links to the other Nudge-inator pages, and below it, on its own line, "© <year> New Reality Interactive LLC" linking to the home page (chosen by Brian on 2026-10-25).
+- The footer is a soft rounded tray, echoing the phone frames, below the carousel on the app page and below the content on the other two. It holds links to the other Nudge-inator pages, with the app page labelled Home, and below it, on its own line, "© <year> New Reality Interactive LLC" linking to the home page (chosen by Brian on 2026-10-25).
 - The privacy policy and support pages work without JavaScript. The app page's screen carousel uses JavaScript, and the rest of that page doesn't depend on it. The pages use no third-party scripts, no web fonts and no trackers.
 - Each page links back to the home page and to the other two Nudge-inator pages.
 - Each page has a visible last-updated date.
