@@ -54,7 +54,7 @@ Each story says who does it. **(Agent)** stories change this repository and an a
 18. As an App Review member, I want the privacy policy to name Settings › Delete All Data, so that I can see how a person removes their data. (Agent drafts, Brian approves)
 19. As an App Review member, I want the privacy policy to say that deleting the app alone leaves its alarms scheduled, so that the instruction to use Delete All Data first is clearly justified. (Agent drafts, Brian approves)
 20. As an App Review member, I want the privacy policy's privacy-label statement ("Data Not Collected") to match the privacy label in App Store Connect, so that the listing is consistent. (Agent drafts, Brian approves)
-21. As an App Review member, I want the privacy policy's tracking statement to match the app's privacy manifest, so that the manifest and the page agree. The statement must be true for the app as shipped (story 44). (Agent drafts, Brian approves)
+21. As an App Review member, I want the privacy policy's tracking statement to match the app's privacy manifest, so that the manifest and the page agree. The statement must be true for the app as shipped. (Agent drafts, Brian approves)
 22. As a tester, I want to open the privacy policy from the TestFlight app, so that I can read it before I install. The privacy policy is public once its page is merged, so whether TestFlight requires the link is outside this spec (open question 5). (Brian)
 23. As a visitor, I want a contact address for privacy questions on the privacy policy, so that I can ask about my data. (Agent drafts, Brian approves)
 24. As a visitor, I want the privacy policy to say how Apple's optional diagnostics sharing relates to the app, so that I'm not confused by Apple's crash and analytics reports. Whether the policy covers this is decided when the full text is written (open question 6). (Agent drafts, Brian approves)
@@ -89,14 +89,13 @@ Each story says who does it. **(Agent)** stories change this repository and an a
 
 ### Maintainers
 
-44. As a maintainer, I want one list of facts that the privacy policy, the support page, the privacy manifest, the App Store privacy label and the onboarding text are all checked against, so that a change in one is caught in the others. (Agent)
 45. As a maintainer, I want the change that alters the app's data handling to include an update to these pages, so that the pages never go stale. It goes in the Nudge-inator release checklist, which this spec doesn't change. (Brian)
 46. As a maintainer, I want the new pages to ship with no build step or framework, so that the site stays as simple as it is now. (Agent)
 47. As a maintainer, I want the new pages to go through a pull request on this repository, so that the change is reviewed before it goes live. (Agent opens it, Brian reviews and merges)
 48. As a person using the app, I want a link to the privacy policy inside the app, so that I can read it without searching for it. Guideline 5.1.1(i) requires this. It's built in the Nudge-inator repository, not here. It's added in the Nudge-inator repository (open question 13). It blocks nothing in this spec, but the App Store release depends on it. (Not built in this repository)
 49. As a person deleting my data, I want the privacy policy to say how long reminders are kept and how to delete them, so that I know what Delete All Data does before I use it. (Agent drafts, Brian approves)
 50. As a beta tester, I want the privacy policy to say what TestFlight shares with the developer when I send feedback or a crash log, so that I know what I'm sending before I send it. (Agent drafts, Brian approves)
-51. As Brian, I want the three pages built in the site's existing static HTML and CSS, so that I only need to approve and publish. The agent builds the app page as described in "Pages", and builds the privacy policy and support placeholders (stories 52 to 55). The full privacy policy and support text is written outside this project. All three pages follow the mockup's design, including its dark-mode colors. They work without JavaScript and link to each other. It runs the Testing Decisions checks that can run before publishing (iPhone width in light and dark mode, heading order, link text, contrast, no broken links, wording against the fact list) on the pull request's pages and reports the results there. Brian approves the text (stories 6 and 7) and publishes by merging. (Agent builds; Brian approves and publishes)
+51. As Brian, I want the three pages built in the site's existing static HTML and CSS, so that I only need to approve and publish. The agent builds the app page as described in "Pages", and builds the privacy policy and support placeholders (stories 52 to 55). The full privacy policy and support text is written outside this project. All three pages follow the mockup's design, including its dark-mode colors. They work without JavaScript and link to each other. It runs the Testing Decisions checks that can run before publishing (iPhone width in light and dark mode, heading order, link text, contrast, no broken links, wording against the content rules in "Pages") on the pull request's pages and reports the results there. Brian approves the text (stories 6 and 7) and publishes by merging. (Agent builds; Brian approves and publishes)
 
 ### Placeholder pages
 
@@ -161,7 +160,7 @@ Each story says who does it. **(Agent)** stories change this repository and an a
 - **"Home" depends on where you are.** On the main site, Home is the site's root page. Inside the Nudge-inator section, Home is the app page at `/nudge-inator/`. The main site doesn't link to the Nudge-inator section, on purpose, for now (Brian, 2026-10-25).
 - Each Nudge-inator page links to the other two Nudge-inator pages, with the app page labelled Home. The company name in the footer links to the main site's root page.
 - Each page has a visible last-updated date.
-- The privacy policy states the following, using the wording from the facts list in the brief dated 2026-10-24:
+- The privacy policy states the following:
   - No account and no server. Reminders are stored only on the iPhone, in the app's local database (SwiftData in the app's App Group container, with CloudKit sync turned off).
   - No network requests, and no analytics, advertising, tracking or third-party SDKs.
   - Reminders are included in the person's own iPhone backups (iCloud or computer), which is how iOS backs up app data.
@@ -188,9 +187,11 @@ Each story says who does it. **(Agent)** stories change this repository and an a
   - Has the page name as its heading, a visible "Coming Soon" status, and no policy or FAQ text.
   - Says the page is being written and will be published on this address.
   - Shows the approved contact address for that page: `privacy@newrealityinteractive.com` on the privacy placeholder, `support@newrealityinteractive.com` on the support placeholder.
-  - Links to the other placeholder, and to the main site's root page from the company name in the footer. Until the app page is live, the nav bar and the footer show only Privacy and Support, with no Home link, and the wordmark isn't a link (Brian, 2026-10-25). Home and the wordmark link are added in the same change that publishes the app page.
+  - Links to the app page (Home and the wordmark) and to the other placeholder, and to the main site's root page from the company name in the footer. The app page is built first, so these links work from the start.
+  - Takes its layout, header, nav and footer from the matching mockup page. The mockup's body text is filler and isn't used.
   - Uses the same design as the app page and works without JavaScript. It shows the last-updated date October 25, 2026, which changes to the full text's date when that replaces the placeholder (Brian, 2026-10-25).
 - The privacy policy and support content bullets below describe the full text, which is written outside this project.
+- **Build order** (Brian, 2026-10-25): the app page first, since it sets up the section's shared design. Then the privacy placeholder, then the support placeholder.
 
 ### Typography
 
@@ -219,7 +220,6 @@ Draft FAQ answers, for Brian to confirm:
 
 ### Wording and consistency
 
-- One fact list is the source for the privacy policy, the support page, the privacy manifest, the App Store privacy label and the onboarding text ("No account and no server. Your reminders stay on this iPhone and in your own backups."). When the wording in one of them changes, the others are checked against the fact list.
 - Brian owns the pages and keeps them in step with the app. Any change that alters what the app does with data updates the pages in the same release. This is a process requirement to add to the Nudge-inator release checklist. This spec doesn't change that repository (see Out of Scope).
 
 ### Publishing
@@ -273,7 +273,7 @@ Read from Apple's "App Review Guidelines" page, `https://developer.apple.com/app
 - **5.1.1(v), accounts.** "If your app doesn't include significant account-based features, let people use it without a login." Nudge-inator has no account, so the policy and support page don't need an account-deletion section.
 - **5.1.4, kids.** Applies to kids-focused apps. Nudge-inator has no age restriction (Brian, 2026-10-24), so there's no children's section.
 - **1.5, developer information.** "Make sure your app and its Support URL include an easy way to contact you." The support page's email address satisfies this.
-- **2.3, accurate metadata.** The privacy information and the description must "accurately reflect the app's core experience." This is why the pages use the fact list and the glossary wording.
+- **2.3, accurate metadata.** The privacy information and the description must "accurately reflect the app's core experience." This is why the pages use the glossary wording and claim only what the app does.
 - **2.3.1(a), review notes.** New features must be "described with specificity in the Notes for Review section of App Store Connect". This applies to the review notes for alarms through silent mode and Focus.
 
 The guidelines don't say which App Store Connect URL fields are required. "Required, localizable, and editable properties", above, does.
@@ -286,13 +286,13 @@ Guideline 5.1.1(i) requires the privacy policy "within the app in an easily acce
 
 - **Approved by Brian on 2026-10-25.** The seam is the published page, checked by hand against the checklist below, with no automated test suite.
 - The repository has no test framework, and this spec doesn't add one. The highest seam is the published page at its public address, so checks run against the live URLs. Checks 2 to 5 also run on the pull request's pages before publishing (story 51).
-- Good tests check external behavior: what a visitor sees, whether the URL responds, and whether the words match the fact list. They don't check how the HTML is built.
+- Good tests check external behavior: what a visitor sees, whether the URL responds, and whether the words match the content rules in "Pages". They don't check how the HTML is built.
 - Checks before the App Store Connect URLs are entered:
   1. Each of the three URLs returns a page over HTTPS when opened in a logged-out browser, with no login prompt.
   2. Each page is readable on an iPhone-sized screen with no sideways scrolling, in light mode and in dark mode.
   3. Headings are in order, each link has descriptive text, and text contrast meets WCAG AA. Checked with a browser accessibility tool or a screen reader.
   4. No link on the pages is broken.
-  5. The privacy policy and support page are read line by line against the fact list in the brief. Every statement matches, and nothing extra is claimed.
+  5. The privacy policy and support page are read line by line against the privacy policy and support content rules in "Pages". Every statement matches, and nothing extra is claimed.
   6. The pages load no web fonts: the browser's network panel shows no font requests. On a Mac or iPhone the text renders in SF Pro. With `-apple-system`, `system-ui` and `BlinkMacSystemFont` removed from the stack for the check only, the fallback font still fits at iPhone width and on desktop, and the carousel doesn't move.
 - With JavaScript turned off, the app page's name, description and links must still be readable. Each screenshot is checked for personal reminder text before publishing (story 59).
 - The placeholders must pass checks 1 to 4 and 6, which also cover light and dark mode. Check 5 applies to the full text once it arrives.
