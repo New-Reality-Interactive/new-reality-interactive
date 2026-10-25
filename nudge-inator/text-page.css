@@ -1,0 +1,28 @@
+/* Text pages (privacy, support): a single readable column under the wordmark and nav. Loads after shared.css. */
+a { color: var(--accent); text-underline-offset: 0.18em; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+
+.masthead { width: 100%; max-width: 40rem; margin: 0 auto; padding-block: 1.5rem 0; }
+.wordmark { font-weight: 700; font-size: 1.5rem; letter-spacing: -0.03em; line-height: 1; color: var(--fg); text-decoration: none; }
+.wordmark span { color: var(--accent); }
+
+/* Page nav: text tabs under the wordmark, with the current page underlined in the accent. */
+.site-nav { display: flex; gap: 1.5rem; margin-top: 1rem; border-bottom: 1px solid var(--dot); }
+.site-nav a { margin-bottom: -1px; padding-block: 0.6rem; border-bottom: 2px solid transparent; color: var(--muted); font-size: 0.9375rem; font-weight: 600; text-decoration: none; }
+.site-nav a:hover { color: var(--fg); }
+.site-nav a[aria-current="page"] { color: var(--accent); border-bottom-color: var(--accent); }
+
+main { flex: 1; width: 100%; max-width: 40rem; margin: 0 auto; padding-block: 2.5rem 3rem; }
+h1 { margin: 0; font-weight: 700; font-size: clamp(2.2rem, 7vw, 3rem); letter-spacing: -0.035em; line-height: 1.05; text-wrap: balance; }
+.lede { margin: 1rem 0 0; color: var(--muted); font-size: 1.125rem; text-wrap: pretty; }
+h2 { margin: 2.5rem 0 0.5rem; font-weight: 600; font-size: 1.375rem; letter-spacing: -0.02em; line-height: 1.25; text-wrap: balance; }
+p, ul, ol { margin: 0 0 0.85rem; }
+ul, ol { padding-left: 1.25rem; }
+li + li { margin-top: 0.3rem; }
+
+/* Contact block: the address a reader came here for. */
+.contact { margin-top: 2rem; padding: 1.25rem; border: 1px solid var(--dot); border-radius: 16px; background: color-mix(in srgb, var(--dot) 18%, transparent); }
+.contact h2 { margin-top: 0; }
+.contact p:last-child { margin-bottom: 0; }
+.email { font-weight: 600; font-size: 1.25rem; overflow-wrap: anywhere; }
+.updated { margin: 1rem 0 0; color: var(--muted); font-size: 0.875rem; }
