@@ -55,7 +55,7 @@ Each story says who does it. **(Agent)** stories change this repository and an a
 19. As an App Review member, I want the privacy policy to say that deleting the app alone leaves its alarms scheduled, so that the instruction to use Delete All Data first is clearly justified. (Agent drafts, Brian approves)
 20. As an App Review member, I want the privacy policy's privacy-label statement ("Data Not Collected") to match the privacy label in App Store Connect, so that the listing is consistent. (Agent drafts, Brian approves)
 21. As an App Review member, I want the privacy policy's tracking statement to match the app's privacy manifest, so that the manifest and the page agree. The statement must be true for the app as shipped (story 44). (Agent drafts, Brian approves)
-22. As a tester, I want to open the privacy policy from the TestFlight app, so that I can read it before I install. Open question 5 decides whether TestFlight needs a privacy policy link for external testing. It doesn't block the pages. (Brian)
+22. As a tester, I want to open the privacy policy from the TestFlight app, so that I can read it before I install. The privacy policy is public once its page is merged, so whether TestFlight requires the link is outside this spec (open question 5). (Brian)
 23. As a visitor, I want a contact address for privacy questions on the privacy policy, so that I can ask about my data. (Agent drafts, Brian approves)
 24. As a visitor, I want the privacy policy to say how Apple's optional diagnostics sharing relates to the app, so that I'm not confused by Apple's crash and analytics reports. Whether the policy covers this is decided when the full text is written (open question 6). (Agent drafts, Brian approves)
 
@@ -93,7 +93,7 @@ Each story says who does it. **(Agent)** stories change this repository and an a
 45. As a maintainer, I want the change that alters the app's data handling to include an update to these pages, so that the pages never go stale. It goes in the Nudge-inator release checklist, which this spec doesn't change. (Brian)
 46. As a maintainer, I want the new pages to ship with no build step or framework, so that the site stays as simple as it is now. (Agent)
 47. As a maintainer, I want the new pages to go through a pull request on this repository, so that the change is reviewed before it goes live. (Agent opens it, Brian reviews and merges)
-48. As a person using the app, I want a link to the privacy policy inside the app, so that I can read it without searching for it. Guideline 5.1.1(i) requires this. It's built in the Nudge-inator repository, not here. Open question 13 decides who adds it. It blocks nothing in this spec, but the App Store release depends on it. (Brian decides; not built in this repository)
+48. As a person using the app, I want a link to the privacy policy inside the app, so that I can read it without searching for it. Guideline 5.1.1(i) requires this. It's built in the Nudge-inator repository, not here. It's added in the Nudge-inator repository (open question 13). It blocks nothing in this spec, but the App Store release depends on it. (Not built in this repository)
 49. As a person deleting my data, I want the privacy policy to say how long reminders are kept and how to delete them, so that I know what Delete All Data does before I use it. (Agent drafts, Brian approves)
 50. As a beta tester, I want the privacy policy to say what TestFlight shares with the developer when I send feedback or a crash log, so that I know what I'm sending before I send it. (Agent drafts, Brian approves)
 51. As Brian, I want the three pages built in the site's existing static HTML and CSS, so that the section looks like the rest of the site and I only need to approve and publish. The agent builds the app page as described in "Pages", and builds the privacy policy and support placeholders (stories 52 to 55). The full privacy policy and support text is written outside this project. All three pages follow the mockup's design, including its dark-mode colors. They work without JavaScript and link to each other. It runs the Testing Decisions checks that can run before publishing (iPhone width in light and dark mode, heading order, link text, contrast, no broken links, wording against the fact list) on the pull request's pages and reports the results there. Brian approves the text (stories 6 and 7) and publishes by merging. (Agent builds; Brian approves and publishes)
@@ -198,7 +198,7 @@ Decided on 2026-10-25, replacing the earlier decision to use the mockup's two Go
 - The app uses Apple's system font, SF Pro, through Apple's built-in text styles with Dynamic Type, at Regular, Medium, Semibold and Bold. The pages match it with the system font only.
 - Every page uses one system font stack, held in a single CSS custom property: `-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`. That gives SF Pro on Apple devices, Segoe UI on Windows, Roboto on Android and ChromeOS, and the desktop's sans-serif on Linux.
 - The pages load no web fonts: no Google Fonts or other font links, no `@font-face` rules and no font files. SF Pro is never hosted, embedded or linked, because Apple's font license doesn't allow serving it from a public page.
-- Weights follow the app: Regular (400) for body text, Semibold (600) for headings, captions, FAQ questions and inline emphasis, and Bold (700) for the page titles and the wordmark. No other weight is used. Semibold is Body's emphasized weight in Apple's tables, so inline emphasis is Semibold, not the browser's default bold.
+- Weights follow the app: Regular (400) for body text, Semibold (600) for headings, captions, FAQ questions and inline emphasis, and Bold (700) for the page titles and the wordmark (confirmed by Brian, open question 18). No other weight is used. Semibold is Body's emphasized weight in Apple's tables, so inline emphasis is Semibold, not the browser's default bold.
 - No page text imitates an iPhone screen. The app page's six screens are screenshots, so Apple's text sizes (Body 17/22 pt, Title 2 22/28 pt and so on, at the default Large size) don't apply to the HTML text. If a later page draws an iPhone screen in HTML, it uses those sizes, taken from the Human Interface Guidelines typography tables.
 - The headings keep their negative letter-spacing (−0.02 to −0.035 em). It doesn't copy SF Pro's tracking, which is positive above 24 pt; it was tuned for the earlier display font. It looked right in SF Pro and Helvetica Neue and slightly dense, but not cramped, in Roboto (checked 2026-10-25).
 
@@ -262,7 +262,7 @@ Confirmed from "Required, localizable, and editable properties" (App Store Conne
 
 Still not confirmed:
 
-- Whether TestFlight's external testing needs a privacy policy URL before external testers get the app (open question 5). The Beta App Localizations page confirms the policy is shown to testers, not that it is mandatory. The spec doesn't guess it.
+- Whether TestFlight's external testing needs a privacy policy URL before external testers get the app. The Beta App Localizations page confirms the policy is shown to testers, not that it is mandatory. Brian decided on 2026-10-25 that this project doesn't need the answer (open question 5): the privacy policy is public once its page is merged.
 
 ### App Review Guidelines
 
@@ -279,7 +279,7 @@ The guidelines don't say which App Store Connect URL fields are required. "Requi
 
 ### In-app link to the privacy policy
 
-Guideline 5.1.1(i) requires the privacy policy "within the app in an easily accessible manner". Nudge-inator has no privacy link in the app yet. The link belongs in the app's own code, in the Nudge-inator repository, so this spec doesn't change it. Open question 13 asks who adds it and where. It needs to ship before the App Store release.
+Guideline 5.1.1(i) requires the privacy policy "within the app in an easily accessible manner". Nudge-inator has no privacy link in the app yet. The link belongs in the app's own code, in the Nudge-inator repository, so this spec doesn't change it. It's added in the Nudge-inator repository (open question 13, answered 2026-10-25). It needs to ship before the App Store release.
 
 ## Testing Decisions
 
@@ -344,12 +344,11 @@ Answered on 2026-10-25:
 - **Clean-reinstall steps (11):** left out. The support page has no "Installing a beta" section.
 - **Beta section in the privacy policy (14):** kept, as drafted.
 - **Testing seam:** approved as written.
+- **TestFlight external testing (5):** outside this project. The privacy policy is public once its page is merged, so it's available to TestFlight either way.
+- **In-app privacy link (13):** added in the Nudge-inator repository, which handles the iOS app.
+- **Title weight (18):** Bold for the page titles and the wordmark.
 
-Still open (none blocks this spec):
-
-5. **TestFlight external testing.** Apple's API page calls the TestFlight privacy policy URL "recommended," not required. Confirm in App Store Connect Help whether external testing needs it. (Brian is looking into this.) **Blocks:** nothing in this spec (story 22).
-13. **In-app privacy link.** Guideline 5.1.1(i) requires a privacy policy link inside the app. Who adds it in the Nudge-inator repository: you, or a separate ticket? It needs to ship before the App Store release. **Blocks:** nothing in this spec (story 48). The App Store release depends on it.
-18. **Title weight.** Apple's title styles are Regular by default, with Bold only as their emphasized weight. The pages use Bold for the page titles and the wordmark. Confirm Bold, or say whether the app uses Semibold for its titles. **Blocks:** nothing in this spec.
+No questions are open.
 
 ### Checked against the app repository
 
