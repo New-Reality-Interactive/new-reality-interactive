@@ -1,0 +1,73 @@
+/* Text pages (privacy, support): the tour's font and colors, set as a single readable column. */
+:root {
+  --bg: #EDF3F3;
+  --fg: #0E1A1C;
+  --muted: #45585A;
+  --accent: #04666B;
+  --rule: #CFDDDE;
+  --card: #F7FAFA;
+  /* The system font: SF Pro on Apple devices, as in the app. Segoe UI, Roboto or the desktop sans elsewhere. */
+  --font: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #0B1315; --fg: #EAF4F4; --muted: #A7BBBC; --accent: #07DDE6; --rule: #22393C; --card: #101C1F; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #0B1315; --fg: #EAF4F4; --muted: #A7BBBC; --accent: #07DDE6; --rule: #22393C; --card: #101C1F; color-scheme: dark; }
+
+*, *::before, *::after { box-sizing: border-box; }
+html { height: 100%; }
+body {
+  margin: 0; min-height: 100%; display: flex; flex-direction: column;
+  background: var(--bg); color: var(--fg); font: 1rem/1.6 var(--font);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  overflow-x: hidden;
+}
+a { color: var(--accent); text-underline-offset: 0.18em; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+
+.masthead { width: 100%; max-width: 40rem; margin: 0 auto; padding-block: 1.5rem 0; }
+.wordmark { font-weight: 700; font-size: 1.5rem; letter-spacing: -0.03em; line-height: 1; color: var(--fg); text-decoration: none; }
+.wordmark span { color: var(--accent); }
+
+/* Page nav: text tabs under the wordmark, with the current page underlined in the accent. */
+.site-nav { display: flex; gap: 1.5rem; margin-top: 1rem; border-bottom: 1px solid var(--rule); }
+.site-nav a { margin-bottom: -1px; padding-block: 0.6rem; border-bottom: 2px solid transparent; color: var(--muted); font-size: 0.9375rem; font-weight: 600; text-decoration: none; }
+.site-nav a:hover { color: var(--fg); }
+.site-nav a[aria-current="page"] { color: var(--accent); border-bottom-color: var(--accent); }
+
+main { flex: 1; width: 100%; max-width: 40rem; margin: 0 auto; padding-block: 2.5rem 3rem; }
+h1 { margin: 0; font-weight: 700; font-size: clamp(2.2rem, 7vw, 3rem); letter-spacing: -0.035em; line-height: 1.05; text-wrap: balance; }
+.lede { margin: 0.75rem 0 0; color: var(--muted); font-size: 1.125rem; text-wrap: pretty; }
+.updated { margin: 1rem 0 0; color: var(--muted); font-size: 0.875rem; }
+h2 { margin: 2.5rem 0 0.5rem; font-weight: 600; font-size: 1.375rem; letter-spacing: -0.02em; line-height: 1.25; text-wrap: balance; }
+p, ul, ol { margin: 0 0 0.85rem; }
+strong { font-weight: 600; }
+ul, ol { padding-left: 1.25rem; }
+li + li { margin-top: 0.3rem; }
+
+/* Contact block: the one thing a support visitor came for. */
+.contact { margin-top: 2rem; padding: 1.25rem; border: 1px solid var(--rule); border-radius: 16px; background: var(--card); }
+.contact h2 { margin-top: 0; }
+.contact .email { font-weight: 600; font-size: 1.25rem; overflow-wrap: anywhere; }
+.contact p:last-child, .contact ul:last-child { margin-bottom: 0; }
+
+/* FAQ: native disclosure, so it works without JavaScript. */
+.faq { border-top: 1px solid var(--rule); }
+.faq details { border-bottom: 1px solid var(--rule); }
+.faq summary { cursor: pointer; list-style: none; padding: 1rem 2rem 1rem 0; position: relative; font-weight: 600; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; position: absolute; right: 0.25rem; top: 0.85rem; font-size: 1.25rem; color: var(--accent); }
+.faq details[open] summary::after { content: "\2212"; }
+.faq summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+.faq details p { color: var(--muted); }
+
+/* Footer: the links in a soft rounded tray, echoing the phone frames, with the copyright on its own line below. */
+.site-footer { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; padding-block: 0 1.25rem; font-size: 0.8125rem; color: var(--muted); text-align: center; }
+.site-footer nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem 1.25rem; padding: 0.7rem 1.5rem; border-radius: 999px; background: color-mix(in srgb, var(--rule) 45%, transparent); }
+.site-footer nav a { color: var(--fg); font-weight: 600; }
+.site-footer a { color: inherit; text-decoration: none; }
+.site-footer a:hover, .site-footer a[aria-current="page"] { color: var(--accent); }
+.site-footer a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+.site-footer p { margin: 0; font-size: 0.75rem; }
