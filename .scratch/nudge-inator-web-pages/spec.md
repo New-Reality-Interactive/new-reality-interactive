@@ -108,7 +108,7 @@ Each story says who does it. **(Agent)** stories change this repository and an a
 ### App page
 
 56. As Brian, I want the app page built to the design in the Nudge-inator mockup, so that the page matches the approved look and I only review the copy and the publishing. (Agent builds; Brian approves and publishes)
-57. As a visitor on an iPhone, I want to swipe through the app's six screens, each with a short line, so that I can see what the app does before I install it. (Agent)
+57. As a visitor on an iPhone, I want to swipe through the app's seven screens, each with a short line, so that I can see what the app does before I install it. (Agent)
 58. As a visitor with JavaScript turned off, I want the app page's name, description and links to still be readable, so that the page isn't blank. (Agent)
 59. As Brian, I want each screenshot checked for personal reminder text before the app page is published, so that nothing private goes public. (Agent checks, Brian approves)
 
@@ -181,8 +181,8 @@ Each story says who does it. **(Agent)** stories change this repository and an a
   - A link to the privacy policy.
   - No "Installing a beta" section (open question 11).
 - The app page is in scope now. It says the app is coming until it is on the App Store, then links to the App Store. It uses the app's one-line description from the glossary: "An iPhone app that keeps nudging you about a reminder, the way an iOS Alarm keeps ringing, until you mark it done."
-- The app page's design, screens and captions come from the mockup, which is the design spec. Its six screens are real app screens, and its captions are draft copy for Brian to approve (story 32). The mockup doesn't show the "coming soon" line or the App Store link, which the app page adds (stories 33 and 34).
-- Caption 6 reads "Urgent nudges ring as alarms, even on silent and in every Focus, when `Break through Focus` is enabled." The mockup's wording needed that clause, because Break through Focus is a setting on each reminder.
+- The app page's design, screens and captions come from the mockup, which is the design spec. Its seven screens are real app screens, and its captions are draft copy for Brian to approve (story 32). The mockup doesn't show the "coming soon" line or the App Store link, which the app page adds (stories 33 and 34).
+- Caption 7 (the alarms caption, sixth until the Filter My Day screen was added) reads "Urgent nudges ring as alarms, even on silent and in every Focus, when `Break through Focus` is enabled." The mockup's wording needed that clause, because Break through Focus is a setting on each reminder.
 - **Placeholder pages.** The privacy policy and support page ship first as placeholders on their final addresses. Each placeholder:
   - Has the page name as its heading, a visible "Coming Soon" status, and no policy or FAQ text.
   - Says the page is being written and will be published on this address.
@@ -199,7 +199,7 @@ Decided on 2026-10-25, replacing the earlier decision to use the mockup's two Go
 - Every page uses one system font stack, held in a single CSS custom property: `-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`. That gives SF Pro on Apple devices, Segoe UI on Windows, Roboto on Android and ChromeOS, and the desktop's sans-serif on Linux.
 - The pages load no web fonts: no Google Fonts or other font links, no `@font-face` rules and no font files. SF Pro is never hosted, embedded or linked, because Apple's font license doesn't allow serving it from a public page.
 - Weights follow the app: Regular (400) for body text, Semibold (600) for headings, captions, FAQ questions and inline emphasis, and Bold (700) for the page titles and the wordmark (confirmed by Brian, open question 18). No other weight is used. Semibold is Body's emphasized weight in Apple's tables, so inline emphasis is Semibold, not the browser's default bold.
-- No page text imitates an iPhone screen. The app page's six screens are screenshots, so Apple's text sizes (Body 17/22 pt, Title 2 22/28 pt and so on, at the default Large size) don't apply to the HTML text. If a later page draws an iPhone screen in HTML, it uses those sizes, taken from the Human Interface Guidelines typography tables.
+- No page text imitates an iPhone screen. The app page's seven screens are screenshots, so Apple's text sizes (Body 17/22 pt, Title 2 22/28 pt and so on, at the default Large size) don't apply to the HTML text. If a later page draws an iPhone screen in HTML, it uses those sizes, taken from the Human Interface Guidelines typography tables.
 - The headings keep their negative letter-spacing (−0.02 to −0.035 em). It doesn't copy SF Pro's tracking, which is positive above 24 pt; it was tuned for the earlier display font. It looked right in SF Pro and Helvetica Neue and slightly dense, but not cramped, in Roboto (checked 2026-10-25).
 
 ### Wording and glossary terms
@@ -338,7 +338,7 @@ Answered on 2026-10-24:
 Answered on 2026-10-25:
 - **Carousel:** it stays. The app page's screen carousel uses JavaScript.
 - **Fonts:** the system font for the whole Nudge-inator section, matching the app's SF Pro, with no web fonts (see "Typography"). This replaces the earlier answer, the mockup's two Google Fonts. The homepage is unchanged.
-- **Caption 6:** "Urgent nudges ring as alarms, even on silent and in every Focus, when `Break through Focus` is enabled." The other five captions stay as drafted in the mockup until Brian approves them (story 32).
+- **Caption 7 (alarms):** "Urgent nudges ring as alarms, even on silent and in every Focus, when `Break through Focus` is enabled." The other six captions stay as drafted in the mockup until Brian approves them (story 32).
 - **Apple diagnostics wording (6):** decided when the full privacy text is written outside this project. The placeholders don't need it.
 - **Pause and Stop wording (7):** the FAQ answers Done, then Pause and Resume, as drafted.
 - **Clean-reinstall steps (11):** left out. The support page has no "Installing a beta" section.
