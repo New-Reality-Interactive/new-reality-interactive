@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nudge-inator Tour</title>
+<meta name="description" content="A swipeable 3D carousel of real Nudge-inator screens, each with a short line about what it shows.">
+<style>
+:root { color-scheme: light; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; font: 14px var(--font); }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+</style>
+<style>
+/* Layout: one screen. Name on top, the line for the screen in front, then a coverflow of real app screens. */
+:root {
+  --bg: #EDF3F3;
+  --fg: #0E1A1C;
+  --muted: #45585A;
+  --accent: #04666B;
+  --frame: #0E1A1C;
+  --dot: #B9CACB;
+  /* The system font: SF Pro on Apple devices, as in the app. Segoe UI, Roboto or the desktop sans elsewhere. */
+  --font: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --w: clamp(200px, 58vw, 300px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #0B1315; --fg: #EAF4F4; --muted: #A7BBBC; --accent: #07DDE6; --frame: #22393C; --dot: #2E4A4E; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #0B1315; --fg: #EAF4F4; --muted: #A7BBBC; --accent: #07DDE6; --frame: #22393C; --dot: #2E4A4E; color-scheme: dark; }
+
+html { height: 100%; }
+body {
+  min-height: 100%; display: flex; flex-direction: column;
+  background: var(--bg); color: var(--fg); font-family: var(--font);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  overflow-x: hidden;
+}
+main { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 1.25rem; padding-block: 2rem 1.5rem; }
+
+h1 { margin: 0; font-weight: 700; font-size: clamp(2.2rem, 7vw, 3.6rem); letter-spacing: -0.035em; line-height: 1; text-wrap: balance; text-align: center; }
+h1 span { color: var(--accent); }
+
+/* Every caption sits in the same grid cell, so the box is always as tall as the tallest one and
+   the carousel below never moves. Only the current one shows. */
+.captions { display: grid; width: 100%; max-width: 30rem; text-align: center; }
+.caption { grid-area: 1 / 1; display: flex; flex-direction: column; justify-content: flex-start; gap: 0.35rem; transition: opacity 320ms ease, transform 320ms ease; }
+.caption[aria-hidden="true"] { opacity: 0; transform: translateY(6px); }
+.caption h2 { margin: 0; font-weight: 600; font-size: clamp(1.35rem, 4vw, 1.75rem); letter-spacing: -0.02em; text-wrap: balance; }
+.caption p { margin: 0; color: var(--muted); font-size: 1rem; line-height: 1.5; text-wrap: balance; }
+
+.stage {
+  position: relative; width: 100%; max-width: 1100px;
+  height: calc(var(--w) * 2556 / 1178 + 24px);
+  perspective: 1600px; perspective-origin: 50% 45%; touch-action: pan-y; user-select: none; -webkit-user-select: none;
+  cursor: grab; outline: none;
+}
+.stage.dragging { cursor: grabbing; }
+.stage:focus-visible { outline: 2px solid var(--accent); outline-offset: 6px; border-radius: 24px; }
+.slide {
+  position: absolute; top: 12px; left: 50%; width: var(--w); margin-left: calc(var(--w) / -2);
+  transform-style: preserve-3d; transform-origin: 50% 50%;
+  transition: transform 520ms cubic-bezier(.2,.8,.2,1), opacity 520ms ease, filter 520ms ease;
+  will-change: transform;
+}
+.stage.dragging .slide { transition: none; }
+.slide img {
+  display: block; width: 100%; max-width: 100%; height: auto; aspect-ratio: 1178 / 2556;
+  border-radius: calc(var(--w) * 0.15); border: 7px solid var(--frame); background: #F2F2F7;
+  box-shadow: 0 30px 60px -30px rgba(0,0,0,.45);
+  pointer-events: none;
+}
+
+.controls { display: flex; align-items: center; gap: 1rem; }
+.arrow {
+  width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--dot); background: transparent; color: var(--fg);
+  display: grid; place-items: center; cursor: pointer;
+}
+.arrow:hover { border-color: var(--accent); color: var(--accent); }
+.arrow:focus-visible, .dot:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.dots { display: flex; gap: 0.15rem; }
+.dot { width: 28px; height: 44px; border: 0; background: none; padding: 0; cursor: pointer; display: grid; place-items: center; }
+.dot::after { content: ""; width: 8px; height: 8px; border-radius: 4px; background: var(--dot); transition: width 300ms ease, background 300ms ease; }
+.dot[aria-current="true"]::after { width: 22px; background: var(--accent); }
+
+/* Footer: small and muted, so the carousel stays the only thing asking for attention. */
+.site-footer { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.25rem 1.25rem; padding-block: 0.5rem 1.25rem; font-size: 0.8125rem; color: var(--muted); }
+.site-footer nav { display: flex; gap: 1.25rem; }
+.site-footer a { color: inherit; text-decoration: none; }
+.site-footer a:hover { color: var(--fg); text-decoration: underline; text-underline-offset: 0.18em; }
+.site-footer a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+.site-footer p { margin: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .slide, .caption, .dot::after { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<main>
+  <h1>Nudge<span>-</span>inator</h1>
+
+  <div class="captions" id="captions" aria-live="polite">
+    <div class="caption" aria-hidden="false"><h2>Meet the reminder that won't let it go.</h2><p>No account and no server. Just nudges until you tap Done.</p></div>
+    <div class="caption" aria-hidden="true"><h2>It keeps coming back.</h2><p>Reminders that are nudging sit at the top of Now, each with one big Done.</p></div>
+    <div class="caption" aria-hidden="true"><h2>Always know what's next.</h2><p>Every reminder shows which nudge it's on and when the next one comes.</p></div>
+    <div class="caption" aria-hidden="true"><h2>Choose how hard it pushes.</h2><p>Gentle, Firm or Relentless. With Relentless, every nudge rings as an alarm.</p></div>
+    <div class="caption" aria-hidden="true"><h2>Your day, accounted for.</h2><p>What's done, what's nudging, what you missed and what's left.</p></div>
+    <div class="caption" aria-hidden="true"><h2>Loud when it matters.</h2><p>Urgent nudges ring as alarms, even on silent and in every Focus, when Break through Focus is enabled.</p></div>
+  </div>
+
+  <div class="stage" id="stage" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Nudge-inator screens. Use the left and right arrow keys, or swipe.">
+    <div class="slide" aria-roledescription="slide" aria-label="1 of 6"><img src="shots/onboarding.png" alt="Welcome screen: Nudges until you're done, Urgent nudges ring as alarms, You choose what breaks through, Stays on your iPhone." draggable="false"></div>
+    <div class="slide" aria-roledescription="slide" aria-label="2 of 6"><img src="shots/now-1.png" alt="The Now tab: two reminders nudging, each with its strength, nudge count, next nudge and a Done button." draggable="false"></div>
+    <div class="slide" aria-roledescription="slide" aria-label="3 of 6"><img src="shots/details-nudging-1.png" alt="A nudging reminder's page: nudge 2 of 20, the next nudge, Done, and its repeat and pace." draggable="false"></div>
+    <div class="slide" aria-roledescription="slide" aria-label="4 of 6"><img src="shots/form-new-relentless-1.png" alt="The New Reminder form with Relentless chosen: every nudge rings as an alarm." draggable="false"></div>
+    <div class="slide" aria-roledescription="slide" aria-label="5 of 6"><img src="shots/myday-1.png" alt="My Day: counts of Done, Nudging, Missed and Left, then each reminder with its time and what happened." draggable="false"></div>
+    <div class="slide" aria-roledescription="slide" aria-label="6 of 6"><img src="shots/settings-1.png" alt="Settings: notifications and alarms on, Send a Test Nudge, Default Pace and How It Nudges." draggable="false"></div>
+  </div>
+
+  <div class="controls">
+    <button class="arrow" id="prev" type="button" aria-label="Previous screen">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+    </button>
+    <div class="dots" id="dots"></div>
+    <button class="arrow" id="next" type="button" aria-label="Next screen">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <nav aria-label="Nudge-inator">
+    <a href="privacy/">Privacy</a>
+    <a href="support/">Support</a>
+  </nav>
+  <p>© 2026 <a href="../../../index.html">New Reality Interactive LLC</a></p>
+</footer>
+
+<script>
+(() => {
+  const stage = document.getElementById("stage");
+  const slides = [...stage.querySelectorAll(".slide")];
+  const n = slides.length;
+  const captionEls = [...document.querySelectorAll("#captions .caption")];
+  const captions = captionEls.map((el) => [el.querySelector("h2").textContent]);
+  const dotsBox = document.getElementById("dots");
+  let index = 0;   // the screen in front
+  let drag = 0;    // live drag, in screens
+
+  const dots = captions.map((_, i) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "dot"; b.setAttribute("aria-label", `Screen ${i + 1}: ${captions[i][0]}`);
+    b.addEventListener("click", () => go(i));
+    dotsBox.appendChild(b);
+    return b;
+  });
+
+  const mod = (a) => ((a % n) + n) % n;
+  // Shortest signed distance from the front, so the ring wraps both ways.
+  const offset = (i) => { let d = i - index - drag; d = mod(d + n / 2) - n / 2; return d; };
+  const slideWidth = () => slides[0].offsetWidth;
+
+  // The screens sit on a ring. The one in front is full size; the rest are small and far back,
+  // turned only a little so they still face you, and each grows as it swings into focus.
+  const sizeAt = [1, 0.36, 0.24, 0.2];
+  const fadeAt = [1, 0.85, 0.5, 0];
+  const lerp = (table, a) => {
+    const k = Math.min(Math.floor(a), table.length - 2), t = Math.min(a - k, 1);
+    return table[k] + (table[k + 1] - table[k]) * t;
+  };
+  function layout() {
+    const w = slideWidth();
+    const step = (2 * Math.PI) / n;
+    // Wide enough to spread the ring, narrow enough that the side screens stay on a phone.
+    const half = stage.clientWidth / 2;
+    const rx = Math.min(w * 1.05, (half - w * 0.2) / Math.sin(step));
+    const rz = w * 1.6;
+    slides.forEach((el, i) => {
+      const d = offset(i), a = Math.abs(d), angle = d * step;
+      const x = rx * Math.sin(angle);
+      const z = rz * (Math.cos(angle) - 1);
+      el.style.transform = `translateX(${x}px) translateZ(${z}px) rotateY(${-d * 18}deg) scale(${lerp(sizeAt, a)})`;
+      el.style.opacity = String(lerp(fadeAt, a));
+      el.style.filter = a < 0.05 ? "none" : `brightness(${1 - 0.18 * Math.min(a, 2)})`;
+      el.style.zIndex = String(100 - Math.round(a * 10));
+      const front = i === index && drag === 0;
+      el.setAttribute("aria-hidden", front ? "false" : "true");
+    });
+    dots.forEach((b, i) => b.setAttribute("aria-current", i === index ? "true" : "false"));
+  }
+
+  function caption() {
+    captionEls.forEach((el, i) => el.setAttribute("aria-hidden", i === index ? "false" : "true"));
+  }
+
+  function go(i) { index = mod(i); drag = 0; layout(); caption(); }
+
+  document.getElementById("prev").addEventListener("click", () => go(index - 1));
+  document.getElementById("next").addEventListener("click", () => go(index + 1));
+  stage.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") { e.preventDefault(); go(index - 1); }
+    if (e.key === "ArrowRight") { e.preventDefault(); go(index + 1); }
+  });
+
+  // Swipe or drag: the ring follows the finger, then settles on the nearest screen.
+  let startX = null, startY = 0, moved = false, pid = null;
+  stage.addEventListener("pointerdown", (e) => {
+    startX = e.clientX; startY = e.clientY; moved = false; pid = e.pointerId;
+  });
+  stage.addEventListener("pointermove", (e) => {
+    if (startX === null || e.pointerId !== pid) return;
+    const dx = e.clientX - startX, dy = e.clientY - startY;
+    if (!moved) {
+      if (Math.abs(dx) < 6 || Math.abs(dx) < Math.abs(dy)) return;
+      moved = true; stage.classList.add("dragging");
+      try { stage.setPointerCapture(pid); } catch (_) {}
+    }
+    drag = -dx / (slideWidth() * 1.1);
+    layout();
+  });
+  function end(e) {
+    if (startX === null || e.pointerId !== pid) return;
+    stage.classList.remove("dragging");
+    if (moved) {
+      const fling = Math.abs(drag) > 0.15 && Math.abs(drag) < 0.5 ? Math.sign(drag) : 0;
+      go(Math.round(index + drag) + (Math.round(drag) === 0 ? fling : 0));
+    } else {
+      // A tap on a screen at the side brings it to the front.
+      const hits = slides.filter((el) => {
+        const r = el.getBoundingClientRect();
+        return el.style.opacity !== "0" && e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
+      });
+      if (hits.length) go(slides.indexOf(hits.reduce((a, b) => (+a.style.zIndex > +b.style.zIndex ? a : b))));
+    }
+    startX = null; pid = null;
+  }
+  stage.addEventListener("pointerup", end);
+  stage.addEventListener("pointercancel", (e) => { if (e.pointerId === pid) { stage.classList.remove("dragging"); drag = 0; layout(); startX = null; pid = null; } });
+  window.addEventListener("resize", layout);
+
+  // Open with the first screen growing into place from the back.
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduce) {
+    stage.classList.add("dragging");
+    drag = -0.9; layout();
+    requestAnimationFrame(() => requestAnimationFrame(() => { stage.classList.remove("dragging"); drag = 0; layout(); }));
+  } else layout();
+})();
+</script>
+</body>
+</html>

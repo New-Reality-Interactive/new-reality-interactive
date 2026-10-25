@@ -1,4 +1,4 @@
-Status: needs-info (waiting on the "Ready for agent" checklist at the top of Further Notes; Brian changes it to ready-for-agent once every item is checked)
+Status: ready-for-agent (every item in the "Ready for agent" checklist was checked on 2026-10-25)
 
 # Nudge-inator web pages
 
@@ -27,7 +27,7 @@ Until the privacy policy and support text are written, their pages ship as "Comi
 
 ## User Stories
 
-Each story says who does it. **(Agent)** stories change this repository and an agent can take them. **(Brian)** stories need publishing, App Store Connect, the live site, or Brian's decision. **(Agent drafts, Brian approves)** means the text is written first and Brian approves it before it's published. The full privacy policy and support text is written outside this project, so these stories describe what that text must do. The placeholders are covered by stories 52 to 55. "Blocked by" names an open question (see "Open Questions for Brian") that must be answered before that story can finish.
+Each story says who does it. **(Agent)** stories change this repository and an agent can take them. **(Brian)** stories need publishing, App Store Connect, the live site, or Brian's decision. **(Agent drafts, Brian approves)** means the text is written first and Brian approves it before it's published. The full privacy policy and support text is written outside this project, so these stories describe what that text must do. The placeholders are covered by stories 52 to 55.
 
 ### Brian (founder and managing member)
 
@@ -36,8 +36,8 @@ Each story says who does it. **(Agent)** stories change this repository and an a
 3. As Brian, I want to decide whether the app page is in scope now, so that the marketing URL exists before the App Store release if I want it. (Brian, decided 2026-10-24)
 4. As Brian, I want to approve the final URL paths before anything is published, so that the addresses I enter in App Store Connect are the ones I intend. (Brian, decided 2026-10-24)
 5. As Brian, I want the privacy policy drafted from the facts the app actually supports, so that I'm not publishing claims I can't back up. (Agent)
-6. As Brian, I want to edit and approve the privacy policy text before it goes live, so that it sounds like me and matches my legal position. The sequence: the full text arrives in a pull request (story 51), I edit and approve it, and only then is it merged and published. Blocked by open questions 6 and 14. (Agent drafts, Brian approves and publishes)
-7. As Brian, I want to confirm every FAQ answer on the support page, so that the answers are accurate for the app as shipped. The sequence: the full support text arrives in a pull request (story 51), I confirm or correct each FAQ answer and the rest of the text, and only then is it merged and published. Blocked by open question 7 (the stopping-nudges answer) and open question 11 (the beta section). (Agent drafts, Brian approves and publishes)
+6. As Brian, I want to edit and approve the privacy policy text before it goes live, so that it sounds like me and matches my legal position. The sequence: the full text arrives in a pull request (story 51), I edit and approve it, and only then is it merged and published. (Agent drafts, Brian approves and publishes)
+7. As Brian, I want to confirm every FAQ answer on the support page, so that the answers are accurate for the app as shipped. The sequence: the full support text arrives in a pull request (story 51), I confirm or correct each FAQ answer and the rest of the text, and only then is it merged and published. (Agent drafts, Brian approves and publishes)
 8. As Brian, I want the pages to use the app's glossary terms, so that the pages say what the app's own screens say. (Agent)
 9. As Brian, I want the privacy policy to show a last-updated date, so that readers and reviewers can tell how current it is. (Agent)
 10. As Brian, I want to be told when the app's data handling changes, so that I can update the pages in the same release. (Agent: any agent changing the app's data handling flags it to Brian)
@@ -57,14 +57,14 @@ Each story says who does it. **(Agent)** stories change this repository and an a
 21. As an App Review member, I want the privacy policy's tracking statement to match the app's privacy manifest, so that the manifest and the page agree. The statement must be true for the app as shipped (story 44). (Agent drafts, Brian approves)
 22. As a tester, I want to open the privacy policy from the TestFlight app, so that I can read it before I install. Open question 5 decides whether TestFlight needs a privacy policy link for external testing. It doesn't block the pages. (Brian)
 23. As a visitor, I want a contact address for privacy questions on the privacy policy, so that I can ask about my data. (Agent drafts, Brian approves)
-24. As a visitor, I want the privacy policy to say how Apple's optional diagnostics sharing relates to the app, so that I'm not confused by Apple's crash and analytics reports. Blocked by open question 6; if Brian follows the recommendation, this story is dropped. (Agent drafts, Brian approves)
+24. As a visitor, I want the privacy policy to say how Apple's optional diagnostics sharing relates to the app, so that I'm not confused by Apple's crash and analytics reports. Whether the policy covers this is decided when the full text is written (open question 6). (Agent drafts, Brian approves)
 
 ### Support page readers
 
 25. As a user with a problem, I want a clear way to contact support, so that I can ask for help without an account. (Agent drafts, Brian approves)
 26. As a user writing to support, I want a list of what to include (iPhone model, iOS version, app version), so that the first reply can answer my question. (Agent drafts, Brian approves)
 27. As a user, I want a FAQ that answers why alarms ring through silent mode and Focus, so that I understand the behavior before I'm surprised by it. (Agent drafts, Brian approves)
-28. As a user, I want a FAQ that explains how to stop nudges, so that I can turn them off without deleting reminders. Blocked by open question 7. (Agent drafts, Brian approves)
+28. As a user, I want a FAQ that explains how to stop nudges, so that I can turn them off without deleting reminders. (Agent drafts, Brian approves)
 29. As a user, I want a FAQ that explains how to delete all my data, so that I know Delete All Data is the right step. (Agent drafts, Brian approves)
 30. As a user, I want a FAQ that explains why alarms remain after I delete the app, so that I know to delete data first. (Agent drafts, Brian approves)
 31. As a user, I want the support page to link to the privacy policy, so that I can find both from one place. (Agent)
@@ -95,8 +95,8 @@ Each story says who does it. **(Agent)** stories change this repository and an a
 47. As a maintainer, I want the new pages to go through a pull request on this repository, so that the change is reviewed before it goes live. (Agent opens it, Brian reviews and merges)
 48. As a person using the app, I want a link to the privacy policy inside the app, so that I can read it without searching for it. Guideline 5.1.1(i) requires this. It's built in the Nudge-inator repository, not here. Open question 13 decides who adds it. It blocks nothing in this spec, but the App Store release depends on it. (Brian decides; not built in this repository)
 49. As a person deleting my data, I want the privacy policy to say how long reminders are kept and how to delete them, so that I know what Delete All Data does before I use it. (Agent drafts, Brian approves)
-50. As a beta tester, I want the privacy policy to say what TestFlight shares with the developer when I send feedback or a crash log, so that I know what I'm sending before I send it. Blocked by open question 14. (Agent drafts, Brian approves)
-51. As Brian, I want the three pages built in the site's existing static HTML and CSS, so that the section looks like the rest of the site and I only need to approve and publish. The agent builds the app page as described in "Pages", and builds the privacy policy and support placeholders (stories 52 to 55). The full privacy policy and support text is written outside this project. All three pages follow the mockup's design, including its dark-mode colors. They work without JavaScript and link to each other. It runs the Testing Decisions checks that can run before publishing (iPhone width in light and dark mode, heading order, link text, contrast, no broken links, wording against the fact list) on the pull request's pages and reports the results there. Sections blocked by an open question (stories 24, 28, 50 and the support page's beta section) stay out of the pull request, or are marked as drafts in it, until the question is answered. Brian approves the text (stories 6 and 7) and publishes by merging. (Agent builds; Brian approves and publishes)
+50. As a beta tester, I want the privacy policy to say what TestFlight shares with the developer when I send feedback or a crash log, so that I know what I'm sending before I send it. (Agent drafts, Brian approves)
+51. As Brian, I want the three pages built in the site's existing static HTML and CSS, so that the section looks like the rest of the site and I only need to approve and publish. The agent builds the app page as described in "Pages", and builds the privacy policy and support placeholders (stories 52 to 55). The full privacy policy and support text is written outside this project. All three pages follow the mockup's design, including its dark-mode colors. They work without JavaScript and link to each other. It runs the Testing Decisions checks that can run before publishing (iPhone width in light and dark mode, heading order, link text, contrast, no broken links, wording against the fact list) on the pull request's pages and reports the results there. Brian approves the text (stories 6 and 7) and publishes by merging. (Agent builds; Brian approves and publishes)
 
 ### Placeholder pages
 
@@ -111,6 +111,15 @@ Each story says who does it. **(Agent)** stories change this repository and an a
 57. As a visitor on an iPhone, I want to swipe through the app's six screens, each with a short line, so that I can see what the app does before I install it. (Agent)
 58. As a visitor with JavaScript turned off, I want the app page's name, description and links to still be readable, so that the page isn't blank. (Agent)
 59. As Brian, I want each screenshot checked for personal reminder text before the app page is published, so that nothing private goes public. (Agent checks, Brian approves)
+
+### Typography
+
+60. As a visitor on an iPhone, iPad or Mac, I want the pages' text in the same font as the app, so that the site and the app feel like one product. (Agent)
+61. As a visitor on Windows, Android, ChromeOS or Linux, I want the pages' text in my device's own system font, so that the pages look native and stay readable where SF Pro isn't installed. (Agent)
+62. As a visitor on a slow connection, I want the pages to load no web fonts, so that the text appears at once and no font request leaves my device. (Agent)
+63. As Brian, I want the pages to use Apple's system font without hosting, embedding or linking the SF Pro files, so that the site stays within Apple's font license. (Agent)
+64. As Brian, I want the pages to use only the app's font weights (Regular, Semibold, and Bold where the app uses it), so that headings and body text carry the same hierarchy as the app. (Agent)
+65. As a visitor whose device falls back to another font, I want headings and captions to fit without crowding or reflowing the carousel, so that the page still looks deliberate. (Agent)
 
 ## Implementation Decisions
 
@@ -144,9 +153,11 @@ Each story says who does it. **(Agent)** stories change this repository and an a
 
 ### Pages
 
-- The Nudge-inator section uses the design in the mockup at `docs/mockups/nudge-inator`: its fonts, its colors and its dark-mode colors. This replaces the earlier rule that the pages use the homepage's type and colors. The homepage itself is unchanged.
+- The Nudge-inator section uses the design in the mockup at `docs/mockups/nudge-inator`: its system font (see "Typography"), its colors and its dark-mode colors. This replaces the earlier rule that the pages use the homepage's type and colors. The homepage itself is unchanged.
 - Each page is a standalone HTML page in that design, with the same header and footer across the three.
-- The privacy policy and support pages work without JavaScript. The app page's screen carousel uses JavaScript, and the rest of that page doesn't depend on it. The pages use no third-party scripts, no fonts beyond the two the mockup loads, and no trackers.
+- The mockup includes the privacy and support pages as well as the app page. Their layout, header and footer are the design spec. Their body text is generated filler, not approved text: the placeholders follow the "Placeholder pages" rules below, and the full text comes from outside this project.
+- The footer is one quiet line below the carousel on the app page and below the content on the other two: links to the other Nudge-inator pages, then "© <year> New Reality Interactive LLC" linking to the home page. It is small and muted, so it doesn't compete with the carousel.
+- The privacy policy and support pages work without JavaScript. The app page's screen carousel uses JavaScript, and the rest of that page doesn't depend on it. The pages use no third-party scripts, no web fonts and no trackers.
 - Each page links back to the home page and to the other two Nudge-inator pages.
 - Each page has a visible last-updated date.
 - The privacy policy states the following, using the wording from the facts list in the brief dated 2026-10-24:
@@ -168,7 +179,7 @@ Each story says who does it. **(Agent)** stories change this repository and an a
   - The contact address `support@newrealityinteractive.com`, and a list of what to include in a message: iPhone model, iOS version and app version.
   - A FAQ with the four questions from the brief, with the draft answers below. Brian confirms every answer.
   - A link to the privacy policy.
-  - An "Installing a beta" section with clean-reinstall steps, which Brian supplies, if he keeps it (open question 11).
+  - No "Installing a beta" section (open question 11).
 - The app page is in scope now. It says the app is coming until it is on the App Store, then links to the App Store. It uses the app's one-line description from the glossary: "An iPhone app that keeps nudging you about a reminder, the way an iOS Alarm keeps ringing, until you mark it done."
 - The app page's design, screens and captions come from the mockup, which is the design spec. Its six screens are real app screens, and its captions are draft copy for Brian to approve (story 32). The mockup doesn't show the "coming soon" line or the App Store link, which the app page adds (stories 33 and 34).
 - Caption 6 reads "Urgent nudges ring as alarms, even on silent and in every Focus, when `Break through Focus` is enabled." The mockup's wording needed that clause, because Break through Focus is a setting on each reminder.
@@ -180,6 +191,17 @@ Each story says who does it. **(Agent)** stories change this repository and an a
   - Uses the same design as the app page, works without JavaScript, and has no last-updated date until the full text arrives.
 - The privacy policy and support content bullets below describe the full text, which is written outside this project.
 
+### Typography
+
+Decided on 2026-10-25, replacing the earlier decision to use the mockup's two Google Fonts.
+
+- The app uses Apple's system font, SF Pro, through Apple's built-in text styles with Dynamic Type, at Regular, Medium, Semibold and Bold. The pages match it with the system font only.
+- Every page uses one system font stack, held in a single CSS custom property: `-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`. That gives SF Pro on Apple devices, Segoe UI on Windows, Roboto on Android and ChromeOS, and the desktop's sans-serif on Linux.
+- The pages load no web fonts: no Google Fonts or other font links, no `@font-face` rules and no font files. SF Pro is never hosted, embedded or linked, because Apple's font license doesn't allow serving it from a public page.
+- Weights follow the app: Regular (400) for body text, Semibold (600) for headings, captions, FAQ questions and inline emphasis, and Bold (700) for the page titles and the wordmark. No other weight is used. Semibold is Body's emphasized weight in Apple's tables, so inline emphasis is Semibold, not the browser's default bold.
+- No page text imitates an iPhone screen. The app page's six screens are screenshots, so Apple's text sizes (Body 17/22 pt, Title 2 22/28 pt and so on, at the default Large size) don't apply to the HTML text. If a later page draws an iPhone screen in HTML, it uses those sizes, taken from the Human Interface Guidelines typography tables.
+- The headings keep their negative letter-spacing (−0.02 to −0.035 em). It doesn't copy SF Pro's tracking, which is positive above 24 pt; it was tuned for the earlier display font. It looked right in SF Pro and Helvetica Neue and slightly dense, but not cramped, in Roboto (checked 2026-10-25).
+
 ### Wording and glossary terms
 
 Nudge-inator's glossary sets the words. The pages use these terms:
@@ -190,7 +212,7 @@ Nudge-inator's glossary sets the words. The pages use these terms:
 Draft FAQ answers, for Brian to confirm:
 
 - **Why do alarms ring through silent mode and Focus?** Each reminder has a Break through Focus setting. When it's on, its nudges are sent as alarms, which sound through silent mode and Focus. When it's off, its nudges are ordinary notifications that a Focus can hold. A Relentless reminder always breaks through Focus.
-- **How do I stop nudges?** Mark the reminder Done. Done closes the open occurrence. Stopping an alarm only silences that one ring, and the next nudge still comes on schedule. To stop a reminder from nudging without losing it, pause it. Resume brings it back at its next due time. Brian should check the glossary's line that Stop "is the only way to take a break from nudging", since Pause also stops nudging.
+- **How do I stop nudges?** Mark the reminder Done. Done closes the open occurrence. Stopping an alarm only silences that one ring, and the next nudge still comes on schedule. To stop a reminder from nudging without losing it, pause it. Resume brings it back at its next due time. Brian confirmed this answer on 2026-10-25. The glossary's line that Stop "is the only way to take a break from nudging" is fixed in the Nudge-inator repository, outside this spec.
 - **How do I delete all my data?** Go to Settings › Delete All Data. It removes every reminder and cancels every nudge and alarm. Do this before you delete the app.
 - **Why do alarms remain after I delete the app?** Deleting the app alone leaves its alarms scheduled on your iPhone. Use Settings › Delete All Data first, which cancels every nudge and alarm.
 
@@ -261,7 +283,7 @@ Guideline 5.1.1(i) requires the privacy policy "within the app in an easily acce
 
 ## Testing Decisions
 
-- **Awaiting Brian's approval.** The seam below (the published page, checked by hand against a checklist, with no automated test suite) is proposed, not agreed. Brian confirms it or names a different seam before this spec is ready for an agent.
+- **Approved by Brian on 2026-10-25.** The seam is the published page, checked by hand against the checklist below, with no automated test suite.
 - The repository has no test framework, and this spec doesn't add one. The highest seam is the published page at its public address, so checks run against the live URLs. Checks 2 to 5 also run on the pull request's pages before publishing (story 51).
 - Good tests check external behavior: what a visitor sees, whether the URL responds, and whether the words match the fact list. They don't check how the HTML is built.
 - Checks before the App Store Connect URLs are entered:
@@ -270,8 +292,9 @@ Guideline 5.1.1(i) requires the privacy policy "within the app in an easily acce
   3. Headings are in order, each link has descriptive text, and text contrast meets WCAG AA. Checked with a browser accessibility tool or a screen reader.
   4. No link on the pages is broken.
   5. The privacy policy and support page are read line by line against the fact list in the brief. Every statement matches, and nothing extra is claimed.
+  6. The pages load no web fonts: the browser's network panel shows no font requests. On a Mac or iPhone the text renders in SF Pro. With `-apple-system`, `system-ui` and `BlinkMacSystemFont` removed from the stack for the check only, the fallback font still fits at iPhone width and on desktop, and the carousel doesn't move.
 - With JavaScript turned off, the app page's name, description and links must still be readable. Each screenshot is checked for personal reminder text before publishing (story 59).
-- The placeholders must pass checks 1 to 4, which also cover light and dark mode. Check 5 applies to the full text once it arrives.
+- The placeholders must pass checks 1 to 4 and 6, which also cover light and dark mode. Check 5 applies to the full text once it arrives.
 - Prior art: none in this repository. The existing pages have no tests.
 
 ## Out of Scope
@@ -293,10 +316,10 @@ Guideline 5.1.1(i) requires the privacy policy "within the app in an easily acce
 
 The status stays `needs-info` until every item is checked. Then Brian changes it to `ready-for-agent`.
 
-- [ ] Every blocking question answered: open questions 6, 7, 11 and 14 (see "Still open" below for what each one blocks). These block the full text, not the placeholders.
+- [x] Every blocking question answered: open questions 6, 7, 11 and 14 (2026-10-25).
 - [x] Design questions 15 to 17 answered (2026-10-25).
-- [ ] Testing seam approved by Brian (Testing Decisions).
-- [ ] Spec committed on its branch, if Brian asks for that.
+- [x] Testing seam approved by Brian (2026-10-25).
+- [x] Spec and mockup committed on the spec branch (2026-10-25).
 
 ### Open Questions for Brian
 
@@ -314,17 +337,20 @@ Answered on 2026-10-24:
 
 Answered on 2026-10-25:
 - **Carousel:** it stays. The app page's screen carousel uses JavaScript.
-- **Fonts:** the mockup's fonts for the whole Nudge-inator section. The homepage is unchanged.
+- **Fonts:** the system font for the whole Nudge-inator section, matching the app's SF Pro, with no web fonts (see "Typography"). This replaces the earlier answer, the mockup's two Google Fonts. The homepage is unchanged.
 - **Caption 6:** "Urgent nudges ring as alarms, even on silent and in every Focus, when `Break through Focus` is enabled." The other five captions stay as drafted in the mockup until Brian approves them (story 32).
+- **Apple diagnostics wording (6):** decided when the full privacy text is written outside this project. The placeholders don't need it.
+- **Pause and Stop wording (7):** the FAQ answers Done, then Pause and Resume, as drafted.
+- **Clean-reinstall steps (11):** left out. The support page has no "Installing a beta" section.
+- **Beta section in the privacy policy (14):** kept, as drafted.
+- **Testing seam:** approved as written.
 
-Still open:
+Still open (none blocks this spec):
 
 5. **TestFlight external testing.** Apple's API page calls the TestFlight privacy policy URL "recommended," not required. Confirm in App Store Connect Help whether external testing needs it. (Brian is looking into this.) **Blocks:** nothing in this spec (story 22).
-6. **Apple diagnostics wording.** Decide whether the privacy policy mentions Apple's optional crash and analytics sharing. Apple's page says "You are not responsible for disclosing data collected by Apple," so the policy doesn't have to mention it. Recommended: leave it out, since the app doesn't collect that data. (Brian is looking into this.) **Blocks:** the privacy policy text (stories 6 and 24).
-7. **Pause and Stop wording.** The glossary says Stop "is the only way to take a break from nudging", but Pause also stops nudging. The draft FAQ answer follows Pause. Confirm the answer, or tell me which wording is right. **Blocks:** the FAQ answer on stopping nudges (stories 7 and 28).
-11. **Clean-reinstall steps on the support page.** Recommended: keep an "Installing a beta" section with the clean-reinstall steps, which Brian supplies, and remove that section when the app reaches the App Store. Confirm, or tell me to leave them out. **Blocks:** the support page's beta section (story 7). The rest of the support page can go ahead.
 13. **In-app privacy link.** Guideline 5.1.1(i) requires a privacy policy link inside the app. Who adds it in the Nudge-inator repository: you, or a separate ticket? It needs to ship before the App Store release. **Blocks:** nothing in this spec (story 48). The App Store release depends on it.
-14. **Beta section in the privacy policy.** Apple's TestFlight page says crash logs, usage information and feedback go to the developer during beta. Recommended: keep the beta section in the privacy policy, as drafted above. Confirm, or tell me what to change. **Blocks:** the privacy policy text (stories 6 and 50).
+18. **Title weight.** Apple's title styles are Regular by default, with Bold only as their emphasized weight. The pages use Bold for the page titles and the wordmark. Confirm Bold, or say whether the app uses Semibold for its titles. **Blocks:** nothing in this spec.
+
 ### Checked against the app repository
 
 Checked on 2026-10-24 by reading `/Users/bpm/Work/repositories/nudge-inator` (the working tree, which has uncommitted changes):
@@ -336,11 +362,13 @@ Checked on 2026-10-24 by reading `/Users/bpm/Work/repositories/nudge-inator` (th
 
 - **No privacy manifest yet.** As of 2026-10-25, Nudge-inator still has no `PrivacyInfo.xcprivacy`. The privacy policy's manifest statement has to match the app as shipped (story 21).
 
+- **Segoe UI not checked.** The fallback check ran on a Mac, which has neither Segoe UI nor Roboto. Roboto was checked from Google's openly licensed file in a test copy; Segoe UI can't be downloaded and needs a check on Windows.
+
 ### Scope change (2026-10-25)
 
 Placeholder privacy and support pages were added at Brian's request. The full privacy policy and support text is written outside this project, so the sections describing that text now set requirements for it rather than work for an agent under this spec. The app page is unchanged and still in scope.
 
 ### Tracking
 
-- This spec is in `.scratch/nudge-inator-web-pages/spec.md`, on the branch `nudge-inator-web-pages-spec`, which is not committed. The status above is `needs-info` until every item in "Ready for agent" is checked. Then Brian sets it to `ready-for-agent`.
+- This spec is in `.scratch/nudge-inator-web-pages/spec.md`, on the branch `nudge-inator-web-pages-spec`, together with the mockup it names as its design spec.
 - No GitHub issues or tickets are created for this spec.
