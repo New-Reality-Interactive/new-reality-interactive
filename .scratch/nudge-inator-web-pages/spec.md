@@ -1,0 +1,346 @@
+Status: needs-info (waiting on the "Ready for agent" checklist at the top of Further Notes; Brian changes it to ready-for-agent once every item is checked)
+
+# Nudge-inator web pages
+
+Last updated: 2026-10-25
+
+## Problem Statement
+
+Nudge-inator is an iPhone reminders app (iOS 26.1 and later, Swift and SwiftUI). It ships first through TestFlight and then the App Store. Both need public web addresses:
+
+- App Store Connect asks for a privacy policy URL, a support URL and a marketing URL.
+- TestFlight shows testers the app's URLs and privacy policy.
+
+New Reality Interactive's website has no pages for the app, so there is nothing to link to. Brian wants the pages on his own site, with stable addresses, in plain language that matches what the app actually does with data.
+
+## Solution
+
+Add three public pages for Nudge-inator to the existing New Reality Interactive website, under one `/nudge-inator/` section:
+
+1. A privacy policy, which is needed first.
+2. A support page with contact details and a short FAQ.
+3. An app page, which provides the marketing URL. It is in scope now.
+
+The English pages use addresses that never change. Later translations are added beside them. The pages are readable on an iPhone in light and dark mode.
+
+Until the privacy policy and support text are written, their pages ship as "Coming Soon" placeholders on the same addresses. The full text is written outside this project and replaces the placeholders without changing those addresses. The app page follows the Nudge-inator mockup as its design spec, and the privacy and support pages share that design.
+
+## User Stories
+
+Each story says who does it. **(Agent)** stories change this repository and an agent can take them. **(Brian)** stories need publishing, App Store Connect, the live site, or Brian's decision. **(Agent drafts, Brian approves)** means the text is written first and Brian approves it before it's published. The full privacy policy and support text is written outside this project, so these stories describe what that text must do. The placeholders are covered by stories 52 to 55. "Blocked by" names an open question (see "Open Questions for Brian") that must be answered before that story can finish.
+
+### Brian (founder and managing member)
+
+1. As Brian, I want to choose the support contact method, so that customers know where to write and I control what the address is used for. (Brian, decided 2026-10-24)
+2. As Brian, I want to choose the privacy contact, so that privacy questions reach me and not a generic inbox. (Brian, decided 2026-10-24)
+3. As Brian, I want to decide whether the app page is in scope now, so that the marketing URL exists before the App Store release if I want it. (Brian, decided 2026-10-24)
+4. As Brian, I want to approve the final URL paths before anything is published, so that the addresses I enter in App Store Connect are the ones I intend. (Brian, decided 2026-10-24)
+5. As Brian, I want the privacy policy drafted from the facts the app actually supports, so that I'm not publishing claims I can't back up. (Agent)
+6. As Brian, I want to edit and approve the privacy policy text before it goes live, so that it sounds like me and matches my legal position. The sequence: the full text arrives in a pull request (story 51), I edit and approve it, and only then is it merged and published. Blocked by open questions 6 and 14. (Agent drafts, Brian approves and publishes)
+7. As Brian, I want to confirm every FAQ answer on the support page, so that the answers are accurate for the app as shipped. The sequence: the full support text arrives in a pull request (story 51), I confirm or correct each FAQ answer and the rest of the text, and only then is it merged and published. Blocked by open question 7 (the stopping-nudges answer) and open question 11 (the beta section). (Agent drafts, Brian approves and publishes)
+8. As Brian, I want the pages to use the app's glossary terms, so that the pages say what the app's own screens say. (Agent)
+9. As Brian, I want the privacy policy to show a last-updated date, so that readers and reviewers can tell how current it is. (Agent)
+10. As Brian, I want to be told when the app's data handling changes, so that I can update the pages in the same release. (Agent: any agent changing the app's data handling flags it to Brian)
+11. As Brian, I want to check each address against the list in Implementation Decisions before I enter it in App Store Connect, so that a typo doesn't become a permanent URL. (Brian)
+12. As Brian, I want to enter the URLs in App Store Connect myself, so that nothing is submitted on my behalf. (Brian)
+
+### Privacy policy readers (App Review, TestFlight testers, App Store visitors)
+
+13. As an App Review member, I want the privacy policy to state that the app has no account and no server, so that I can check it against the app's behavior. (Agent drafts, Brian approves)
+14. As an App Review member, I want the privacy policy to say that the app makes no network requests and includes no analytics, advertising, tracking or third-party SDKs, so that I can verify the claim. (Agent drafts, Brian approves)
+15. As an App Review member, I want the privacy policy to say that reminders are stored only on the iPhone, in the app's local database, with CloudKit sync turned off, so that I know where the data lives. (Agent drafts, Brian approves)
+16. As an App Review member, I want the privacy policy to say that reminders are included in the person's own iPhone backups, so that I know backups are the only other copy. (Agent drafts, Brian approves)
+17. As an App Review member, I want the privacy policy to say that nudges are local notifications and that the strongest reminders are AlarmKit alarms scheduled on the device, so that I know nothing is sent to a server. (Agent drafts, Brian approves)
+18. As an App Review member, I want the privacy policy to name Settings › Delete All Data, so that I can see how a person removes their data. (Agent drafts, Brian approves)
+19. As an App Review member, I want the privacy policy to say that deleting the app alone leaves its alarms scheduled, so that the instruction to use Delete All Data first is clearly justified. (Agent drafts, Brian approves)
+20. As an App Review member, I want the privacy policy's privacy-label statement ("Data Not Collected") to match the privacy label in App Store Connect, so that the listing is consistent. (Agent drafts, Brian approves)
+21. As an App Review member, I want the privacy policy's tracking statement to match the app's privacy manifest, so that the manifest and the page agree. The statement must be true for the app as shipped (story 44). (Agent drafts, Brian approves)
+22. As a tester, I want to open the privacy policy from the TestFlight app, so that I can read it before I install. Open question 5 decides whether TestFlight needs a privacy policy link for external testing. It doesn't block the pages. (Brian)
+23. As a visitor, I want a contact address for privacy questions on the privacy policy, so that I can ask about my data. (Agent drafts, Brian approves)
+24. As a visitor, I want the privacy policy to say how Apple's optional diagnostics sharing relates to the app, so that I'm not confused by Apple's crash and analytics reports. Blocked by open question 6; if Brian follows the recommendation, this story is dropped. (Agent drafts, Brian approves)
+
+### Support page readers
+
+25. As a user with a problem, I want a clear way to contact support, so that I can ask for help without an account. (Agent drafts, Brian approves)
+26. As a user writing to support, I want a list of what to include (iPhone model, iOS version, app version), so that the first reply can answer my question. (Agent drafts, Brian approves)
+27. As a user, I want a FAQ that answers why alarms ring through silent mode and Focus, so that I understand the behavior before I'm surprised by it. (Agent drafts, Brian approves)
+28. As a user, I want a FAQ that explains how to stop nudges, so that I can turn them off without deleting reminders. Blocked by open question 7. (Agent drafts, Brian approves)
+29. As a user, I want a FAQ that explains how to delete all my data, so that I know Delete All Data is the right step. (Agent drafts, Brian approves)
+30. As a user, I want a FAQ that explains why alarms remain after I delete the app, so that I know to delete data first. (Agent drafts, Brian approves)
+31. As a user, I want the support page to link to the privacy policy, so that I can find both from one place. (Agent)
+
+### App page readers and App Store visitors
+
+32. As a visitor from the App Store, I want the marketing page to say what Nudge-inator does in a few lines, so that I can decide whether to download it. (Agent drafts, Brian approves)
+33. As a visitor before the app is on the App Store, I want the app page to say the app is coming, so that I'm not sent to a dead link. (Agent drafts, Brian approves)
+34. As a visitor after launch, I want the app page to link to the App Store listing, so that I can install the app. (Agent, once Brian gives the App Store link after release)
+35. As a visitor who wants to try the app early, I want the app page to say that testing is by invitation only, so that I don't look for a public beta link that doesn't exist. (Agent drafts, Brian approves)
+
+### Everyone
+
+36. As a reader on an iPhone, I want the pages to fit the screen with no sideways scrolling, so that I can read them in Safari. (Agent)
+37. As a reader with a dark-mode phone, I want the pages to use a dark color scheme, so that they don't flash white or hurt my eyes at night. (Agent)
+38. As a reader using a screen reader, I want headings, descriptive link text and labelled sections, so that I can move around the pages. (Agent)
+39. As a reader with low vision, I want text that meets readable contrast and can be enlarged, so that I can read the pages. (Agent)
+40. As a reader who opens a link from the App Store, I want HTTPS and no login, so that the link opens without a warning or a sign-in prompt. (Brian: the live site's hosting)
+41. As a reader who uses another language later, I want a translated page at a language address, so that I can read the app's pages in my language. Only the address structure is in scope now. (Agent)
+42. As an English reader, I want the English addresses to stay the same when translations are added, so that links I've shared keep working. (Agent)
+43. As a reader who finds one Nudge-inator page, I want links to the other two, so that I can find the privacy policy, the support page and the app page from any of them. (Agent)
+
+### Maintainers
+
+44. As a maintainer, I want one list of facts that the privacy policy, the support page, the privacy manifest, the App Store privacy label and the onboarding text are all checked against, so that a change in one is caught in the others. (Agent)
+45. As a maintainer, I want the change that alters the app's data handling to include an update to these pages, so that the pages never go stale. It goes in the Nudge-inator release checklist, which this spec doesn't change. (Brian)
+46. As a maintainer, I want the new pages to ship with no build step or framework, so that the site stays as simple as it is now. (Agent)
+47. As a maintainer, I want the new pages to go through a pull request on this repository, so that the change is reviewed before it goes live. (Agent opens it, Brian reviews and merges)
+48. As a person using the app, I want a link to the privacy policy inside the app, so that I can read it without searching for it. Guideline 5.1.1(i) requires this. It's built in the Nudge-inator repository, not here. Open question 13 decides who adds it. It blocks nothing in this spec, but the App Store release depends on it. (Brian decides; not built in this repository)
+49. As a person deleting my data, I want the privacy policy to say how long reminders are kept and how to delete them, so that I know what Delete All Data does before I use it. (Agent drafts, Brian approves)
+50. As a beta tester, I want the privacy policy to say what TestFlight shares with the developer when I send feedback or a crash log, so that I know what I'm sending before I send it. Blocked by open question 14. (Agent drafts, Brian approves)
+51. As Brian, I want the three pages built in the site's existing static HTML and CSS, so that the section looks like the rest of the site and I only need to approve and publish. The agent builds the app page as described in "Pages", and builds the privacy policy and support placeholders (stories 52 to 55). The full privacy policy and support text is written outside this project. All three pages follow the mockup's design, including its dark-mode colors. They work without JavaScript and link to each other. It runs the Testing Decisions checks that can run before publishing (iPhone width in light and dark mode, heading order, link text, contrast, no broken links, wording against the fact list) on the pull request's pages and reports the results there. Sections blocked by an open question (stories 24, 28, 50 and the support page's beta section) stay out of the pull request, or are marked as drafts in it, until the question is answered. Brian approves the text (stories 6 and 7) and publishes by merging. (Agent builds; Brian approves and publishes)
+
+### Placeholder pages
+
+52. As Brian, I want placeholder privacy and support pages live on their final addresses now, so that the URLs I enter in App Store Connect point to pages that exist before the full text is written. (Agent builds; Brian approves and publishes)
+53. As a visitor who opens the privacy policy or support page early, I want to see that the page is coming soon and where I can write in the meantime, so that I'm not sent to a dead end. (Agent)
+54. As Brian, I want the full text to replace the placeholder body without changing the address, so that the URLs in App Store Connect stay valid. The full text is written outside this project. (Brian)
+55. As a reader on a dark-mode phone, I want the placeholders to use the same dark color scheme as the full pages, so that they don't flash white. (Agent)
+
+### App page
+
+56. As Brian, I want the app page built to the design in the Nudge-inator mockup, so that the page matches the approved look and I only review the copy and the publishing. (Agent builds; Brian approves and publishes)
+57. As a visitor on an iPhone, I want to swipe through the app's six screens, each with a short line, so that I can see what the app does before I install it. (Agent)
+58. As a visitor with JavaScript turned off, I want the app page's name, description and links to still be readable, so that the page isn't blank. (Agent)
+59. As Brian, I want each screenshot checked for personal reminder text before the app page is published, so that nothing private goes public. (Agent checks, Brian approves)
+
+## Implementation Decisions
+
+### Site and hosting
+
+- The site is static HTML and CSS with no build step. The new pages follow that approach. No framework or host is proposed.
+- The site is served by GitHub Pages from this repository, with the custom domain `newrealityinteractive.com`. Brian confirmed this on 2026-10-24. Trailing-slash addresses (for example `/nudge-inator/privacy/`) depend on the host serving a directory's index page. That behavior is assumed for GitHub Pages and needs checking after the first publish.
+- The site has no existing app or product pages. The "Tommy's Voyage" tracker page used a sub-path (`/journey/`) and was removed in PR #15, so the new `/nudge-inator/` section is the first product section on the site.
+- The homepage doesn't change in this spec. It gets no link to the Nudge-inator section (Brian, 2026-10-24).
+
+### URL structure
+
+- English pages live at addresses without a language segment:
+  - App page: `/nudge-inator/`
+  - Privacy policy: `/nudge-inator/privacy/`
+  - Support: `/nudge-inator/support/`
+- Brian approved these URL paths on 2026-10-24. They are the addresses to enter in App Store Connect. The privacy policy and support URLs can't be edited at any time, so changing either one later means a new version submission. Stable paths matter for that reason.
+- Translations go under a language segment beside the English section, for example `/<locale>/nudge-inator/privacy/`. The locale code should use the same form Apple uses in App Store Connect. The English addresses never move. If the site later adds an explicit `/en-us/` path, the unprefixed English addresses stay as they are, and the English pages are not redirected.
+- The App Store Connect fields take full HTTPS URLs on the custom domain: `https://newrealityinteractive.com/nudge-inator/privacy/` (privacy policy), `https://newrealityinteractive.com/nudge-inator/support/` (support URL), and `https://newrealityinteractive.com/nudge-inator/` (marketing URL).
+
+### Contacts
+
+- Support contact: `support@newrealityinteractive.com`, approved by Brian on 2026-10-24.
+- Privacy contact: `privacy@newrealityinteractive.com`, approved by Brian on 2026-10-24.
+- Both addresses are published on the pages. Brian is responsible for monitoring them.
+
+### Age and testing
+
+- The app has no age restriction (Brian, 2026-10-24). The privacy policy has no children's section, and the support page makes no age statement. Brian's age-rating answer in App Store Connect is outside this spec.
+- Testing is by invitation only (Brian, 2026-10-24). The app page doesn't link to TestFlight, and no public beta link is published. Invited testers still see the privacy policy in the TestFlight app (see the Apple requirements section).
+
+### Pages
+
+- The Nudge-inator section uses the design in the mockup at `docs/mockups/nudge-inator`: its fonts, its colors and its dark-mode colors. This replaces the earlier rule that the pages use the homepage's type and colors. The homepage itself is unchanged.
+- Each page is a standalone HTML page in that design, with the same header and footer across the three.
+- The privacy policy and support pages work without JavaScript. The app page's screen carousel uses JavaScript, and the rest of that page doesn't depend on it. The pages use no third-party scripts, no fonts beyond the two the mockup loads, and no trackers.
+- Each page links back to the home page and to the other two Nudge-inator pages.
+- Each page has a visible last-updated date.
+- The privacy policy states the following, using the wording from the facts list in the brief dated 2026-10-24:
+  - No account and no server. Reminders are stored only on the iPhone, in the app's local database (SwiftData in the app's App Group container, with CloudKit sync turned off).
+  - No network requests, and no analytics, advertising, tracking or third-party SDKs.
+  - Reminders are included in the person's own iPhone backups (iCloud or computer), which is how iOS backs up app data.
+  - Nudges are local notifications and, for the strongest reminders, AlarmKit alarms scheduled on the device. Nothing is sent to a server.
+  - Settings › Delete All Data removes every reminder and cancels every nudge and alarm. Deleting the app alone leaves its alarms scheduled, so the page tells people to use Delete All Data first.
+  - The App Store privacy label is planned as "Data Not Collected". The privacy manifest declares no tracking and no collected data. The app repository doesn't have that file yet, so the policy's statement must be true for the app as shipped (story 21).
+  - Retention and deletion, as Guideline 5.1.1(i) requires: reminders stay on the iPhone until the person deletes them with Settings › Delete All Data. Backups keep copies for as long as the person keeps those backups. Deleting the app alone leaves its alarms scheduled, so use Delete All Data first.
+  - The app sends no data anywhere, so no data is shared with any third party. The one exception is TestFlight, which isn't the app: the beta section above covers it. Guideline 5.1.1(i) asks the policy to confirm third-party protections, and with no third parties that statement is that none receive data.
+  - A section on TestFlight beta testing, drafted from Apple's "Legal - TestFlight & Privacy" page, which says Apple shares this with the developer when a tester uses TestFlight:
+    - Crash logs, usage information, and feedback (comments, screenshots, and device details such as the model, iOS version and free disk space). Testers can't opt out of Apple collecting crash logs and usage information.
+    - The developer may use that data to improve the app and related products, and "is not permitted to share this information with a third party."
+    - Requests to access or delete TestFlight data go to the developer, at the privacy contact.
+    - A screenshot can show reminder text, so testers should send only what they're comfortable sharing.
+  - The privacy contact, `privacy@newrealityinteractive.com`, and a last-updated date.
+- The support page contains:
+  - The contact address `support@newrealityinteractive.com`, and a list of what to include in a message: iPhone model, iOS version and app version.
+  - A FAQ with the four questions from the brief, with the draft answers below. Brian confirms every answer.
+  - A link to the privacy policy.
+  - An "Installing a beta" section with clean-reinstall steps, which Brian supplies, if he keeps it (open question 11).
+- The app page is in scope now. It says the app is coming until it is on the App Store, then links to the App Store. It uses the app's one-line description from the glossary: "An iPhone app that keeps nudging you about a reminder, the way an iOS Alarm keeps ringing, until you mark it done."
+- The app page's design, screens and captions come from the mockup, which is the design spec. Its six screens are real app screens, and its captions are draft copy for Brian to approve (story 32). The mockup doesn't show the "coming soon" line or the App Store link, which the app page adds (stories 33 and 34).
+- Caption 6 reads "Urgent nudges ring as alarms, even on silent and in every Focus, when `Break through Focus` is enabled." The mockup's wording needed that clause, because Break through Focus is a setting on each reminder.
+- **Placeholder pages.** The privacy policy and support page ship first as placeholders on their final addresses. Each placeholder:
+  - Has the page name as its heading, a visible "Coming Soon" status, and no policy or FAQ text.
+  - Says the page is being written and will be published on this address.
+  - Shows the approved contact address for that page: `privacy@newrealityinteractive.com` on the privacy placeholder, `support@newrealityinteractive.com` on the support placeholder.
+  - Links to the other placeholder and to the home page. The app page isn't built yet, so it isn't linked.
+  - Uses the same design as the app page, works without JavaScript, and has no last-updated date until the full text arrives.
+- The privacy policy and support content bullets below describe the full text, which is written outside this project.
+
+### Wording and glossary terms
+
+Nudge-inator's glossary sets the words. The pages use these terms:
+
+- **Reminder**, not "task". **Nudge**, not "ping" or "alert". **Done**, not "complete" or "dismiss". **Pause** and **Resume** for stopping and restarting a reminder without losing it. **Break through Focus** for the setting that lets nudges sound through silent mode and Focus.
+- **Alarm** only for the system alarm that AlarmKit schedules. The glossary uses "alarm" for the system object, not for a reminder.
+
+Draft FAQ answers, for Brian to confirm:
+
+- **Why do alarms ring through silent mode and Focus?** Each reminder has a Break through Focus setting. When it's on, its nudges are sent as alarms, which sound through silent mode and Focus. When it's off, its nudges are ordinary notifications that a Focus can hold. A Relentless reminder always breaks through Focus.
+- **How do I stop nudges?** Mark the reminder Done. Done closes the open occurrence. Stopping an alarm only silences that one ring, and the next nudge still comes on schedule. To stop a reminder from nudging without losing it, pause it. Resume brings it back at its next due time. Brian should check the glossary's line that Stop "is the only way to take a break from nudging", since Pause also stops nudging.
+- **How do I delete all my data?** Go to Settings › Delete All Data. It removes every reminder and cancels every nudge and alarm. Do this before you delete the app.
+- **Why do alarms remain after I delete the app?** Deleting the app alone leaves its alarms scheduled on your iPhone. Use Settings › Delete All Data first, which cancels every nudge and alarm.
+
+### Wording and consistency
+
+- One fact list is the source for the privacy policy, the support page, the privacy manifest, the App Store privacy label and the onboarding text ("No account and no server. Your reminders stay on this iPhone and in your own backups."). When the wording in one of them changes, the others are checked against the fact list.
+- Brian owns the pages and keeps them in step with the app. Any change that alters what the app does with data updates the pages in the same release. This is a process requirement to add to the Nudge-inator release checklist. This spec doesn't change that repository (see Out of Scope).
+
+### Publishing
+
+- The pages are changed through a pull request on this repository, like the setup changes in PR #15. Merging to `main` publishes them.
+- The placeholders go out first, in the first pull request, on their final addresses. They don't wait for the full text or any open question. The full text follows in a later pull request with the same addresses.
+- The agent opens the pull request with the placeholders. Brian approves the full text (stories 6 and 7) when it arrives, and merges. If the app page and support page are ready first, they can go out in an earlier pull request without the privacy policy, with links to it added once it's live.
+- App Store Connect is updated by Brian after the pages are live. The URLs are verified (see Testing Decisions) before they are entered.
+
+### Apple requirements
+
+Confirmed with apple-rag-mcp:
+
+| Requirement | Apple source | What it confirms |
+| --- | --- | --- |
+| Privacy policy URL in each language's app information | App Info Localizations (App Store Connect API), `https://developer.apple.com/documentation/appstoreconnectapi/app-info-localizations` | The "Privacy policy URL" attribute exists per locale. |
+| Support URL and marketing URL in each version's localized metadata | App Store Version Localizations, `https://developer.apple.com/documentation/appstoreconnectapi/app-store-version-localizations` | Both attributes exist per locale. |
+| TestFlight shows testers URLs and privacy policies | Beta App Localizations, `https://developer.apple.com/documentation/appstoreconnectapi/beta-app-localizations` | Testers see "descriptions, URLs, and privacy policies" in the TestFlight app. |
+| Apple's crash and analytics data comes only from people who opted in | App Crashes report, `https://developer.apple.com/documentation/analytics-reports/app-crashes` | Data comes "from users who have opted to share their data with Apple and developers." |
+
+Confirmed from Apple pages Brian downloaded on 2026-10-24:
+
+- **Privacy Policy URL is required for iOS and macOS apps.** "App information", App Store Connect Help: "Privacy Policy URL ... Required for iOS and macOS apps."
+- **Privacy Policy on the product page is required.** "App Privacy Details", App Store: "Privacy Policy (Required): The URL to your publicly accessible privacy policy." Privacy Choices, which points to a page for requesting deletion, is optional.
+- **"Collect" means transmitting data off the device.** The same page says "Data that is processed only on device is not 'collected' and does not need to be disclosed." This supports the "Data Not Collected" label.
+- **Apple's own data isn't the developer's to disclose.** The same page says: "You are not responsible for disclosing data collected by Apple." This bears on Q6.
+- **Name and subtitle limits.** App information: the name is 2 to 30 characters and the subtitle is at most 30 characters. Keyword limits aren't on this page.
+- **TestFlight localization fields.** Apple's "BetaAppLocalizationUpdateRequest.Data.Attributes" page (App Store Connect API) says:
+  - `marketingUrl` is "visible to testers in the TestFlight app."
+  - `privacyPolicyUrl` is "recommended for all apps that collect user or device-related data or as otherwise required by law." It isn't called required.
+  - "After you have added data to the fields for this object, you can change that data, but you cannot remove data." Once a TestFlight URL is set, it can be changed but not cleared.
+  - A description is required before beta app review.
+  - It has no support URL field.
+- **TestFlight shares beta data with the developer.** Apple's "Legal - TestFlight & Privacy" page: "When you test a beta app, your crash logs and usage information will be automatically collected by Apple and shared with the Application Provider," and "you will not be able to opt out of this collection." Feedback "may be associated with your name and email address." The developer "is not permitted to share this information with a third party." "For requests to access or delete your TestFlight data, you should contact the Application Provider directly." The page doesn't say whether TestFlight's external testing needs a privacy policy URL, so open question 5 is still open.
+
+Confirmed from "Required, localizable, and editable properties" (App Store Connect Help). The table marks were read from rendered pages, since the text extraction dropped them:
+
+- **Privacy Policy URL:** required and localized. Not editable at any time, so changing it means a new version submission.
+- **Support URL:** required and localized. Not editable at any time.
+- **Marketing URL:** optional, and localized. Not editable at any time.
+
+Still not confirmed:
+
+- Whether TestFlight's external testing needs a privacy policy URL before external testers get the app (open question 5). The Beta App Localizations page confirms the policy is shown to testers, not that it is mandatory. The spec doesn't guess it.
+
+### App Review Guidelines
+
+Read from Apple's "App Review Guidelines" page, `https://developer.apple.com/app-store/review/guidelines/`, which Apple dates "Last Updated: October 16, 2026". Brian downloaded it on 2026-10-24, because apple-rag-mcp can't reach it.
+
+- **5.1.1(i), privacy policy.** "All apps must include a link to their privacy policy in the App Store Connect metadata field and within the app in an easily accessible manner." The policy "must clearly and explicitly" identify what data is collected, how, and all uses; confirm that third parties give the same protection; and "explain its data retention/deletion policies and describe how a user can revoke consent and/or request deletion of the user's data." The privacy policy section above covers these. The in-app link is a separate requirement (see "In-app link to the privacy policy").
+- **5.1.1(v), accounts.** "If your app doesn't include significant account-based features, let people use it without a login." Nudge-inator has no account, so the policy and support page don't need an account-deletion section.
+- **5.1.4, kids.** Applies to kids-focused apps. Nudge-inator has no age restriction (Brian, 2026-10-24), so there's no children's section.
+- **1.5, developer information.** "Make sure your app and its Support URL include an easy way to contact you." The support page's email address satisfies this.
+- **2.3, accurate metadata.** The privacy information and the description must "accurately reflect the app's core experience." This is why the pages use the fact list and the glossary wording.
+- **2.3.1(a), review notes.** New features must be "described with specificity in the Notes for Review section of App Store Connect". This applies to the review notes for alarms through silent mode and Focus.
+
+The guidelines don't say which App Store Connect URL fields are required. "Required, localizable, and editable properties", above, does.
+
+### In-app link to the privacy policy
+
+Guideline 5.1.1(i) requires the privacy policy "within the app in an easily accessible manner". Nudge-inator has no privacy link in the app yet. The link belongs in the app's own code, in the Nudge-inator repository, so this spec doesn't change it. Open question 13 asks who adds it and where. It needs to ship before the App Store release.
+
+## Testing Decisions
+
+- **Awaiting Brian's approval.** The seam below (the published page, checked by hand against a checklist, with no automated test suite) is proposed, not agreed. Brian confirms it or names a different seam before this spec is ready for an agent.
+- The repository has no test framework, and this spec doesn't add one. The highest seam is the published page at its public address, so checks run against the live URLs. Checks 2 to 5 also run on the pull request's pages before publishing (story 51).
+- Good tests check external behavior: what a visitor sees, whether the URL responds, and whether the words match the fact list. They don't check how the HTML is built.
+- Checks before the App Store Connect URLs are entered:
+  1. Each of the three URLs returns a page over HTTPS when opened in a logged-out browser, with no login prompt.
+  2. Each page is readable on an iPhone-sized screen with no sideways scrolling, in light mode and in dark mode.
+  3. Headings are in order, each link has descriptive text, and text contrast meets WCAG AA. Checked with a browser accessibility tool or a screen reader.
+  4. No link on the pages is broken.
+  5. The privacy policy and support page are read line by line against the fact list in the brief. Every statement matches, and nothing extra is claimed.
+- With JavaScript turned off, the app page's name, description and links must still be readable. Each screenshot is checked for personal reminder text before publishing (story 59).
+- The placeholders must pass checks 1 to 4, which also cover light and dark mode. Check 5 applies to the full text once it arrives.
+- Prior art: none in this repository. The existing pages have no tests.
+
+## Out of Scope
+
+- Writing the privacy policy and support text. That happens outside this project. This spec covers only their placeholders and the addresses the full text will use.
+- Entering the URLs in App Store Connect. Brian does this himself after the pages are live.
+- Any change to the Nudge-inator repository, including its code, its privacy manifest, its onboarding text and its release notes. This spec only lists what those must agree with.
+- Translations. The structure allows them, but the English pages come first.
+- Analytics or tracking on the website itself. If Brian adds site analytics later, the privacy policy must be checked, but this spec doesn't add any.
+- Any change to the homepage, including a link to the Nudge-inator section.
+- A public TestFlight link. Testing is by invitation only.
+- A search engine, a blog or any other page beyond the three listed.
+- The App Store age rating. The app has no age restriction, but the rating questions are answered in App Store Connect, not on this site.
+- Creating tickets, and starting any build work. That comes after Brian approves this spec.
+
+## Further Notes
+
+### Ready for agent
+
+The status stays `needs-info` until every item is checked. Then Brian changes it to `ready-for-agent`.
+
+- [ ] Every blocking question answered: open questions 6, 7, 11 and 14 (see "Still open" below for what each one blocks). These block the full text, not the placeholders.
+- [x] Design questions 15 to 17 answered (2026-10-25).
+- [ ] Testing seam approved by Brian (Testing Decisions).
+- [ ] Spec committed on its branch, if Brian asks for that.
+
+### Open Questions for Brian
+
+Answered on 2026-10-24:
+
+- **Final URL paths:** `/nudge-inator/`, `/nudge-inator/privacy/` and `/nudge-inator/support/`.
+- **Support contact:** `support@newrealityinteractive.com`.
+- **Privacy contact:** `privacy@newrealityinteractive.com`.
+- **App page in scope now:** yes, as the marketing URL, with "coming soon" text until the app is on the App Store.
+- **Hosting:** GitHub Pages from this repository, custom domain `newrealityinteractive.com`.
+- **Age restriction:** none on the app. No children's section.
+- **Homepage link:** not yet. No change to the homepage.
+- **Public TestFlight link:** no. Testing is invite-only.
+- **Glossary:** `/Users/bpm/Work/repositories/nudge-inator/GLOSSARY.md`. Its wording is used above.
+
+Answered on 2026-10-25:
+- **Carousel:** it stays. The app page's screen carousel uses JavaScript.
+- **Fonts:** the mockup's fonts for the whole Nudge-inator section. The homepage is unchanged.
+- **Caption 6:** "Urgent nudges ring as alarms, even on silent and in every Focus, when `Break through Focus` is enabled." The other five captions stay as drafted in the mockup until Brian approves them (story 32).
+
+Still open:
+
+5. **TestFlight external testing.** Apple's API page calls the TestFlight privacy policy URL "recommended," not required. Confirm in App Store Connect Help whether external testing needs it. (Brian is looking into this.) **Blocks:** nothing in this spec (story 22).
+6. **Apple diagnostics wording.** Decide whether the privacy policy mentions Apple's optional crash and analytics sharing. Apple's page says "You are not responsible for disclosing data collected by Apple," so the policy doesn't have to mention it. Recommended: leave it out, since the app doesn't collect that data. (Brian is looking into this.) **Blocks:** the privacy policy text (stories 6 and 24).
+7. **Pause and Stop wording.** The glossary says Stop "is the only way to take a break from nudging", but Pause also stops nudging. The draft FAQ answer follows Pause. Confirm the answer, or tell me which wording is right. **Blocks:** the FAQ answer on stopping nudges (stories 7 and 28).
+11. **Clean-reinstall steps on the support page.** Recommended: keep an "Installing a beta" section with the clean-reinstall steps, which Brian supplies, and remove that section when the app reaches the App Store. Confirm, or tell me to leave them out. **Blocks:** the support page's beta section (story 7). The rest of the support page can go ahead.
+13. **In-app privacy link.** Guideline 5.1.1(i) requires a privacy policy link inside the app. Who adds it in the Nudge-inator repository: you, or a separate ticket? It needs to ship before the App Store release. **Blocks:** nothing in this spec (story 48). The App Store release depends on it.
+14. **Beta section in the privacy policy.** Apple's TestFlight page says crash logs, usage information and feedback go to the developer during beta. Recommended: keep the beta section in the privacy policy, as drafted above. Confirm, or tell me what to change. **Blocks:** the privacy policy text (stories 6 and 50).
+### Checked against the app repository
+
+Checked on 2026-10-24 by reading `/Users/bpm/Work/repositories/nudge-inator` (the working tree, which has uncommitted changes):
+
+- **CloudKit is off, and the store uses the App Group container.** `App/Store/ReminderStore.swift` configures SwiftData with `cloudKitDatabase: .none` and the group `group.com.newrealityinteractive.nudgeinator`. This matches the brief.
+- **No network calls found.** A search of the app's sources found no URL sessions, analytics or advertising SDKs, or tracking code. The search matched only the store's CloudKit configuration and test files.
+
+### Things I couldn't verify
+
+- **No privacy manifest yet.** As of 2026-10-25, Nudge-inator still has no `PrivacyInfo.xcprivacy`. The privacy policy's manifest statement has to match the app as shipped (story 21).
+
+### Scope change (2026-10-25)
+
+Placeholder privacy and support pages were added at Brian's request. The full privacy policy and support text is written outside this project, so the sections describing that text now set requirements for it rather than work for an agent under this spec. The app page is unchanged and still in scope.
+
+### Tracking
+
+- This spec is in `.scratch/nudge-inator-web-pages/spec.md`, on the branch `nudge-inator-web-pages-spec`, which is not committed. The status above is `needs-info` until every item in "Ready for agent" is checked. Then Brian sets it to `ready-for-agent`.
+- No GitHub issues or tickets are created for this spec.
