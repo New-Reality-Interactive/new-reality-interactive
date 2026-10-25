@@ -57,9 +57,11 @@ li + li { margin-top: 0.3rem; }
 .faq summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
 .faq details p { color: var(--muted); }
 
-/* Footer: shared with the tour page. */
-.site-footer { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.25rem 1.25rem; padding-block: 1.25rem 1.5rem; font-size: 0.8125rem; color: var(--muted); }
-.site-footer nav { display: flex; gap: 1.25rem; }
+/* Footer: the links in a soft rounded tray, echoing the phone frames, with the copyright on its own line below. */
+.site-footer { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; padding-block: 0 1.25rem; font-size: 0.8125rem; color: var(--muted); text-align: center; }
+.site-footer nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem 1.25rem; padding: 0.7rem 1.5rem; border-radius: 999px; background: color-mix(in srgb, var(--rule) 45%, transparent); }
+.site-footer nav a { color: var(--fg); font-weight: 600; }
 .site-footer a { color: inherit; text-decoration: none; }
-.site-footer a:hover, .site-footer a[aria-current="page"] { color: var(--fg); text-decoration: underline; }
-.site-footer p { margin: 0; }
+.site-footer a:hover, .site-footer a[aria-current="page"] { color: var(--accent); }
+.site-footer a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+.site-footer p { margin: 0; font-size: 0.75rem; }
