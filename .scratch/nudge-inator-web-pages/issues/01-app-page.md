@@ -12,7 +12,6 @@
 - [ ] The page says the app is coming to the App Store. It has no App Store link and no TestFlight link.
 - [ ] With JavaScript turned off, the name, description, coming-soon line and links are still readable.
 - [ ] The footer is the mockup's soft tray, with Privacy and Support linking to `/nudge-inator/privacy/` and `/nudge-inator/support/`, and "© 2026 New Reality Interactive LLC" on its own line below, linking to the main site's root page.
-- [ ] The page shows a visible last-updated date that doesn't compete with the carousel.
 - [ ] Weights are only Regular, Semibold and Bold, as in the spec's Typography section.
 - [ ] Each of the seven screenshots is checked for personal reminder text, and the result for each is listed in the pull request for Brian to approve.
 - [ ] The main site's homepage is unchanged and doesn't link to the Nudge-inator section.

@@ -159,7 +159,7 @@ Each story says who does it. **(Agent)** stories change this repository and an a
 - The privacy policy and support pages work without JavaScript. The app page's screen carousel uses JavaScript, and the rest of that page doesn't depend on it. The pages use no third-party scripts, no web fonts and no trackers.
 - **"Home" depends on where you are.** On the main site, Home is the site's root page. Inside the Nudge-inator section, Home is the app page at `/nudge-inator/`. The main site doesn't link to the Nudge-inator section, on purpose, for now (Brian, 2026-10-25).
 - Each Nudge-inator page links to the other two Nudge-inator pages, with the app page labelled Home. The company name in the footer links to the main site's root page.
-- Each page has a visible last-updated date.
+- The privacy and support pages each have a visible last-updated date. The app page has none (Brian, 2026-10-25).
 - The privacy policy states the following:
   - No account and no server. Reminders are stored only on the iPhone, in the app's local database (SwiftData in the app's App Group container, with CloudKit sync turned off).
   - No network requests, and no analytics, advertising, tracking or third-party SDKs.
