@@ -15,7 +15,7 @@
 - [x] "© 2026 New Reality Interactive LLC" sits on its own line below the footer tray, linking to the main site's root page.
 - [x] The page works without JavaScript, loads no web fonts, and fits an iPhone-width screen with no sideways scrolling in light and dark mode.
 - [x] The app page's Privacy link now opens this page.
-- [x] Checks 2, 3, 4 and 6 from the spec's Testing Decisions are run on the pull request's page and reported there. For check 4, the Support link is expected to fail until ticket 03 lands; every other link works.
+- [ ] Checks 2, 3, 4 and 6 from the spec's Testing Decisions are run on the pull request's page and reported there. For check 4, the Support link is expected to fail until ticket 03 lands; every other link works.
 
 ## Implementation notes
 
