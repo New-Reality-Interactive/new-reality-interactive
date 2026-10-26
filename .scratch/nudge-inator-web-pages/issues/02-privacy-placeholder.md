@@ -30,3 +30,7 @@ Added after ticket 01 merged (PR #17).
 - The Support link stays dead until ticket 03.
 - Check 2: the headless Chrome used for ticket 01 couldn't go below about 500px wide. Use devtools device emulation at iPhone width instead. Report any check that couldn't be run.
 - Use the PR body from ticket 01 (PR #17) as the template, including the checks report.
+
+## Outcome
+
+Changed scope (Brian, 2026-10-25): this page shipped the full privacy policy, not a "Coming Soon" placeholder (PR #18). The "Coming Soon", "line saying the policy is being written" and "no policy text" criteria above no longer apply. Everything else was met. See the spec's "Scope change" note.

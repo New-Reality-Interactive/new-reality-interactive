@@ -29,3 +29,7 @@ Added after ticket 02 merged (PR #18).
 - On the privacy page and app page, links to Support (`../support/index.html`, `support/index.html`) are the dead links this ticket fixes. Re-run the link check on all three pages.
 - Check 2: headless Chrome can't go below about 500px wide, so the iPhone-width check was only done at 500px for tickets 01 and 02. Use devtools device emulation at 390px, or report it as not run.
 - Use the PR body from ticket 02 (PR #18) as the template, including the checks report and its "not run" lines.
+
+## Outcome
+
+Changed scope (Brian, 2026-10-25): this page ships the mockup's support content (contact block, FAQ, privacy line), not a "Coming Soon" placeholder. The "Coming Soon", "line saying the page is being written", "no FAQ text" and "mockup filler isn't used" criteria above no longer apply, and the `.status` pill note was not followed. Everything else is met. The FAQ answers other than "How do I stop nudges?" still need Brian's confirmation. See the spec's "Scope change" note.

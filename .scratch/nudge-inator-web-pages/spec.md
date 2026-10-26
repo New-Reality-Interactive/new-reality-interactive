@@ -372,3 +372,12 @@ Placeholder privacy and support pages were added at Brian's request. The full pr
 
 - This spec is in `.scratch/nudge-inator-web-pages/spec.md`, on the branch `nudge-inator-web-pages-spec`, together with the mockup it names as its design spec.
 - No GitHub issues or tickets are created for this spec.
+
+### Scope change: privacy and support ship full text (Brian, 2026-10-25)
+
+The privacy and support pages ship with their full text, not as "Coming Soon" placeholders. This overrides the "Placeholder pages" rules above (stories 52, 53 and 55, and the placeholder bullets under "Pages").
+
+- **Privacy:** the text is Brian's initial policy, `docs/privacy-policy.md` in the nudge-inator repository. It shipped in PR #18.
+- **Support:** the text is the mockup's support page body (contact block, four FAQ answers, privacy line). Brian directed this for ticket 03. The three FAQ answers other than "How do I stop nudges?" aren't recorded as confirmed by Brian, and the "stop nudges" answer is shorter than the confirmed wording. Brian confirms them when he approves the PR.
+- Check 5 now applies to both pages: read line by line against the content rules, with nothing extra claimed.
+- The addresses, last-updated date, links and design are unchanged. The ticket and spec text above describing placeholders is kept for history.
