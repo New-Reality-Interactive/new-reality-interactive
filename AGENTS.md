@@ -2,7 +2,7 @@
 
 ### Issue tracker
 
-Local markdown: issues live as files under `.scratch/<feature>/` in this repo. See `docs/agents/issue-tracker.md`.
+GitHub Issues on `New-Reality-Interactive/new-reality-interactive`, through the `gh` CLI. See `docs/agents/issue-tracker.md`.
 
 ### Triage labels
 
