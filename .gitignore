@@ -2,3 +2,6 @@
 
 # Versioned screenshot folders (e.g. 1.4.0)
 nudge-inator/shots/[0-9]*.[0-9]*.[0-9]*/
+
+# Impeccable design-critique snapshots (local only)
+.impeccable/
