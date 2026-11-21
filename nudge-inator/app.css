@@ -54,7 +54,7 @@ h1 span { color: var(--accent); }
 }
 
 .tagline { margin: -0.25rem 0 0; max-width: 30rem; text-align: center; color: var(--muted); font-size: 1.125rem; line-height: 1.5; text-wrap: balance; }
-.soon { margin: 0; font-weight: 600; color: var(--accent); text-align: center; }
+.soon { margin: 0; font-weight: 500; color: var(--muted); text-align: center; }
 
 /* Without JavaScript the carousel is just the first screen and its caption; the rest of the page still reads. */
 html:not(.js) .slide:not(:first-child), html:not(.js) .controls { display: none; }
