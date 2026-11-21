@@ -49,6 +49,7 @@ Its reminders don't let go. Only Done ends a reminder, and stopping an alarm onl
 ## Evidence on Hand
 
 - Real app screenshots: the carousel in `nudge-inator/shots/carousel-*.png` and the tutorial pages in `nudge-inator/shots/tutorial-*.png`. Versioned screenshot sets (`shots/1.4.0/`, `shots/1.5.0/`) are kept locally and gitignored.
+- App icon: `nudge-inator/assets/nudge-inator-app-icon-1024.png` is the master, rendered from the app repo's `App/AppIcon.icon`. The 192 px and 64 px copies are what the site shows (the icon above the name, the wordmark on text pages, the browser-tab icon). Re-render from the app's icon file whenever it changes.
 - Absent: no reviews, ratings, user counts, testimonials or press. Don't fabricate any of them.
 
 ## Product Principles
