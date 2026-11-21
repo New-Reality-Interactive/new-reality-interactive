@@ -45,7 +45,8 @@ Agency-calibre engineering from someone with 26 years of software engineering ex
 
 - Real: 26 years of experience, the $85/hr rate, the one-business-day reply promise, and a quote from Brian.
 - Absent: no client testimonials, case studies, portfolio work, client logos or press. Don't fabricate any of them.
-- Open: the LinkedIn footer link is still a placeholder (`YOUR-PROFILE-HERE`).
+- LinkedIn: the footer links to the Company Page (linkedin.com/company/new-reality-interactive), not Brian's personal profile. Keep it that way.
+- Brand assets in `assets/`: the logo lockup, the loop mark, the favicon, the LinkedIn logo and cover, and the Nudge-inator app icon.
 
 ## Product Principles
 
