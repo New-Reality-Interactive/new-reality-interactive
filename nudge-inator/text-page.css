@@ -24,7 +24,7 @@ li + li { margin-top: 0.3rem; }
 .contact { margin-top: 2rem; padding: 1.25rem; border: 1px solid var(--dot); border-radius: 16px; background: color-mix(in srgb, var(--dot) 18%, transparent); }
 .contact h2 { margin-top: 0; }
 .contact p:last-child { margin-bottom: 0; }
-.email { font-weight: 600; font-size: 1.25rem; overflow-wrap: anywhere; }
+.email { font-weight: 600; font-size: clamp(1rem, 5vw, 1.25rem); overflow-wrap: anywhere; }
 .updated { margin: 1rem 0 0; color: var(--muted); font-size: 0.875rem; }
 
 /* FAQ: native disclosure, so it works without JavaScript. */
