@@ -3,8 +3,9 @@ a { color: var(--accent); text-underline-offset: 0.18em; }
 a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
 
 .masthead { width: 100%; max-width: 40rem; margin: 0 auto; padding-block: 1.5rem 0; }
-.wordmark { font-weight: 700; font-size: 1.5rem; letter-spacing: -0.03em; line-height: 1; color: var(--fg); text-decoration: none; }
+.wordmark { display: inline-flex; align-items: center; font-weight: 700; font-size: 1.5rem; letter-spacing: -0.03em; line-height: 1; color: var(--fg); text-decoration: none; }
 .wordmark span { color: var(--accent); }
+.wordmark img { width: 32px; height: 32px; margin-right: 0.5rem; }
 
 /* Page nav: text tabs under the wordmark, with the current page underlined in the accent. */
 .site-nav { display: flex; gap: 1.5rem; margin-top: 1rem; border-bottom: 1px solid var(--dot); }
