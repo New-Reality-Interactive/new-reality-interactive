@@ -135,6 +135,13 @@ body::before {
    color: var(--accent);
 }
 
+/* The logo lockup (mark + wordmark). Its height stays inside the nav's fixed --nav-height. */
+#main-nav .nav-logo img {
+   display: block;
+   height: 44px;
+   width: auto;
+}
+
 #main-nav .nav-links {
    display: flex;
    gap: 2.5rem;
@@ -1253,6 +1260,10 @@ section {
 @media (max-width: 900px) {
    :root {
       --nav-height: 84px;
+   }
+
+   #main-nav .nav-logo img {
+      height: 40px;
    }
 
    #main-nav {
