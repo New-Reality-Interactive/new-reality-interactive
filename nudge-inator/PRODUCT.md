@@ -29,9 +29,10 @@ Its reminders don't let go. Only Done ends a reminder, and stopping an alarm onl
 - Nudge strengths: Gentle (never rings as an alarm), Firm (rings as an alarm from nudge 4) and Relentless (every nudge rings). At the Consistent pace a reminder gets 20 nudges, 10 minutes apart. The user sets a Default Pace in Settings.
 - Gentle and Firm reminders have a Break Through Focus switch. Relentless always breaks through.
 - Alarm sounds: a Default Alarm Sound in Settings, which each reminder can override. There are six tones from Chime to Siren, plus iOS's Default Alarm.
-- Views: Now (what's due), My Day (done, nudging, missed and left counts, then reminders in time order), Sent (grouped by person, with status when the recipient chooses to share it), and Tags (one-word labels for filtering, search, swipe to rename or delete).
+- Quiet Hours (Settings › Quiet Hours): schedules (a start, an end and the days) and a Quiet Now switch. While they're on, no nudge arrives, alarms included. A held nudge isn't sent later and counts as one you didn't answer, so a reminder can end as Missed.
+- Views: Now (what's due), My Day (done, nudging, missed and left counts, then reminders in time order, with Previous Day and Next Day arrows for other days), Sent (grouped by person, with status when the recipient chooses to share it), and Tags (one-word labels for filtering and search; tapping one opens its page, with its reminders, Edit and Delete Tag).
 - Sharing: invite a person through iCloud, then choose who gets a reminder. Sent reminders don't nudge the sender.
-- In-app tutorials (Settings › Tutorials) are mirrored on the support page: How It Nudges, How Alarm Sounds Work and How Sharing Works.
+- In-app tutorials (Settings › Tutorials) are mirrored on the support page: How It Nudges, How Alarm Sounds Work, How Sharing Works and How Quiet Hours Work.
 
 ## Capabilities and Constraints
 
@@ -39,7 +40,7 @@ Its reminders don't let go. Only Done ends a reminder, and stopping an alarm onl
 - Status: in beta on TestFlight, coming to the App Store. Don't claim it's on the App Store until it is.
 - Privacy facts: your own reminders stay on your iPhone, and shared reminders go through your iCloud. There's no account and no server of ours.
 - Support is by email at support@newrealityinteractive.com. Ask for the iPhone model, iOS version, app version, and what was expected compared with what happened.
-- The terms on the site must match the in-app names exactly (Done, Gentle, Firm, Relentless, Consistent, Break Through Focus, Default Alarm Sound, Now, My Day, Sent, Tags).
+- The terms on the site must match the in-app names exactly (Done, Gentle, Firm, Relentless, Consistent, Break Through Focus, Default Alarm Sound, Quiet Hours, Quiet Now, Now, My Day, Sent, Tags).
 
 ## Brand Commitments
 
@@ -48,7 +49,7 @@ Its reminders don't let go. Only Done ends a reminder, and stopping an alarm onl
 
 ## Evidence on Hand
 
-- Real app screenshots: the carousel in `nudge-inator/shots/carousel-*.png` and the tutorial pages in `nudge-inator/shots/tutorial-*.png`. Versioned screenshot sets (`shots/1.4.0/`, `shots/1.5.0/`) are kept locally and gitignored.
+- Real app screenshots: the carousel in `nudge-inator/shots/carousel-*.png` and the tutorial pages in `nudge-inator/shots/tutorial-*.png`. Versioned screenshot sets (`shots/1.4.0/` to `shots/1.6.0/`) are kept locally and gitignored.
 - App icon: `nudge-inator/assets/nudge-inator-app-icon-1024.png` is the master, rendered from the app repo's `App/AppIcon.icon`. The 192 px and 64 px copies are what the site shows (the icon above the name, the wordmark on text pages, the browser-tab icon). Re-render from the app's icon file whenever it changes.
 - Absent: no reviews, ratings, user counts, testimonials or press. Don't fabricate any of them.
 
